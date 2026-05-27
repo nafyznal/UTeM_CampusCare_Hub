@@ -76,6 +76,10 @@
         margin-bottom: 10px;
     }
 
+    .sidebar{
+        display: flex;
+    }
+
     .hidden{
         display:none;
     }
@@ -83,6 +87,21 @@
     .hover{
         transition: all 0.3s ease;
         transform: scale(1.1);
+    }
+
+    #content {
+        flex: 1;
+        width: 45%;
+        display: flex;
+        margin-left: 20%;
+        margin-right: 20px;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #000000;
     }
 
 
@@ -103,8 +122,7 @@
     </div>
 
     <aside id="sidebar" class="hidden">
-        <nav>
-            
+        <nav>   
             <svg width="40" height="40" viewBox="0 0 24 24" id="profile">
                 <!-- Head -->
                 <circle cx="12" cy="8" r="4" 
@@ -132,6 +150,17 @@
             </ul>
             
         </nav>
+    </aside>
+
+    <div id="content" class="center">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Request</th>
+                <th>Status</th>
+                
+            </tr>
+        </table>
     </div>
     
 </body>
