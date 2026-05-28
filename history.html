@@ -44,6 +44,9 @@
         height:400px;
         margin-left: 10px;
         color: white;
+
+        position:fixed;
+        top: 120px;
         
 
     }
@@ -90,20 +93,23 @@
     }
 
     #content {
-        flex: 1;
-        width: 45%;
-        display: flex;
-        margin-left: 20%;
-        margin-right: 20px;
-        text-align: center;
-    }
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border: 1px solid #000000;
-    }
+table {
+    width: 70%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    background: white;
+}
 
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
 
 </style>
 
@@ -164,7 +170,7 @@
     </div>
     
 </body>
-<script ="text/javascript">
+<script type="text/javascript">
 
     document.getElementById('menu').addEventListener('click', function() {
         var sidebar = document.getElementById('sidebar');
