@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+    <title>FOOD</title>
+    <link rel="stylesheet" href="main.css">
+<style>
+*{
+    font-family: Arial, sans-serif, serif;
+}
+
+#content{
+    width: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+#leftSide{
+    float: left;
+    width: 25%;
+    margin: 15px;
+    background-color: #541A1A;
+    color: white;
+    border-radius: 10pt;
+}
+#leftSide a{
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+#leftSide a:hover{
+    color: black;
+}
+#rightSide{
+    float: right;
+    width: 65%;
+    padding: 20px 10px;
+}
+.item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+}
+.center{
+    text-align: center;
+}
+.site{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.food{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dfood{
+    border-radius: 7pt;
+    background-color: tran;
+    color: white;
+    padding: 5px;
+}
+.food .dfood:hover{
+    background: grey;
+}
+.kit{
+    display: flex;
+    justify-content: space-between;
+    background-color: grey;
+    color: white;
+    border-radius: 7pt;
+    margin: 10pt;
+    padding: 7pt;
+    gap: 10px;
+    display: flex;
+}
+.kfood{
+    flex: 1;
+    margin: 0 15px;
+    font-weight: bold;
+}
+.request{
+    float: right;
+    background-color: white;
+    border: 2px solid transparent;
+    border-radius: 10pt;
+    padding: 3pt 10pt;
+}
+.request:hover{
+    color: cyan;
+}
+</style>
+</head>
+
+<body>
+<div id="content">
+    <div id="leftSide">
+    <div class="item">
+        <img src="image/profile.png" class="site">
+        <h6>Hi!</h6>
+        <h6 id="name">Blablabla</h6>
+    </div>
+    <div class="item">
+        <img src="image/aid.png" class="site">
+    <a href="#">Aid</a>
+    </div>
+    <div class="item">
+        <ul class="aid">
+            <a href="food.html">Food</a>
+            <li><a href="kit.html">Kit</a></li>
+            <li><a href="meal.html">Meal</a></li>
+            <a href="essential.html">Essential</a>
+        </ul>
+    </div>
+    <div class="item">
+        <img src="image/history.png" class="site">
+        <a href="history.html">History</a>
+    </div>
+    <div class="item">
+        <img src="image/scan.png" class="site">
+        <a href="scan.html">Scan & Collect</a>
+    </div>
+    <div class="center">
+        <img src="image/logout.png" class="site">
+    </div>
+</div>
+
+<div id="rightSide">
+    <h3>Essential</h3>
+    <div class="kit">
+        <img src="image/toiletries1.png">
+        <p class="kfood">Toiletries</p>
+        <br><br><button type="button" class="request">Request</button>
+    </div>
+    <div class="kit">
+        <img src="image/personalCore.png">
+        <p class="kfood">Personal Core</p>
+        <br><br><button type="button" class="request">Request</button>
+    </div>
+    <div class="kit">
+        <img src="image/sanitary.png">
+        <p class="kfood">Sanitary Pad</p>
+        <br><br><button type="button" class="request">Request</button>
+    </div>
+
+</div>
+</div>
+</body>
