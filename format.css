@@ -1,0 +1,112 @@
+body{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #F1E2D1;
+        margin: 0;
+        
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+    }
+
+    #head{
+        background-color: linear-gradient(blue, pink);
+        margin: 0;
+        text-align: center;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        color: #541A1A;
+        cursor: default;
+    }
+
+    
+    #menu {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        cursor: pointer;
+    }
+
+    .svg_icon {
+        fill: #541A1A;
+    }
+    
+    aside{
+        background-color: #541A1A;
+        border-radius: 20px;
+        width:250px;
+        height:400px;
+        margin-left: 10px;
+        color: white;
+
+        position:fixed;
+        top: 120px;
+        
+
+    }
+
+    .aside{
+        margin-left: 20px;
+    }
+
+    #profile{
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    li{
+        list-style: none;
+        text-decoration: none;
+        margin-left: 20px;
+        margin-bottom:50px;
+        cursor: pointer;
+    }
+
+    li a{
+        text-decoration: none;
+        color: white;
+    }
+    
+    p{
+        display: inline-block;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    .sidebar{
+        display: flex;
+    }
+
+    .hidden{
+        display:none;
+    }
+
+    .hover{
+        text-decoration: underline;
+        transition: all 0.3s ease;
+        transform: scale(1.1);
+    }
+
+    #content {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    }
+
+    table {
+        width: 70%;
+        border-collapse: collapse;
+        border: 1px solid black;
+        background: white;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+    }
+
+    #iconSidebar{
+        margin-right: 10px;
+    }
