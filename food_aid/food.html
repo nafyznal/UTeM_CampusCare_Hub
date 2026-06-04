@@ -6,12 +6,20 @@
 *{
     font-family: Arial, sans-serif, serif;
 }
-
-
+body{
+    background-color: #F1E2D1;
+}
+#up{
+    display: center;
+    padding: 5px;
+}
 #content{
     width: 100%;
-    background-color: white;
+    background-color: #F1E2D1;
     overflow: hidden;
+}
+#up h3{
+    display: center;
 }
 #leftSide{
     float: left;
@@ -40,6 +48,10 @@
     gap: 10px;
     margin: 10px;
 }
+.tem:hover{
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
 .center{
     text-align: center;
 }
@@ -57,12 +69,12 @@
 }
 .dfood{
     border-radius: 7pt;
-    background-color: tran;
+    background-color: #541A1A;
     color: white;
     padding: 5px;
 }
 .food .dfood:hover{
-    background: grey;
+    background: black;
 }
 .kit{
     display: flex;
@@ -91,7 +103,6 @@
     color: cyan;
 }
 </style>
-</head>
 
 
 <body>
@@ -102,6 +113,7 @@
         <h6>Hi!</h6>
         <h6 id="name">Blablabla</h6>
     </div>
+    <hr>
     <div class="item">
         <img src="image/aid.png" class="site">
     <a href="#">Aid</a>
@@ -122,32 +134,10 @@
         <img src="image/scan.png" class="site">
         <a href="scan.html">Scan & Collect</a>
     </div>
+    <hr/>
     <div class="center">
         <img src="image/logout.png" class="site">
     </div>
-</div>
-
-
-<div id="rightSide">
-    <h3>Essential</h3>
-    <div class="kit">
-        <img src="image/toiletries1.png">
-        <p class="kfood">Toiletries</p>
-        <br><br><button type="button" class="request">Request</button>
     </div>
-    <div class="kit">
-        <img src="image/personalCore.png">
-        <p class="kfood">Personal Core</p>
-        <br><br><button type="button" class="request">Request</button>
-    </div>
-    <div class="kit">
-        <img src="image/sanitary.png">
-        <p class="kfood">Sanitary Pad</p>
-        <br><br><button type="button" class="request">Request</button>
-    </div>
-
-
-</div>
 </div>
 </body>
-
