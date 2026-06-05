@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<head>
+    <title>FOOD</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+.left{
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.kfood{
+    flex: 1;
+    margin: 0 15px;
+    font-weight: bold;
+}
+.request{
+    float: right;
+    background-color: white;
+    border: 2px solid transparent;
+    border-radius: 10pt;
+    padding: 3pt 10pt;
+}
+.request:hover{
+    color: black;
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+.kit{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: grey;
+    background-image: url("image/snack.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border-radius: 7pt;
+    margin: 10pt;
+    padding: 7pt;
+    gap: 10px;
+}
+.mini{
+    background-image: url("image/miniKit.jpeg");
+}
+.big{
+    background-image: url("image/bigKit.jpeg");
+}
+#backIcon{
+    position: absolute;
+    top: 10px;      /* jarak dari atas */
+    right: 10px;    /* jarak dari kanan */
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.popup{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+.popup-content{
+    position: relative;
+    padding: 20px;
+    border-radius: 10pt;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn{
+    from{opacity: 0; transform: scale(0.9);}
+    to{opacity: 1; transform: scale(1);}
+}
+</style>
+
+<body>
+<div id="up">
+    <img src="image/burger_menu.svg" class="upside">
+    <h3>Food</h3>
+    <img src="image/home.svg" class="site">
+</div>
+
+
+<div id="content">
+    <div id="leftSide">
+    <div class="profile">
+        <img src="image/profile.svg" class="upside">
+        <h6>Hi!</h6>
+        <h6 id="name">Blablabla</h6>
+    </div>
+    <hr>
+    <div class="item">
+        <img src="image/aid.svg" class="site">
+    <a href="#">Aid</a>
+    </div>
+    <div class="item">
+        <ul class="aid">
+            <a href="food.html">Food</a>
+            <li><a href="kit.html">Kit</a></li>
+            <li><a href="meal.html">Meal</a></li>
+            <a href="essential.html">Essential</a>
+        </ul>
+    </div>
+    <div class="item">
+        <img src="image/history.svg" class="site">
+        <a href="history.html">History</a>
+    </div>
+    <div class="item">
+        <img src="image/scan.svg" class="site">
+        <a href="scan.html">Scan & Collect</a>
+    </div>
+    <hr/>
+    <div class="center">
+        <img src="image/logout.svg" class="site">
+    </div>
+</div>
+
+<div id="rightSide">
+    <div class="food">
+        <button type="button" class="dfood" onclick="location.href='kit.html'">KIT</button>
+        <button type="button" class="dfood" onclick="location.href='meal.html'">MEAL</button>
+    </div>
+    <div class="kit mini">
+        <p class="kfood">Mini Kit
+        <img src="image/arrowDown.svg" class="site"></p>
+        <button type="button" class="request">Request</button>
+    </div>
+    <div class="kit big">
+        <p class="kfood">Big Kit
+        <img src="image/arrowDown.svg" class="site"></p>
+        <button type="button" class="request">Request</button>
+    </div>
+</div>
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <img src="image/arrowUpLeft.svg" id="backIcon">
+        <img src="image/success.png" class="medium">
+        <h3>Request success</h3>
+    </div>
+</div>  
+</div>
+
+<script>
+    document.querySelectorAll('.request').forEach(btn => {
+        btn.addEventListener('click', ()=>{
+            document.getElementById('popup').style.display = 'flex';
+        });
+    });
+    document.getElementById('backIcon').addEventListener('click', ()=>{
+        document.getElementById('popup').style.display = 'none';
+        kit.back();
+    });
+</script>
+</body>

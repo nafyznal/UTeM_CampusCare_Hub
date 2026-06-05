@@ -1,0 +1,96 @@
+*{
+    font-family: Arial, Helvetica, sans-serif
+}
+body{
+    background-color: #F1E2D1;
+}
+#up{
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;    
+    padding: 0 10px;
+}
+.upside{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    cursor: pointer;
+}
+#content{
+    width: 100%;
+    background-color: #F1E2D1;
+    overflow: hidden;
+}
+#up h3{
+    display: center;
+}
+#leftSide{
+    float: left;
+    width: 25%;
+    margin: 15px;
+    background-color: #541A1A;
+    color: white;
+    border-radius: 10pt;
+}
+#leftSide a{
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+#leftSide a:hover{
+    color: black;
+}
+#rightSide{
+    float: right;
+    width: 65%;
+    padding: 20px 10px;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+.item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+.item:hover{
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+.center{
+    text-align: center;
+}
+.site{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.food{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dfood{
+    border-radius: 20pt;
+    background-color: #541A1A;
+    color: white;
+    padding: 5px 50px;
+    border-color: transparent;
+}
+.food .dfood:hover{
+    background: black;
+}
+.medium{
+    width: 150px;
+    height: auto;
+}
