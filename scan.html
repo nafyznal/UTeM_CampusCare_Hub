@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan and Collect</title>
+</head>
+<link rel="stylesheet" href="formatScan.css">
+<body>
+    <header class="center">
+        <div class="header-container">
+            <img src="icon/burger_menu.svg" alt="Menu" class="menu-icon" width="30" height="30">
+            <h1>Scan and Collect</h1>
+            <a href="home.html">
+                <img src="icon/home.svg" alt="Home" class="home-icon" width="30" height="30">
+            </a>
+        </div>
+        
+    </header>
+    <section id="nav-section" class="hidden">
+        <div class="user-info">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
+            <p>Hi, John!</p>
+        </div>
+        <hr style="border-color:rgba(255,255,255,0.3); margin:12px 0;"/>
+
+        </div>
+        <ul id="nav-list">
+            <li style="list-style:none; margin-left:20px; margin-bottom:30px;">
+            <a href="#" style="color:white; text-decoration:none; font-weight:bold;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Aid</a>
+            </li>
+            <li style="list-style:none; margin-left:20px; margin-bottom:30px;">
+            <a href="#" style="color:white; text-decoration:none; font-weight:bold;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Scan and Collect</a>
+            </li>
+            <li style="list-style:none; margin-left:20px; margin-bottom:30px;">
+            <a href="#" style="color:white; text-decoration:none; font-weight:bold;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Profile</a>
+        </li>
+      </ul>
+    </nav>
+    <hr style="border-color:rgba(255,255,255,0.3); margin:0 0 12px 0;"/>
+
+        <div style="display:flex; justify-content:center; align-items:center; margin-top:40px; gap:8px; cursor:pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"/><path d="M20 3H9a2 2 0 0 0-2 2v4h2V5h11v14H9v-4H7v4a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>
+            <p style="margin:0; font-weight:bold; font-size:14px; letter-spacing:1px;">LOGOUT</p>
+        </div>
+    </section>
+
+    <main>
+        <p>Use the QR code below to scan and collect your points.</p>
+        <img src="icon/qr-code-svgrepo-com.svg" alt="QR Code" class="qr-code" width="200" height="200">
+    </main>
+</body>
+</html>
