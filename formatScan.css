@@ -13,34 +13,32 @@ body{
 /* heaader */
 
 header {
-    display: flex;
-    align-items: center;
-    color: #541A1A;
+    margin: 0;
+    padding: 10px 10px;
+    background-color: transparent;
+    width: 100%;
 }
 
 #menu-icon {
-    margin-right: 20px;
     cursor: pointer;
-    filter: drop-shadow(2px 2px 2px rgb(100, 100, 100))
+    filter: drop-shadow(2px 2px 2px rgb(100, 100, 100));
 }
 
 .header-container{
     display: flex; 
     align-items: center;
-    justify-content: space-between; /* Pushes menu left, home right, title center */
+    justify-content: space-between;
     width: 100%;
-    max-width: auto;
-    margin: 0 auto;
 }
 
 .header-container h1{
+    margin: 0%;
     text-align: center;
 }
 
 #home-icon{
-    align-items: right;
     cursor: pointer;
-    filter: drop-shadow(3px 3px 2px rgb(100, 100, 100))
+    filter: drop-shadow(3px 3px 2px rgb(100, 100, 100));
 }
 
 /* utk sidebar */
