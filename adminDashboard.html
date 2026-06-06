@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scan and Collect</title>
+    <title>Admin Dashboard</title>
 </head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="format.css">
 <body>
-
     <header class="center">
         <div class="header-container">
 
@@ -19,7 +18,7 @@
                 </svg>
             </div>
                 
-            <h1>Scan and Collect</h1>
+            <h1>Admin Dasboard</h1>
             <div class="icon">
                 <a href="home.html" id="home-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -31,15 +30,17 @@
             
         </div>
     </header>
-        
-    <section id="nav-section" class="hidden">
+
+    <section>
+        <!-- profile -->
         <div class="user-info">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
-            <p>Hi, John!</p>
+            <p>Hi, Admin!</p>
         </div>
         <hr style="border-color:rgba(255,255,255,0.3); margin:12px 0;"/>
 
-        <ul id="nav-list">
+        <!-- nav list -->
+         <ul id="nav-list">
             <li id="aid">
                 <svg id="aid-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <!-- Outer medical shield/box with rounded corners -->
@@ -48,13 +49,7 @@
                     <line x1="12" y1="8" x2="12" y2="16"></line>
                     <line x1="8" y1="12" x2="16" y2="12"></line>
                 </svg>
-                    <a>Aid</a>
-            </li>
-            <li class="sub" class="hidden">
-                    <a href="food.html">Food</a>
-            </li>
-            <li clas="sub" class="hidden">
-                    <a href="Essential.html">Essential</a>
+                    <a href="aid.html" >Aid</a>
             </li>
             <li id="history">
                 
@@ -80,33 +75,30 @@
                 <a href="scan.html">Scan and Collect</a>
             </li>
       </ul>
-    </nav>
-    <hr/>
-
-        <div id="logout">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"/><path d="M20 3H9a2 2 0 0 0-2 2v4h2V5h11v14H9v-4H7v4a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>
-            <p style="margin:0; font-weight:bold; font-size:14px; letter-spacing:1px;">LOGOUT</p>
-        </div>
     </section>
-
-    <main>
-        <p class="center">Use the QR code below to scan and collect your .</p>
-        <img src="icon/qr-code-svgrepo-com.svg" alt="QR Code" class="qr-code" width="200" height="200">
-    </main>
-
-    <!-- <footer>
-        <p><b>Copyright</b></p>
-    </footer> -->
-    
 </body>
 
-
 <script type="text/javascript">
-    //sidebar toggle
-    document.querySelector('#menu-icon').addEventListener('click', function() {
-        document.getElementById('nav-section').classList.toggle('hidden');
+
+    document.querySelectorAll('.icon').forEach(icon=>{
+        icon.addEventListener("mouseover",()=>{
+            icon.classList.add("hover")
+        });
+
+        icon.addEventListener("mouseleave",()=>{
+            icon.classList.remove("hover")
+        });
     });
 
+    document.querySelectorAll('.icon').forEach(icon=>{
+        icon.addEventListener("mouseover",()=>{
+            icon.classList.add("hover")
+        });
+
+        icon.addEventListener("mouseleave",()=>{
+            icon.classList.remove("hover")
+        });
+    });
 
     document.querySelectorAll('li').forEach(li => {
         
@@ -120,37 +112,6 @@
             li.classList.remove("hover");
         });
     });
-
-    document.querySelectorAll('.icon').forEach(icon => {
-        
-        // 2. Listen for the mouse entering the link
-        icon.addEventListener("mouseover", () => {
-            icon.classList.add("hover");
-        });
-
-        // 3. Listen for the mouse leaving the link
-        icon.addEventListener("mouseleave", () => {
-            icon.classList.remove("hover");
-        });
-    });
-
-    document.querySelectorAll('#logout').forEach(logout => {
-        
-        // 2. Listen for the mouse entering the link
-        logout.addEventListener("mouseover", () => {
-            logout.classList.add("hover");
-        });
-
-        // 3. Listen for the mouse leaving the link
-        logout.addEventListener("mouseleave", () => {
-            logout.classList.remove("hover");
-        });
-    });
-
-    document.querySelector('#aid').addEventListener('click', function() {
-    // If 'hidden' is there, it removes it. If it's missing, it adds it!
-    document.getElementById('sub').classList.toggle('hidden');
-});
-
+    
 </script>
 </html>
