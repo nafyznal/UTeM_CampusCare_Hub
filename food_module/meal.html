@@ -3,56 +3,32 @@
     <title>FOOD</title>
     <link rel="stylesheet" href="style.css">
 <style>
-
-.kit{
-    display: flex;
-    justify-content: space-between;
-    background-color: grey;
-    color: white;
-    border-radius: 7pt;
-    margin: 10pt;
-    padding: 7pt;
-    gap: 10px;
-    display: flex;
-}
+    
 .kfood{
     flex: 1;
     margin: 0 15px;
     font-weight: bold;
 }
-.request{
-    float: right;
-    background-color: white;
-    border: 2px solid transparent;
-    border-radius: 10pt;
-    padding: 3pt 10pt;
-}
-.request:hover{
-    color: black;
-    transform: scale(1.05);
-    transition: 0.3s ease;
-}
-.kit{
+.meal{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     background-color: grey;
-    background-image: url("image/snack.png");
     background-size: cover;
     background-position: center;
     color: white;
     border-radius: 7pt;
     margin: 10pt;
     padding: 7pt;
-    gap: 10px;
 }
 .mini{
     background-image: url("image/miniMeal.jpeg");
 }
 #backIcon{
     position: absolute;
-    top: 10px;      /* jarak dari atas */
-    right: 10px;    /* jarak dari kanan */
+    top: 10px;      
+    right: 10px;   
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -75,22 +51,50 @@
     text-align: center;
     animation: fadeIn 0.3s ease;
 }
+.popup-content h3{
+    color: white;
+}
+.desc{
+    color: white;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.meal.mini.desc{
+    display: none;
+}
+.meal.mini:hover .desc{
+    display: block;
+}
 @keyframes fadeIn{
     from{opacity: 0; transform: scale(0.9);}
     to{opacity: 1; transform: scale(1);}
 }
+.sideBar{
+    width: 250px;
+    background-color: maroon;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    transition: left 0.3s ease;
+}
+.sideBar.hidden{
+    left: -250px;
+}
 </style>
-</head>
 
 <body>
 <div id="up">
-    <img src="image/burger_menu.svg" class="site">
+    <img src="image/burger_menu.svg" id="menuIcon" class="site" onclick="toggleSideBar()">
     <h3>Food</h3>
     <img src="image/home.svg" class="site">
 </div>
+
+
 <div id="content">
-    <div id="leftSide">
-    <div class="item">
+<div id="leftSide" class="sideBar">
+    <div class="profile">
         <img src="image/profile.svg" class="site">
         <h6>Hi!</h6>
         <h6 id="name">Blablabla</h6>
@@ -98,11 +102,11 @@
     <hr>
     <div class="item">
         <img src="image/aid.svg" class="site">
-    <a href="#">Aid</a>
+        <a href="food.html">Aid</a>
     </div>
     <div class="item">
         <ul class="aid">
-            <a href="food.html">Food</a>
+            <a>Food</a>
             <li><a href="kit.html">Kit</a></li>
             <li><a href="meal.html">Meal</a></li>
             <a href="essential.html">Essential</a>
@@ -127,16 +131,20 @@
         <button type="button" class="dfood" onclick="location.href='kit.html'">KIT</button>
         <button type="button" class="dfood" onclick="location.href='meal.html'">MEAL</button>
     </div>
-    <div class="kit mini">
-        <p class="kfood">Mini Meal<img src="image/arrowDown.svg" class="site"></p>
-        <br><br><button type="button" class="request">Request</button>
+    <div class="meal mini">
+        <span class="kfood">Mini Meal</span>
+        <div id="miniMeal" class="desc" style="display: none;">
+            <p>Description:</p>
+            <p>Nasi lemak with fried chicken</p>
+        </div>
+        <button type="button" class="request">Request</button>
     </div>
 </div>
 
 <div id="popup" class="popup">
     <div class="popup-content">
         <img src="image/arrowUpLeft.svg" id="backIcon">
-        <img src="image/success.png" class="site">
+        <img src="image/success.png" class="medium">
         <h3>Request success</h3>
     </div>
 </div>  
@@ -150,7 +158,21 @@
     });
     document.getElementById('backIcon').addEventListener('click', ()=>{
         document.getElementById('popup').style.display = 'none';
-        meal.back();
+        kit.back();
     });
+
+    const mealBox = document.querySelector('.meal.mini');
+    const desc = document.getElementById('miniMeal');
+
+    mealBox.addEventListener('mouseenter', () =>{
+        desc.style.display = 'block';
+    });
+    mealBox.addEventListener('mouseleave', () =>{
+        desc.style.display = 'none';
+    })
+
+    function toggleSideBar(){
+        document.getElementById("leftSide").classList.toggle("hidden");
+    }
 </script>
 </body>

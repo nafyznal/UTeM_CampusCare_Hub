@@ -5,10 +5,16 @@ body{
     background-color: #F1E2D1;
 }
 #up{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex; 
     align-items: center; 
     justify-content: space-between;    
     padding: 0 10px;
+    z-index: 1000;
+    height: 50px;
 }
 .upside{
     width: 30px;
@@ -43,7 +49,10 @@ body{
 #rightSide{
     float: right;
     width: 65%;
-    padding: 20px 10px;
+    margin-top: 70px;
+    padding: 20px 10px;           
+    right: 0;          
+    height: calc(100% - 70px);
 }
 .profile{
     display: flex;
@@ -85,8 +94,26 @@ body{
     padding: 5px 50px;
     border-color: transparent;
 }
-.food .dfood:hover{
+.dfood:hover{
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+.kfood:hover{
     background: black;
+}
+.request{
+    align-self: flex-end;
+    margin-top: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 10pt;
+    padding: 3pt 10pt;
+    cursor: pointer;
+}
+.request:hover{
+    color: black;
+    transform: scale(1.05);
+    transition: 0.3s ease;
 }
 .medium{
     width: 150px;

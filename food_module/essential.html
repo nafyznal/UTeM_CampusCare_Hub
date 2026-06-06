@@ -19,31 +19,18 @@
     margin: 0 15px;
     font-weight: bold;
 }
-.request{
-    float: right;
-    background-color: white;
-    border: 2px solid transparent;
-    border-radius: 10pt;
-    padding: 3pt 10pt;
-}
-.request:hover{
-    color: black;
-    transform: scale(1.05);
-    transition: 0.3s ease;
-}
 .essential{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     background-color: grey;
-    background-image: url("image/snack.png");
     background-size: cover;
     background-position: center;
     color: white;
     border-radius: 7pt;
     margin: 10pt;
     padding: 7pt;
-    gap: 10px;
 }
 .toiletries{
     background-image: url("image/toiletries.jpeg");
@@ -80,21 +67,55 @@
     text-align: center;
     animation: fadeIn 0.3s ease;
 }
+.popup-content h3{
+    color: white;
+}
+.desc, .desc1, .desc2{
+    color: white;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.essential.desc,
+.essential.desc1,
+.essential.desc2
+{
+    display: none;
+}
+
+.essential.toiletries:hover .desc,
+.essential.personal:hover .desc,
+.essential.sanitary:hover .desc
+{
+    display: block;
+}
 @keyframes fadeIn{
     from{opacity: 0; transform: scale(0.9);}
     to{opacity: 1; transform: scale(1);}
+}
+.sideBar{
+    width: 250px;
+    background-color: maroon;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    transition: left 0.3s ease;
+}
+.sideBar.hidden{
+    left: -250px;
 }
 </style>
 </head>
 
 <body>
 <div id="up">
-    <img src="image/burger_menu.svg" class="site">
+    <img src="image/burger_menu.svg" id="menuIcon" class="site" onclick="toggleSideBar()">
     <h3>Essential</h3>
     <img src="image/home.svg" class="site">
 </div>
 <div id="content">
-    <div id="leftSide">
+    <div id="leftSide" class="sideBar">
     <div class="profile">
         <img src="image/profile.svg" class="site">
         <h6>Hi!</h6>
@@ -103,11 +124,11 @@
     <hr>
     <div class="item">
         <img src="image/aid.svg" class="site">
-    <a href="#">Aid</a>
+    <a href="food.html">Aid</a>
     </div>
     <div class="item">
         <ul class="aid">
-            <a href="food.html">Food</a>
+            <a>Food</a>
             <li><a href="kit.html">Kit</a></li>
             <li><a href="meal.html">Meal</a></li>
             <a href="essential.html">Essential</a>
@@ -129,26 +150,35 @@
 
 <div id="rightSide">
     <div class="essential toiletries">
-        <p class="kfood">Toiletries
-        <img src="image/arrowDown.svg" class="site"></p>
-        <br><br><button type="button" class="request">Request</button>
+        <span class="kfood">Toiletries</span>
+        <div id="toiletries" class="desc" style="display: none;">
+            <p>Description:</p>
+            <p>Colgate, berus gigi, sabun mandi(Lifebuoy), pencuci rambut(pantene)</p>
+        </div>
+        <button type="button" class="request">Request</button>
     </div>
     <div class="essential personal">
-        <p class="kfood">Personal Core
-        <img src="image/arrowDown.svg" class="site"></p>
-        <br><br><button type="button" class="request">Request</button>
+        <span class="kfood">Personal Core</span>
+        <div id="personalCare" class="desc1" style="display: none;">
+            <p>Description:</p>
+            <p>Sabun Daia, Softener</p>
+        </div>
+        <button type="button" class="request">Request</button>
     </div>
     <div class="essential sanitary">
-        <p class="kfood">Sanitary Pad
-        <img src="image/arrowDown.svg" class="site"></p>
-        <br><br><button type="button" class="request">Request</button>
+        <span class="kfood">Sanitary Pad</span>
+        <div id="sanitaryPad" class="desc2" style="display: none;">
+            <p>Description:</p>
+            <p>Pad, Panty Liner</p>
+        </div>
+        <button type="button" class="request">Request</button>
     </div>
 </div>
 
 <div id="popup" class="popup">
     <div class="popup-content">
         <img src="image/arrowUpLeft.svg" id="backIcon">
-        <img src="image/success.png" class="site">
+        <img src="image/success.png" class="medium">
         <h3>Request success</h3>
     </div>
 </div> 
@@ -164,6 +194,35 @@
         document.getElementById('popup').style.display = 'none';
         essential.back();
     });
+
+    const toiletriesBox = document.querySelector('.essential.toiletries');
+    const desc = document.getElementById('toiletries');
+    toiletriesBox.addEventListener('mouseenter', () =>{
+        desc.style.display = 'block';
+    });
+    toiletriesBox.addEventListener('mouseleave', () =>{
+        desc.style.display = 'none';
+    });
+    const personalBox = document.querySelector('.essential.personal');
+    const desc1 = document.getElementById('personalCare');
+    personalBox.addEventListener('mouseenter', () =>{
+        desc1.style.display = 'block';
+    });
+    personalBox.addEventListener('mouseleave', () =>{
+        desc1.style.display = 'none';
+    });
+    const sanitaryBox = document.querySelector('.essential.sanitary');
+    const desc2 = document.getElementById('sanitaryPad');
+    sanitaryBox.addEventListener('mouseenter', () =>{
+        desc2.style.display = 'block';
+    });
+    sanitaryBox.addEventListener('mouseleave', () =>{
+        desc2.style.display = 'none';
+    });
+
+    function toggleSideBar(){
+        document.getElementById("leftSide").classList.toggle("hidden");
+    }
 </script>
 </body>
 

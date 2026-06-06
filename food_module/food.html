@@ -2,11 +2,29 @@
 <head>
     <title>FOOD</title>
     <link rel="stylesheet" href="style.css">
+
+<style>
+.sideBar{
+    width: 250px;
+    background-color: maroon;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    transition: left 0.3s ease;
+}
+.sideBar.hidden{
+    left: -250px;
+}
+</style>
 </head>
 
 <body>
+<div id="up">
+    <img src="image/burger_menu.svg" id="menuIcon" class="site" onclick="toggleSideBar()">
+    <img src="image/home.svg" class="site">
+</div>
 <div id="content">
-    <div id="leftSide">
+    <div id="leftSide" class="sideBar">
     <div class="item">
         <img src="image/profile.svg" class="site">
         <h6>Hi!</h6>
@@ -15,11 +33,11 @@
     <hr>
     <div class="item">
         <img src="image/aid.svg" class="site">
-    <a href="#">Aid</a>
+    <a href="food.html">Aid</a>
     </div>
     <div class="item">
         <ul class="aid">
-            <a href="food.html">Food</a>
+            <a>Food</a>
             <li><a href="kit.html">Kit</a></li>
             <li><a href="meal.html">Meal</a></li>
             <a href="essential.html">Essential</a>
@@ -39,4 +57,10 @@
     </div>
     </div>
 </div>
+
+<script>
+    function toggleSideBar(){
+        document.getElementById("leftSide").classList.toggle("hidden");
+    }
+</script>
 </body>
