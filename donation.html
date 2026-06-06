@@ -92,12 +92,12 @@
             <div class="payment-method">
 
                 <label>
-                    <input type="radio" name="payment">
+                    <input type="radio" name="payment" value="QR">
                     QR
                 </label>
 
                 <label>
-                    <input type="radio" name="payment">
+                    <input type="radio" name="payment" value="Credit / Debit">
                     Credit Or Debit
                 </label>
 
@@ -116,6 +116,8 @@
             <h2>DONATORS</h2>
 
             <div id="donorList"></div>
+
+            <!--<button onclick="resetDonors()">Reset Donors</button> -->
 
         </div>
 
@@ -145,6 +147,14 @@
             return;
         }
 
+        let paymentMethod = document.querySelector('input[name="payment"]:checked');
+
+        if(!paymentMethod)
+        {
+            alert("Please select a payment method");
+            return;
+        }
+
         //display info
         let displayName;
 
@@ -166,6 +176,13 @@
         donors.push(donor);
 
         localStorage.setItem("donors", JSON.stringify(donors));
+        
+        localStorage.setItem(
+            "latestDonation",
+            JSON.stringify({
+                name:displayName, emai:email, phone:phone, amount:amount, payment: paymentMethod.value, dateTime: new Date().toLocaleString()
+            })
+        );
 
         window.location.href = "successful.html";
     }
@@ -184,6 +201,15 @@
             `;
         });
     }
+
+    /*function resetDonors()
+    {
+        localStorage.removeItem("donors");
+
+        document.getElementById("donorList").innerHTML = "";
+
+        alert("Donor Has been reset.")
+    }*/
 </script>
 
 </body>

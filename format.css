@@ -8,10 +8,12 @@
 body{
     background: #f6f1e8;
     min-height:100vh;
+    max-height: fit-content
 }
 
 .container{
     width:90%;
+    max-width: 1400px;
     margin:auto;
     padding-top:40px;
 }
@@ -24,16 +26,16 @@ body{
 
 h1{
     text-align:center;
-    font-size:80px;
+    font-size:clamp(40px, 8w, 80px);
     color:#541A1A;
-    margin-bottom:60px;
+    margin-bottom:40px;
     letter-spacing:5px;
 }
 
 .donation-section{
     display:flex;
     justify-content:center;
-    gap:130px;
+    gap:40px;
     flex-wrap:wrap;
 }
 
@@ -42,6 +44,8 @@ h1{
     color:#f6f1e8;
     border-radius:50px;
     padding:30px;
+    width: 100%;
+    /*max-width: 400px;*/
 }
 
 .donation-form{
@@ -127,4 +131,88 @@ h2{
     flex-direction:column;
     gap:12px;
     margin-top:20px;
+}
+
+.success-card{
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    background: #541A1A;
+    color: #f6f1e8;
+    border-radius: 50px;
+    padding: 30px;
+    text-align: center;
+}
+
+.success-card h1{
+    font-size: 30px;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.success-icon{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    background: #2db84d;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-icon i{
+    font-size: 55px;
+    color: white;
+}
+
+.payment-details{
+    width: 90%;
+    margin: auto;
+    text-align: left;
+}
+
+.payment-details p{
+    margin-bottom: 15px;
+    font-size: clamp(16px, 2w, 22px);
+}
+
+.success-image img{
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    display: block;
+    margin: auto;
+    padding: 15px;
+}
+
+@media (max-width: 768px) {
+    .top-row{
+        flex-direction: column;
+    }
+
+    .top-row div{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .payment-method{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .donation-form, .donators-box{
+        border-radius: 30px;
+        padding: 20px;
+    }
+
+    .success-card{
+        border-radius: 30px;
+    }
+
+    .back-btn{
+        font-size: 30px;
+    }
+    
 }
