@@ -135,3 +135,24 @@ td {
     text-align: center;
     border: 1px solid #999;
 }
+
+/* button */
+.approve-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 7px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.reject-btn {
+    background-color: #541A1A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 7px;
+    padding: 4px 8px;
+    cursor: pointer;
+}

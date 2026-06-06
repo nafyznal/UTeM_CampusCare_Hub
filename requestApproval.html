@@ -3,6 +3,7 @@
 <head>
     <title>Request Approval</title>
     <link rel="stylesheet" href="requestApproval.css">
+    <script src="requestApproval.js"></script>
 </head>
 <body>
 
@@ -63,7 +64,10 @@
                             <td>19/03/2026 11:45 AM</td>
                             <td>Mini food kit</td>
                             <td>Lutfi Hadi</td>
-                            <td></td>
+                            <td>
+                                <button class="approve-btn" onclick="approveRequest()">Approve</button>
+                                <button class="reject-btn" onclick="rejectRequest()">Reject</button>
+                            </td>
                         </tr>
 
                         <tr>
