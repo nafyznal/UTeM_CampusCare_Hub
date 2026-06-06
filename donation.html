@@ -26,7 +26,7 @@
             <div class="top-row">
                 <div>
                     <label>Amount</label>
-                    <input type="number" placeholder="">
+                    <input type="number" placeholder="" id="amount">
                 </div>
 
                 <div>
@@ -56,12 +56,12 @@
 
                 <div>
                     <label>Name</label>
-                    <input type="text">
+                    <input type="text" id="name">
                 </div>
 
                 <div>
                     <label>Email</label>
-                    <input type="email">
+                    <input type="email" id="email">
                 </div>
 
             </div>
@@ -70,17 +70,17 @@
 
                 <div>
                     <label>Phone Number</label>
-                    <input type="text">
+                    <input type="text" id="phone">
                 </div>
 
                 <div class="radio-group">
                     <label>
-                        <input type="radio" name="visibility">
+                        <input type="radio" name="visibility" value="Anonymous" id="anonymous">
                         Anonymous
                     </label>
 
                     <label>
-                        <input type="radio" name="visibility">
+                        <input type="radio" name="visibility" value="Recognisable" id="recognisable">
                         Recognisable
                     </label>
                 </div>
@@ -103,9 +103,10 @@
 
             </div>
 
-            <button class="payment-btn">
+            <button class="payment-btn" onclick="processDonation()">
                 Proceed Payment
             </button>
+
 
         </div>
 
@@ -114,23 +115,76 @@
 
             <h2>DONATORS</h2>
 
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
-            <div class="lines"></div>
+            <div id="donorList"></div>
 
         </div>
 
     </div>
 
 </div>
+
+<script>
+    function processDonation()
+    {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let phone = document.getElementById("phone").value;
+        let amount = document.getElementById("amount").value;
+
+        if(name === "" || email === "" || phone === "" || amount === "")
+        {
+            alert("Please complete all fields.");
+            return;
+        }
+
+        let visibility = document.querySelector('input[name="visibility"]:checked');
+
+        if(!visibility)
+        {
+            alert("Please select Anonymous or Recognisable");
+            return;
+        }
+
+        //display info
+        let displayName;
+
+        if(visibility.value == "Anonymous")
+        {
+            displayName = "Anonymous";
+        }
+        else
+        {
+            displayName = name;
+        }
+
+        let donor = {
+            name:displayName, email:email, phone:phone, amount:amount
+        };
+
+        let donors = JSON.parse(localStorage.getItem("donors")) || [];
+
+        donors.push(donor);
+
+        localStorage.setItem("donors", JSON.stringify(donors));
+
+        window.location.href = "successful.html";
+    }
+
+    window.onload = function(){
+        let donors = JSON.parse(localStorage.getItem("donors")) || [];
+
+        let donorList = document.getElementById("donorList");
+
+        donorList.innerHTML = "";
+
+        donors.forEach(function (donor)
+        {
+            donorList.innerHTML += `
+            <p>${donor.name} - RM ${donor.amount}</p>
+            `;
+        });
+    }
+</script>
 
 </body>
 </html>

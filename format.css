@@ -121,3 +121,10 @@ h2{
     border-bottom:1px solid rgba(255,255,255,0.5);
     margin-top:22px;
 }
+
+#donorList{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:20px;
+}
