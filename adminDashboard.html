@@ -80,7 +80,38 @@
 
 <script type="text/javascript">
 
-    docum
+    document.querySelectorAll('.icon').forEach(icon=>{
+        icon.addEventListener("mouseover",()=>{
+            icon.classList.add("hover")
+        });
+
+        icon.addEventListener("mouseleave",()=>{
+            icon.classList.remove("hover")
+        });
+    });
+
+    document.querySelectorAll('.icon').forEach(icon=>{
+        icon.addEventListener("mouseover",()=>{
+            icon.classList.add("hover")
+        });
+
+        icon.addEventListener("mouseleave",()=>{
+            icon.classList.remove("hover")
+        });
+    });
+
+    document.querySelectorAll('li').forEach(li => {
+        
+        // 2. Listen for the mouse entering the link
+        li.addEventListener("mouseover", () => {
+            li.classList.add("hover");
+        });
+
+        // 3. Listen for the mouse leaving the link
+        li.addEventListener("mouseleave", () => {
+            li.classList.remove("hover");
+        });
+    });
     
 </script>
 </html>
