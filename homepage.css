@@ -5,15 +5,11 @@ body {
     padding: 20px;
 }
 
-
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-
-
 
 header {
     margin: 0;
@@ -30,18 +26,15 @@ header {
     width: 100%;
 }
 
-
 #menuBtn {
     cursor: pointer;
 }
-
 
 #menu-icon {
     filter: drop-shadow(2px 2px 2px rgb(100, 100, 100));
     width: 35px;
     height: 35px;
 }
-
 
 .header-container h1 {
     margin: 0%;
@@ -50,16 +43,12 @@ header {
     font-size: 24px;
 }
 
-
 #home-icon {
     cursor: pointer;
     filter: drop-shadow(3px 3px 2px rgb(100, 100, 100));
     width: 30px;
     height: 30px;
 }
-
-
-
 
 #mySidebar {
     background-color: #541A1A;
@@ -78,7 +67,6 @@ header {
     flex-direction: column;
 }
 
-
 .sidebar-profile {
     display: flex;
     align-items: center;
@@ -87,22 +75,17 @@ header {
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
-
 .sidebar-profile-img {
     width: 45px !important;
     height: 45px !important;
     object-fit: contain;
 }
 
-
 .sidebar-profile .greeting {
     font-size: 22px;
     font-weight: bold;
     color: white;
 }
-
-
-
 
 .sidebar-menu {
     list-style: none;
@@ -112,9 +95,6 @@ header {
     flex-direction: column;
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
-
-
-
 
 .menu-item-container, .menu-link {
     display: flex;
@@ -129,13 +109,9 @@ header {
     transition: transform 0.25s ease, background-color 0.25s ease;
 }
 
-
 .menu-link:hover, .menu-item-container:hover {
     transform: scale(1.04) translateX(5px);
 }
-
-
-
 
 .sub-menu {
     list-style: none;
@@ -146,13 +122,9 @@ header {
     gap: 13px;
 }
 
-
 .sub-menu li {
     transition: transform 0.2s ease;
 }
-
-
-
 
 .sub-menu-btn, .sub-menu li a {
     color: rgba(255, 255, 255, 0.85);
@@ -162,19 +134,13 @@ header {
     cursor: pointer;
     user-select: none;
 }
-
-
 .sub-menu li:hover {
     transform: scale(1.06) translateX(4px);
 }
 
-
 .sub-menu li a:hover, .sub-menu-btn:hover {
     color: white;
 }
-
-
-
 
 .sub-sub-menu {
     list-style: none;
@@ -185,21 +151,16 @@ header {
     gap: 10px;
 }
 
-
 .sub-sub-menu li a {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.75);
 }
-
-
-
 
 .sidebar-footer {
     margin: 12px;
     background-color: rgba(0, 0, 0, 0.12);
     padding: 20px 25px;
 }
-
 
 #logout {
     display: flex;
@@ -212,31 +173,22 @@ header {
     transition: transform 0.2s ease;
 }
 
-
 #logout:hover {
     text-decoration: underline;
     transform: scale(1.04);
 }
 
-
-
-
 .hidden {
     display: none !important;
 }
-
 
 .dropdown-closed {
     display: none ;
 }
 
-
-
-
 #menu-icon, #home-icon {
     pointer-events: none;
 }
-
 
 .main-container {
     max-width: 1200px;
@@ -244,9 +196,6 @@ header {
     transition: all 0.3s ease;
     width: 100%;
 }
-
-
-
 
 .hero-banner {
     width: 100%;
@@ -260,8 +209,6 @@ header {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     box-sizing: border-box;
 }
-
-
 .banner-content {
     width: 100%;
     display: flex;
@@ -271,13 +218,10 @@ header {
     gap: 20px;
 }
 
-
 .logo-text {
     color: white;
     text-align: left;
 }
-
-
 .brand-title {
     font-size: 64px;
     font-weight: bold;
@@ -285,14 +229,12 @@ header {
     letter-spacing: -1px;
 }
 
-
 .brand-sub {
     font-size: 24px;
     font-weight: bold;
     line-height: 1.1;
     display: inline-block;
 }
-
 
 .btn-donation {
     background-color: #541A1A;
@@ -306,11 +248,9 @@ header {
     transition: transform 0.2s;
 }
 
-
 .btn-donation:hover {
     transform: scale(1.05);
 }
-
 
 .section-title {
     text-align: center;
@@ -319,13 +259,11 @@ header {
     color: #4a1515;
 }
 
-
 .grid-layout {
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 40px;
 }
-
 
 .impact-cards {
     display: grid;
@@ -333,11 +271,9 @@ header {
     gap: 20px;
 }
 
-
 .card {
     text-align: center;
 }
-
 
 .card-number {
     display: block;
@@ -346,13 +282,11 @@ header {
     margin-bottom: 2px;
 }
 
-
 .card-title {
     font-size: 16px;
     margin-bottom: 15px;
     color: #4a1515;
 }
-
 
 .card-image {
     width: 100%;
@@ -362,14 +296,12 @@ header {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-
 .card-image img {
     width: 100%;
     height: 100% ;
     object-fit: cover ;
     margin: 0 ;
 }
-
 
 .mission-box {
     background-color: #541A1A;
@@ -380,7 +312,6 @@ header {
     height: fit-content;
 }
 
-
 .mission-box h2 {
     color: white;
     margin-top: 0;
@@ -388,11 +319,8 @@ header {
     font-size: 22px;
 }
 
-
 .mission-box p {
     font-size: 14px;
     line-height: 1.6;
     text-align: left;
 }
-
-
