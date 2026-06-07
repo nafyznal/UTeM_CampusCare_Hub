@@ -11,7 +11,7 @@ body {
     justify-content: center;
 }
 
-/* Header */
+
 header {
     margin: 0;
     padding: 10px 10px;
@@ -50,9 +50,7 @@ header {
     height: 30px;
 }
 
-/* ==========================================
-   2. REKA BENTUK SIDEBAR (VERSI "HI, JOHN!")
-   ========================================== */
+
 #mySidebar {
     background-color: #541A1A;
     color: white;
@@ -90,7 +88,7 @@ header {
     color: white;
 }
 
-/* Senarai Menu Utama */
+
 .sidebar-menu {
     list-style: none;
     padding: 15px 0;
@@ -100,7 +98,7 @@ header {
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
-/* ANIMASI MENU UTAMA */
+
 .menu-item-container, .menu-link {
     display: flex;
     align-items: center;
@@ -118,7 +116,7 @@ header {
     transform: scale(1.04) translateX(5px); 
 }
 
-/* Sub-menu Tahap 1 (Di bawah Aid: Food & Essential) */
+
 .sub-menu {
     list-style: none;
     padding-left: 65px; 
@@ -132,7 +130,7 @@ header {
     transition: transform 0.2s ease;
 }
 
-/* Gaya tulisan butang Food dan Essential */
+
 .sub-menu-btn, .sub-menu li a {
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
@@ -150,10 +148,10 @@ header {
     color: white;
 }
 
-/* Sub-menu Tahap 2 (Di bawah Food -> Kit & Meal) */
+
 .sub-sub-menu {
     list-style: none;
-    padding-left: 15px; /* Anjakan ke dalam sikit untuk anak menu */
+    padding-left: 15px; 
     margin: 8px 0 5px 0;
     display: flex;
     flex-direction: column;
@@ -165,7 +163,7 @@ header {
     color: rgba(255, 255, 255, 0.75);
 }
 
-/* Bahagian Bawah (Logout) */
+
 .sidebar-footer {
     margin: 12px;
     background-color: rgba(0, 0, 0, 0.12);
@@ -197,10 +195,6 @@ header {
     display: none ;
 }
 
-/* Pusing anak panah bila menu dibuka */
-.caret-rotate {
-    transform: rotate(90deg);
-}
 
 #menu-icon, #home-icon {
     pointer-events: none;
