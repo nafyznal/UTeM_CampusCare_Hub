@@ -4,292 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTeM Campus Care - Home</title>
-    
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <style>
-    
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #eae3d9; 
-            color: #4a1515;
-            padding: 20px;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        .header {
-            max-width: 1200px;
-            margin: 0 auto 15px auto;
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .menu-icon {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 25px;
-            height: 16px;
-            cursor: pointer;
-            z-index: 100; 
-        }
-
-        .menu-icon span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: #4a1515;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        .sidebar {
-            position: absolute;
-            top: 20px;
-            left: -300px; 
-            width: 220px;
-            height: calc(100vh - 40px);
-            background-color: #4c1a1a; 
-            border-radius: 30px;
-            padding: 30px 20px;
-            color: #ffffff;
-            transition: left 0.3s ease;
-            z-index: 90;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
-        }
-
-        .sidebar.active {
-            left: 20px;
-        }
-
-     
-        .sidebar-profile {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 25px;
-        }
-
-        .profile-icon {
-            font-size: 32px;
-        }
-
-        .btn-sidebar-login {
-            background-color: #e9c4aa;
-            color: #4c1a1a;
-            text-decoration: none;
-            padding: 4px 12px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-      
-        .sidebar-menu {
-            list-style: none;
-        }
-
-        .menu-item-main {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .sub-menu {
-            list-style: none;
-            padding-left: 25px;
-            margin-bottom: 15px;
-        }
-
-        .sub-menu li {
-            margin-bottom: 8px;
-            font-size: 14px;
-            opacity: 0.8;
-            cursor: pointer;
-        }
-
-        .sub-menu li:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            transition: margin-left 0.3s ease;
-        }
-
-
-        .hero-banner {
-            width: 100%;
-            height: 320px;
-            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("donation.webp");
-            background-size: cover;
-            background-position: center;
-            border-radius: 40px;
-            display: flex;
-            align-items: flex-end;
-            padding: 40px;
-            margin-bottom: 40px;
-        }
-
-        .banner-content {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .logo-text {
-            display: flex;
-            align-items: center;
-            color: #ffffff;
-        }
-
-        .brand-title {
-            font-size: 64px;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .brand-sub {
-            font-size: 24px;
-            font-weight: bold;
-            line-height: 1.1;
-        }
-
-        .btn-donation {
-            background-color: #4c1a1a;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: 0.2s;
-        }
-
-        .btn-donation:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-        }
-
- 
-        .section-title {
-            text-align: center;
-            font-size: 28px;
-            font-weight: normal;
-            margin-bottom: 40px;
-        }
-
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        .impact-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            text-align: center;
-        }
-
-        .card-number {
-            display: block;
-            font-size: 14px;
-            color: #7a6e67;
-            margin-bottom: 2px;
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: normal;
-            margin-bottom: 15px;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 160px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-    
-        .mission-box {
-            background-color: #4c1a1a;
-            color: #f7ede2;
-            padding: 35px 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .mission-box h2 {
-            font-size: 24px;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .mission-box p {
-            font-size: 14px;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
 
 </style>
 <body>
 
     <header class="header">
-        <div class="menu-icon" onclick="toggleSidebar()">
-        <img src ="burger_menu.svg">
+        <div class="header-container">
+            <div class="menu-icon" id="menuBtn" onclick="toggleSidebar()">
+                 <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </div>
+            <h1>UTeM Campus Care</h1>
+            <div class="home-icon">
+                <img src="home.svg" id="home-icon" alt="Home">
+            </div>
         </div>
     </header>
 
-    <nav class="sidebar" id="mySidebar">
+    <section class="sidebar hidden" id="mySidebar">
         <div class="sidebar-profile">
-            
-            <a href="index.html" class="btn-sidebar-login">Login</a>
+             <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
+            <span class="greeting">Hi, John!</span>
         </div>
         
         <ul class="sidebar-menu">
-            <li class="menu-item-main">👉 Aid</li>
             <li>
-                <ul class="sub-menu">
-                    <li>Food</li>
-                    <li >Kit</li>
-                    <li >Meal</li>
-                    <li>Essential</li>
+               
+                <div class="menu-item-container" onclick="toggleSubMenu(event)" style="cursor: pointer;">
+                     <svg id="aid-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>Aid
+                    <span id="caret-icon" style="margin-left: auto; font-size: 14px; transition: transform 0.2s;"></span>
+                </div>
+              
+         
+                <ul class="sub-menu dropdown-closed" id="aidSubMenu">
+                    <li>
+                      
+                        <div class="sub-menu-btn" onclick="toggleFoodMenu(event)" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            <span>Food</span>
+                            <span id="food-caret" style="font-size: 12px; transition: transform 0.2s; margin-right: 25px;"></span>
+                        </div>
+                        
+                      
+                        <ul class="sub-sub-menu dropdown-closed" id="foodSubMenu">
+                            <li><a href="#">Kit</a></li>
+                            <li><a href="#">Meal</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Essential</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="history.html" class="menu-link">
+                     <svg id="history-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <polyline points="3 3 3 8 8 8"></polyline>
+                        <line x1="12" y1="7" x2="12" y2="12"></line>
+                        <line x1="12" y1="12" x2="16" y2="14"></line>
+                    </svg>
+                    <span></span> <span>History</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-link">
+                    <svg id="scan-icon" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+                        <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+                        <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                        <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+                        <line x1="7" y1="12" x2="17" y2="12"></line>
+                    </svg>
+                    <span></span> <span>Scan and Collect</span>
+                </a>
+            </li>
         </ul>
-    </nav>
 
-    <main class="main-container">
+        <div class="sidebar-footer">
+            <div id="logout" onclick="prosesLogout()">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"/><path d="M20 3H9a2 2 0 0 0-2 2v4h2V5h11v14H9v-4H7v4a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>
+                <span></span> <span>LOGOUT</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container" id="mainContent">
         
         <section class="hero-banner">
             <div class="banner-content">
@@ -297,7 +105,7 @@
                     <span class="brand-title">UTeM</span>
                     <span class="brand-sub">Campus<br>Care</span>
                 </div>
-                <a href="login.html" class="btn-donation">START DONATION</a>
+                <a href="donation.html" class="btn-donation">START DONATION</a>
             </div>
         </section>
 
@@ -333,9 +141,47 @@
     </main>
 
     <script>
+        let sidebar = document.getElementById('mySidebar');
+        let mainContent = document.getElementById('mainContent');
+        let menuBtn = document.getElementById('menuBtn');
+
         function toggleSidebar() {
-            let sidebar = document.getElementById('mySidebar');
-            sidebar.classList.toggle('active');
+            sidebar.classList.toggle('hidden');
+            mainContent.classList.toggle('blur-effect');
+        }
+
+        
+        function toggleSubMenu(event) {
+            event.stopPropagation(); 
+            let subMenu = document.getElementById('aidSubMenu');
+            let caret = document.getElementById('caret-icon');
+            
+            subMenu.classList.toggle('dropdown-closed');
+            caret.classList.toggle('caret-rotate');
+        }
+
+        function toggleFoodMenu(event) {
+            event.stopPropagation();
+            
+            let foodSubMenu = document.getElementById('foodSubMenu');
+            let foodCaret = document.getElementById('food-caret');
+            
+            foodSubMenu.classList.toggle('dropdown-closed');
+            foodCaret.classList.toggle('caret-rotate');
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!sidebar.classList.contains('hidden') && 
+                !sidebar.contains(event.target) && 
+                !menuBtn.contains(event.target)) {
+                
+                sidebar.classList.add('hidden');
+                mainContent.classList.remove('blur-effect');
+            }
+        });
+
+        function prosesLogout() {
+            window.location.href = "index.html";
         }
     </script>
 
