@@ -5,7 +5,6 @@ body {
     padding: 20px;
 }
 
-
 header {
     margin: 0;
     padding: 10px 10px;
@@ -38,14 +37,13 @@ header {
     height: 30px;
 }
 
-
 #mySidebar {
     background-color: #4A1515; 
     color: white;
     border-radius: 20px; 
     width: 210px;        
     height: auto;       
-    max-height: 85vh;    /* Supaya tak terlebih skrin kalau sub-menu terlalu panjang */
+    max-height: 85vh;  
     position: fixed;
     top: 80px;
     left: 20px;
@@ -54,9 +52,8 @@ header {
     padding: 0;          
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease; /* Bagi animasi smooth sikit bila saiz berubah */
+    transition: all 0.3s ease; 
 }
-
 
 .sidebar-profile {
     display: flex;
@@ -85,11 +82,12 @@ header {
     font-weight: bold;
     user-select: none;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .menu-link:hover, .menu-item-container:hover {
     background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
 }
 
 .sub-menu {
@@ -109,10 +107,12 @@ header {
     cursor: pointer;
     user-select: none;
     padding: 5px 0;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .sub-menu li a:hover, .sub-menu-btn:hover {
     color: white;
+    transform: scale(1.04) translateX(2px);
 }
 
 .sub-sub-menu {
@@ -121,15 +121,21 @@ header {
     margin: 5px 0;
     display: flex;
     flex-direction: column;
-   
 }
 
 .sub-sub-menu li a {
     font-size: 15px; 
     color: rgba(255, 255, 255, 0.7);
     font-weight: normal;
+    display: block;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
+
+.sub-sub-menu li a:hover {
+    color: white;
+    transform: translateX(3px);
+}
 
 .sidebar-footer {
     margin-top: 15px;
@@ -148,28 +154,25 @@ header {
     font-weight: bold;
     padding: 12px 20px;
     border-radius: 10px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 #logout:hover {
     background-color: rgba(0, 0, 0, 0.4);
+    transform: scale(1.02);
 }
-
 
 .hidden {
     display: none !important;
 }
 
 .dropdown-closed {
-    display: none ;
+    display: none ; 
 }
-
-
 
 #menu-icon, #home-icon {
     pointer-events: none;
 }
-
 
 .main-container {
     max-width: 1000px;
