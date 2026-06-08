@@ -1,3 +1,25 @@
+<?php
+session_start();
+
+$registered = false;
+$error = '';
+
+if (isset($_POST['register'])) {
+  $name     = trim($_POST['name']);
+  $email    = trim($_POST['email']);
+  $password = $_POST['password'];
+  $role     = $_POST['role'];
+
+  if (empty($name) || empty($email) || empty($password) || empty($role)) {
+    $error = "Please fill in all fields.";
+  } 
+  else 
+    {
+    $registered = true;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +35,12 @@
             <div class="login-box">
                 <h1>REGISTER</h1>
                 
-                <form onsubmit="register(event)">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <label>Name</label>
-                    <input type = "text" required>
+                    <input type = "text" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
 
                     <label>Email</label>
-                    <input type="email" required>
+                    <input type="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"required>
 
                     <label>Password</label>
                     <input type="password" required>
@@ -38,7 +60,7 @@
     <script>
         function register(event){
             event.preventDefault();
-            window.location.href="successful.html";
+            window.location.href="successful.php";
         }
     </script>
 </body>

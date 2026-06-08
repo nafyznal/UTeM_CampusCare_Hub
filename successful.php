@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Registration Successful</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,22 +11,21 @@
     <div class="container">
         <div class="background">
             <div class="login-box">
-                <h1>LOGIN</h1>
-                <form action = "homepage.html">
-                    <label>Email</label>
-                    <input type="email" required>
-
-                    <label>Password</label>
-                    <input type="password" required>
-
+                <h1>Done Register</h1>
+                <img src="success.png" class="success" alt="Success">
+                
+                <form onsubmit="home(event)">
                     <button type="submit">Login</button>
-
-                    <p> Don't have an account ? <a href="register.html">Register</a>
-                    </p>
                 </form>
             </div>
-
         </div>
     </div>
+
+    <script>
+        function home(event) {
+            event.preventDefault(); 
+            window.location.href = "index.php";
+        }
+    </script>
 </body>
 </html>

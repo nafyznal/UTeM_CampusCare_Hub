@@ -19,9 +19,6 @@
                 </svg>
             </div>
             <h1>UTeM Campus Care</h1>
-            <div class="home-icon">
-                <img src="home.svg" id="home-icon" alt="Home">
-            </div>
         </div>
     </header>
 
@@ -58,7 +55,7 @@
                 </ul>
             </li>
             <li>
-                <a href="history.html" class="menu-link">
+                <a href="history.php" class="menu-link">
                      <svg id="history-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                         <polyline points="3 3 3 8 8 8"></polyline>
@@ -97,7 +94,7 @@
                     <span class="brand-title">UTeM</span>
                     <span class="brand-sub">Campus<br>Care</span>
                 </div>
-                <a href="donation.html" class="btn-donation">START DONATION</a>
+                <a href="donation.php" class="btn-donation">START DONATION</a>
             </div>
         </section>
 
@@ -167,7 +164,7 @@
         });
 
         function prosesLogout() {
-            window.location.href = "index.html";
+            window.location.href = "index.php";
         }
     </script>
 </body>

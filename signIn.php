@@ -10,7 +10,7 @@
 <body>
 
     <header class="header">
-        <div class="header-container">
+        <div id="header-container" >
             <div class="menu-icon" id="menuBtn" onclick="toggleSidebar()">
                  <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -19,17 +19,14 @@
                 </svg>
             </div>
             <h1>UTeM Campus Care</h1>
-            <div class="home-icon">
-                <img src="home.svg" id="home-icon" alt="Home">
-            </div>
         </div>
     </header>
-
+<!-- SideBar -->
     <section class="sidebar hidden" id="mySidebar">
         <div class="sidebar-profile">
              <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
         
-    <button class="btn-sidebar-login" onclick="window.location.href='index.html'">Login</button>
+    <button id="btn-sidebar-login" onclick="window.location.href='index.php'">Login</button>
         </div>
        
         <ul class="sidebar-menu">
@@ -70,7 +67,7 @@
                     <span class="brand-title">UTeM</span>
                     <span class="brand-sub">Campus<br>Care</span>
                 </div>
-                <a href="donation.html" class="btn-donation">START DONATION</a>
+                <a href="donation.php" class="btn-donation">START DONATION</a>
             </div>
         </section>
 
@@ -128,7 +125,6 @@
             let foodCaret = document.getElementById('food-caret');
            
             foodSubMenu.classList.toggle('dropdown-closed');
-            foodCaret.classList.toggle('caret-rotate');
         }
 
         document.addEventListener('click', function(event) {
@@ -140,7 +136,7 @@
         });
 
         function prosesLogout() {
-            window.location.href = "index.html";
+            window.location.href = "index.php";
         }
     </script>
 </body>
