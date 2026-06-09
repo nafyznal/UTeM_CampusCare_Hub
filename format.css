@@ -1,8 +1,10 @@
-body{
+/* --- Global Styles --- */
+body {
     background-color: #F1E2D1;
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 }
-
 
 .center {
     display: flex;
@@ -10,142 +12,156 @@ body{
     justify-content: center;
 }
 
-/* heaader */
-
+/* --- Header Section --- */
 header {
     margin: 0;
-    padding: 10px 10px;
+    padding: 15px 20px;
     background-color: transparent;
     width: 100%;
+    box-sizing: border-box;
 }
 
-#menu-icon {
-    cursor: pointer;
-    filter: drop-shadow(2px 2px 2px rgb(100, 100, 100));
-}
-
-.header-container{
+#header-container {
     display: flex; 
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
 
-.header-container h1{
-    margin: 0%;
+#header-container h1 {
+    margin: 0;
+    flex-grow:1;
     text-align: center;
+    font-size: 24px;
 }
 
-#home-icon{
+.icon {
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#menu-icon {
+    filter: drop-shadow(2px 2px 2px rgb(100, 100, 100));
+}
+
+#home-icon {
     filter: drop-shadow(3px 3px 2px rgb(100, 100, 100));
 }
 
-/* utk sidebar */
-
-.user-info{
-    display: flex;
-    align-items:center;
-    margin-top: 20px;
-    margin-left: 30px;
-}
-
-section{
+/* --- Sidebar Navigation --- */
+nav {
     background-color: #541A1A;
     color: white;
     border-radius: 20px;
     width: 200px;
     height: auto;
     position: fixed;
-    top: 10%;
+    top: 12%;
+    margin-left: 20px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
     margin-left: 20px;
 }
 
-.user-info p{
-    
-    margin-left: 20px;
+.user-info p {
+    margin: 0 0 0 10px;
     font-weight: bold;
 }
 
-ul{
+hr {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 15px 0;
+}
+
+/* --- Navigation List --- */
+ul {
     padding: 0;
-    margin-top: 50px;
+    margin: 20px 0;
 }
 
-li{
-    list-style:none; 
-    margin-left:20px; 
-    margin-bottom:30px;
-    pointer-events: auto;
+li {
+    list-style: none; 
+    margin-left: 20px; 
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-li a{
+li a {
     color: white;
     text-decoration: none;
-
+    font-size: 15px;
+    font-weight: 500;
+    user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;    
-    user-select: none;
 }
 
-h2{
+svg {
+    vertical-align: middle;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+/* --- Logout Trigger --- */
+#logout {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 25px; 
+    margin-bottom: 25px;
+    gap: 8px; 
+    cursor: pointer;
+}
+
+/* --- Utility Classes & Micro-interactions --- */
+.hidden {
+    display: none;
+}
+
+/* Smooth scaling transition handler */
+.icon, li, #logout {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover {
+    transform: scale(1.0);
+}
+
+h2 {
     text-align: center;
     margin-top: 20px;
 }
 
-img{
+img {
     margin-top: 20px;
     margin-left: 20px;
 }
 
-#logout{
-    display:flex; 
-    justify-content:center; 
-    align-items:center; 
-    margin-top:40px; 
-    gap:8px; 
-    cursor:pointer;
-    margin-bottom: 40px;
-}
+.sub { margin-left: 70px; }
+.subSub { margin-left: 120px; }
 
-.hidden{
-    display: none;
-}
-
-.hover{
-    transition: all 0.3s ease;
-    transform: scale(1.1);
-}
-
-svg{
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.sub{
-    margin-left: 70px;
-}
-
-.subSub{
-    margin-left: 120px
-}
-
-hr{
-    border-color:rgba(255,255,255,0.3);
-    margin:12px 0;
-}
-
-
-/* FOOTER */
-footer{
+/* --- Footer --- */
+footer {
     display: flex;
     background-color: #541A1A;
     height: 30%;
-    top: 100%;
-    align-items: end;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    align-items: flex-end;
 }
 
-footer p{
-    margin-left: 10px;
+footer p {
+    margin-left: 15px;
+    margin-bottom: 15px;
     color: white;
 }

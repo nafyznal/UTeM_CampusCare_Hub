@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="format.css">
 </head>
-<link rel="stylesheet" href="format.css">
 <body>
     <header class="center">
-        <div class="header-container">
-
-            <div class="icon">
+        <div id="header-container">
+            <div class="icon" id="menu-btn">
                 <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -18,7 +17,8 @@
                 </svg>
             </div>
                 
-            <h1>Admin Dasboard</h1>
+            <h1>Admin Dashboard</h1>
+            
             <div class="icon">
                 <a href="home.html" id="home-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -27,20 +27,17 @@
                     </svg>
                 </a>
             </div>
-            
         </div>
     </header>
 
-    <section id="nav-section" class="hidden">
-        <!-- profile -->
+    <nav id="nav-section" class="hidden">
         <div class="user-info">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
             <p>Hi, Admin!</p>
         </div>
         <hr/>
 
-        <!-- nav list -->
-         <ul id="nav-list">
+        <ul id="nav-list">
             <li id="dashboard">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="3" width="7" height="9" rx="1" />
@@ -48,19 +45,15 @@
                     <rect x="3" y="16" width="7" height="5" rx="1" />
                     <rect x="14" y="12" width="7" height="9" rx="1" />
                 </svg>
-                    <a href="adminDashboard.html" >Dashboard</a>
+                <a href="adminDashboard.html">Dashboard</a>
             </li>
             <li id="approval">
-                
                 <svg id="history-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Counter-clockwise clock arrow -->
                     <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                     <polyline points="3 3 3 8 8 8"></polyline>
-                    <!-- Clock hands -->
                     <line x1="12" y1="7" x2="12" y2="12"></line>
                     <line x1="12" y1="12" x2="16" y2="14"></line>
                 </svg>
-
                 <a href="History.html">History</a>
             </li>
             <li id="scan"> 
@@ -73,68 +66,30 @@
                 </svg>
                 <a href="scan.html">Scan and Collect</a>
             </li>
-      </ul>
-      <hr/>
-      <div id="logout">
+        </ul>
+        <hr/>
+        
+        <div id="logout">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"/><path d="M20 3H9a2 2 0 0 0-2 2v4h2V5h11v14H9v-4H7v4a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>
             <p style="margin:0; font-weight:bold; font-size:14px; letter-spacing:1px;">LOGOUT</p>
         </div>
-    </section>
+    </nav>
 
     <main>
-        <div id="3box">
-            
-        </div>
+        <div id="info-container"></div>
     </main>
+
+    <script type="text/javascript">
+        // Sidebar Toggle
+        document.querySelector('#menu-btn').addEventListener('click', function() {
+            document.getElementById('nav-section').classList.toggle('hidden');
+        });
+
+        // Combined Single Loop for Hover Effects
+        document.querySelectorAll('.icon, li, #logout').forEach(element => {
+            element.addEventListener("mouseover", () => element.classList.add("hover"));
+            element.addEventListener("mouseleave", () => element.classList.remove("hover"));
+        });
+    </script>
 </body>
-
-<script type="text/javascript">
-
-    document.querySelector('#menu-icon').addEventListener('click', function() {
-        document.getElementById('nav-section').classList.toggle('hidden');
-    });
-    
-    document.querySelectorAll('.icon').forEach(icon=>{
-        icon.addEventListener("mouseover",()=>{
-            icon.classList.add("hover")
-        });
-
-        icon.addEventListener("mouseleave",()=>{
-            icon.classList.remove("hover")
-        });
-    });
-
-    document.querySelectorAll('.icon').forEach(icon=>{
-        icon.addEventListener("mouseover",()=>{
-            icon.classList.add("hover")
-        });
-
-        icon.addEventListener("mouseleave",()=>{
-            icon.classList.remove("hover")
-        });
-    });
-
-    document.querySelectorAll('li').forEach(li => {
-        
-        li.addEventListener("mouseover", () => {
-            li.classList.add("hover");
-        });
-
-        li.addEventListener("mouseleave", () => {
-            li.classList.remove("hover");
-        });
-    });
-
-    document.querySelectorAll('#logout').forEach(logout => {
-
-        logout.addEventListener("mouseover", () => {
-            logout.classList.add("hover");
-        });
-
-        logout.addEventListener("mouseleave", () => {
-            logout.classList.remove("hover");
-        });
-    });
-
-</script>
 </html>
