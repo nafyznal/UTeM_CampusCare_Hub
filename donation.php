@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <?php
+    include 'config.php';
+    ?>
 
 <div class="container">
 
@@ -132,17 +135,23 @@
         </form>
 
         <!-- Donators Box -->
+        <!--<?php
+            //Retrieve student information
+            $name = $_POST['name'];  
+            $amount = $_POST['amount']; 
+        ?> -->
+
         <div class="donators-box">
 
             <h2>DONATORS</h2>
 
             <div id="donorList">
+                <div id="donorList">
 
                 <?php
-
                 $sql = "SELECT donor_name, amount
-                        FROM donors
-                        ORDER BY id DESC";
+                FROM donors
+                ORDER BY id DESC";
 
                 $result = mysqli_query($conn, $sql);
 
@@ -151,10 +160,10 @@
                     while($row = mysqli_fetch_assoc($result))
                     {
                         echo "<p>"
-                             . htmlspecialchars($row['donor_name'])
-                             . " - RM "
-                             . htmlspecialchars($row['amount'])
-                             . "</p>";
+                        . htmlspecialchars($row['donor_name'])
+                        . " - RM "
+                        . htmlspecialchars($row['amount'])
+                        . "</p>";
                     }
                 }
                 else
@@ -163,6 +172,8 @@
                 }
 
                 ?>
+
+                </div>
 
             </div>
 

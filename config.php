@@ -1,28 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 ```php
 <?php
 
-/* Database Configuration */
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "donation_db";
-
-/* Create Connection */
-
+// Connect to MySQL database
 $conn = mysqli_connect(
-    $servername,
-    $username,
-    $password,
-    $database
+    "host",
+    "root",
+    "",
+    "donation_db"
 );
 
-/* Check Connection */
-
-if (!$conn)
+// Check connection
+if(!$conn)
 {
-    die("Connection Failed: " . mysqli_connect_error());
+    die("Could not connect to database");
 }
+
+// Optional success message for testing
+// echo "Database Connected Successfully";
 
 ?>
 ```
+
+</body>
+</html>

@@ -1,77 +1,100 @@
-```php
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
 
-include 'config.php';
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-/* Get form data */
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$amount = $_POST['amount'];
-$frequency = $_POST['frequency'];
-$visibility = $_POST['visibility'];
-$payment = $_POST['payment'];
+    <link rel="stylesheet" href="format.css">
+</head>
+<body>
+    <?php
+    //Retrieve student information
+    $name = $_POST['name']; 
+    $email = $_POST['email']; 
+    $phone = $_POST['phone']; 
+    $amount = $_POST['amount']; 
+    $frequency = $_POST['frequency']; 
+    $visibility = $_POST['visibility']; 
+    $payment = $_POST['payment'];
 
-/* Category checkbox */
-if(isset($_POST['category']))
-{
-    $category = implode(", ", $_POST['category']);
-}
-else
-{
-    $category = "None";
-}
+    /* Category checkbox */ 
+    if(isset($_POST['category'])) 
+    { 
+        $category = implode(", ", $_POST['category']); 
+    }
+    else 
+    { 
+    $category = "None"; 
+    }
 
-/* Anonymous donor */
-$displayName = $name;
+    /* Anonymous donor */ 
+    $displayName = $name; 
 
-if($visibility == "Anonymous")
-{
-    $displayName = "Anonymous";
-}
+    if($visibility == "Anonymous") 
+    { 
+        $displayName = "Anonymous"; 
+    }
+    else
+    {
+        $displayName;
+    }
 
-/* Insert into database */
-$sql = "INSERT INTO donors
-(
-    donor_name,
-    email,
-    phone,
-    amount,
-    frequency,
-    category,
-    visibility,
-    payment_method,
-    donation_date
-)
-VALUES
-(
-    '$displayName',
-    '$email',
-    '$phone',
-    '$amount',
-    '$frequency',
-    '$category',
-    '$visibility',
-    '$payment',
-    NOW()
-)";
+    $reference = "REF" . rand(10000,99999); 
+    
+    $dateTime = date("d/m/Y h:i:s A");
 
-$result = mysqli_query($conn, $sql);
+    include 'config.php';
 
-/* Check insertion */
-if($result)
-{
-    $id = mysqli_insert_id($conn);
+    $sql = "INSERT INTO donors
+            (donor_name, amount)
+            VALUES
+            ('$displayName', '$amount')";
 
-    header("Location: successful.php?id=$id");
-    exit();
-}
-else
-{
-    echo "Error: " . mysqli_error($conn);
-}
+    mysqli_query($conn, $sql);
+    
+    ?>
 
-mysqli_close($conn);
+     <div class="container">
 
-?>
-```
+        <a href="donation.php" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div class="success-card">
+            <h1>Payment Successful</h1>
+
+            <div class="success-image">
+                <img src="successful.png" alt="Payment Successful">
+            </div>
+
+            <div class="payment-details">
+                <p><strong>Reference : </strong>
+                    <span id="reference"></span>
+                    <?php echo $reference; ?>
+                </p>
+                
+                <p><strong>Payment Date / Time : </strong>
+                    <span id="datetime"></span>
+                    <?php echo $dateTime; ?>
+                </p>
+
+                <p><strong>Payment With :
+                    <?php echo $payment; ?>
+                </strong></p>
+
+                <p><strong>Total Amount : </strong>
+                    <?php echo $amount; ?>
+                </p>
+
+                <p><strong>Status : </strong>
+                    Successful
+                </p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
