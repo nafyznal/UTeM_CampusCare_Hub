@@ -77,6 +77,7 @@
 
     <main>
         <div id="info-container"></div>
+        <p>Heloo</p>
     </main>
 
     <script type="text/javascript">
