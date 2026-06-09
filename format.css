@@ -109,6 +109,8 @@ svg {
     vertical-align: middle;
     margin-right: 12px;
     flex-shrink: 0;
+    width: 30px;
+    height: 30px;
 }
 
 /* --- Logout Trigger --- */
@@ -148,6 +150,65 @@ img {
 
 .sub { margin-left: 70px; }
 .subSub { margin-left: 120px; }
+
+
+/* main */
+
+.grid-container {
+    display: flex;
+    flex-direction: column; /* This stacks the cards vertically */
+    gap: 20px;              /* Spacing between each card */
+    max-width: 320px;       /* Sets a nice horizontal boundary for the cards */
+    
+    /* Center positioning on the page */
+    margin: 40px auto;      
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.card{
+    background-color: #541A1A; /* Moved color here so the card body is maroon */
+    color: #ffffff;
+    border-radius: 16px;
+    width: 200px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    margin: 10px
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.value {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    white-space: nowrap; 
+}
+
+.label {
+    font-size: 14px;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+
+.icon-container{
+    background-color: #541A1A;
+}
+
+@media (min-width: 768px) {
+    .grid-container {
+        margin-left: 40%; /* Pushes the cards away from your left sidebar */
+    }
+}
+
 
 /* --- Footer --- */
 footer {
