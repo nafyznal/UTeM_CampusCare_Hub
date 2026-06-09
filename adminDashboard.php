@@ -31,7 +31,7 @@
         </div>
     </header>
 
-    <section>
+    <section id="nav-section" class="hidden">
         <!-- profile -->
         <div class="user-info">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
@@ -84,6 +84,10 @@
 
 <script type="text/javascript">
 
+    document.querySelector('#menu-icon').addEventListener('click', function() {
+        document.getElementById('nav-section').classList.toggle('hidden');
+    });
+    
     document.querySelectorAll('.icon').forEach(icon=>{
         icon.addEventListener("mouseover",()=>{
             icon.classList.add("hover")
@@ -106,16 +110,25 @@
 
     document.querySelectorAll('li').forEach(li => {
         
-        // 2. Listen for the mouse entering the link
         li.addEventListener("mouseover", () => {
             li.classList.add("hover");
         });
 
-        // 3. Listen for the mouse leaving the link
         li.addEventListener("mouseleave", () => {
             li.classList.remove("hover");
         });
     });
-    
+
+    document.querySelectorAll('#logout').forEach(logout => {
+
+        logout.addEventListener("mouseover", () => {
+            logout.classList.add("hover");
+        });
+
+        logout.addEventListener("mouseleave", () => {
+            logout.classList.remove("hover");
+        });
+    });
+
 </script>
 </html>
