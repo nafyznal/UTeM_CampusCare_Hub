@@ -1,10 +1,19 @@
+<?php
+session_start();
+if(!isset($_SESSION['username']))
+    {
+        header("location: index.php");
+        exit;
+    }
+$username=$_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTeM Campus Care - Home</title>
-    <!-- <link rel="stylesheet" href="homepage.css"> -->
+    <link rel="stylesheet" href="homepage.css">
 </head>
 
 <body>
@@ -19,16 +28,15 @@
                 </svg>
             </div>
             <h1>UTeM Campus Care</h1>
-            <div class="home-icon">
-                <img src="home.svg" id="home-icon" alt="Home">
-            </div>
         </div>
     </header>
 
     <section class="sidebar hidden" id="mySidebar">
         <div class="sidebar-profile">
-             <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
-            <span class="greeting">Hi, John!</span>
+             <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a">
+                <circle cx="12" cy="8" r="5"/>
+                <path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
+            <span class="greeting">Hi, <?= htmlspecialchars($username) ?></span>
         </div>
        
         <ul class="sidebar-menu">
@@ -58,14 +66,14 @@
                 </ul>
             </li>
             <li>
-                <a href="history.html" class="menu-link">
+                <a href="history.php" class="menu-link">
                      <svg id="history-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                         <polyline points="3 3 3 8 8 8"></polyline>
                         <line x1="12" y1="7" x2="12" y2="12"></line>
                         <line x1="12" y1="12" x2="16" y2="14"></line>
                     </svg>
-                    <span></span> <span>History</span>
+                    <span></span><span>History</span>
                 </a>
             </li>
             <li>
@@ -77,7 +85,7 @@
                         <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
                         <line x1="7" y1="12" x2="17" y2="12"></line>
                     </svg>
-                    <span></span> <span>Scan and Collect</span>
+                    <span></span><span>Scan and Collect</span>
                 </a>
             </li>
         </ul>
@@ -85,7 +93,7 @@
         <div class="sidebar-footer">
             <div id="logout" onclick="prosesLogout()">
                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"/><path d="M20 3H9a2 2 0 0 0-2 2v4h2V5h11v14H9v-4H7v4a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>
-                <span></span> <span>LOGOUT</span>
+                <span></span><span>LOGOUT</span>
             </div>
         </div>
     </section>
@@ -97,7 +105,7 @@
                     <span class="brand-title">UTeM</span>
                     <span class="brand-sub">Campus<br>Care</span>
                 </div>
-                <a href="donation.html" class="btn-donation">START DONATION</a>
+                <a href="donation.php" class="btn-donation">START DONATION</a>
             </div>
         </section>
 
@@ -167,7 +175,7 @@
         });
 
         function prosesLogout() {
-            window.location.href = "index.html";
+            window.location.href = "index.php";
         }
     </script>
 </body>

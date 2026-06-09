@@ -32,35 +32,33 @@ header {
 
 #home-icon {
     cursor: pointer;
-    filter: drop-shadow(3px 3px 2px rgb(100, 100, 100));
-    width: 30px;
-    height: 30px;
 }
 
-#mySidebar {
-    background-color: #4A1515; 
+.mySidebar {
+    background-color: #541A1A;
     color: white;
-    border-radius: 20px; 
+    border-radius: 20px;
     width: 210px;        
-    height: auto;       
-    max-height: 85vh;  
+    height: auto;         
     position: fixed;
     top: 80px;
     left: 20px;
     z-index: 200;
     box-shadow: 5px 8px 25px rgba(0,0,0,0.3);
     padding: 0;          
+    overflow: visible;   
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease; 
+   
 }
 
 .sidebar-profile {
     display: flex;
-    align-items: center;
+    text-align: center;
     padding: 25px 20px;
     gap: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+   
 }
 
 .sidebar-menu {
@@ -70,6 +68,7 @@ header {
     display: flex;
     flex-direction: column;
 }
+
 
 .menu-item-container, .menu-link {
     display: flex;
@@ -130,7 +129,6 @@ header {
     display: block;
     transition: color 0.2s ease, transform 0.2s ease;
 }
-
 
 .sub-sub-menu li a:hover {
     color: white;
