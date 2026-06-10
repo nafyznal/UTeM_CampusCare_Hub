@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+
+    <link rel="stylesheet" href="inventory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <!--Sidebar-->
+        <div class="sidebar">
+            <div class="profile">
+                <i class="fa-regular fa-circle-user"></i>
+
+                <div>
+                    <h3>Hi!</h3>
+                    <p>Blablabla</p>
+                </div>
+
+            </div>
+
+        <hr>
+
+        <ul>
+            <li>
+                <i class="fa-regular fa-folder"></i>
+                Dashboard
+            </li>
+
+            <li>
+                <i class="fa-regular fa-clock"></i>
+                Approval
+            </li>
+
+            <li>
+                <i class="fa-solid fa-list"></i>
+                Item
+            </li>
+        </ul>
+
+        <div class="logout">
+            <i class="fa-solid fa-power-off"></i>
+            Logout
+        </div>
+
+    </div>
+
+    
+
+    <!--Main Content-->
+    <div class="content">
+        <h1>Item Management</h1>
+
+        <button class="add-btn">
+            <i class="fa-solid fa-circle-plus"></i>
+            ADD NEW KIT
+        </button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Mini Food Kit</td>
+                    <td>Foods</td>
+                    <td>
+                        <a href="#">Edit</a> |
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Hygiene Kit</td>
+                    <td>Personal Care</td>
+                    <td>
+                        <a href="#">Edit</a> |
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</body>
+</html>
