@@ -4,32 +4,32 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures footer stays down without absolute positioning breakages */
 }
 
-svg{
-    width: 20px;
-    height: 20px;
-}
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.icon,li,#logout {
+/* Consolidated Transitions & Micro-interactions */
+.icon, li, #logout {
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 }
 
 .icon:hover,
 li:hover,
-#logout:hover {
+#logout:hover,
+.hover {
     transform: scale(1.08);
 }
 
-
 /* --- Header Section --- */
-span{
+span, h1, h2 {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -37,11 +37,12 @@ span{
 
 header {
     background-color: #ffffff;
-    height:auto;
-    margin:auto;
-    padding: 15px 20px;
+    height: auto;
+    margin: auto;
+    padding: 30px;
     width: 100%;
     box-sizing: border-box;
+    top: auto;
 }
 
 #header-container {
@@ -52,19 +53,10 @@ header {
 }
 
 #header-container h1 {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
     margin: 0;
-    flex-grow:1;
+    flex-grow: 1;
     text-align: center;
     font-size: 24px;
-}
-
-.icon {
-    cursor: pointer;
-    transition: transform 0.3s ease;
 }
 
 #menu-icon {
@@ -85,7 +77,7 @@ nav {
     position: fixed;
     top: 12%;
     margin-left: 20px;
-    filter: drop-shadow(10px,10px,6px rgba(24, 24, 24));
+    filter: drop-shadow(10px 10px 6px rgba(24, 24, 24, 0.4)); /* Fixed syntax */
 }
 
 .user-info {
@@ -107,7 +99,7 @@ hr {
     margin: 15px 0;
 }
 
-/* --- Navigation List --- */
+/* --- Navigation List & Global SVGs --- */
 ul {
     padding: 0;
     margin: 20px 0;
@@ -119,7 +111,6 @@ li {
     margin-bottom: 25px;
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
 li a {
@@ -127,12 +118,15 @@ li a {
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;    
 }
 
+/* Distinctly separating icon scopes to avoid overrides */
 svg {
+    width: 20px;
+    height: 20px;
+}
+
+li svg {
     vertical-align: middle;
     margin-right: 12px;
     flex-shrink: 0;
@@ -148,26 +142,18 @@ svg {
     margin-top: 25px; 
     margin-bottom: 25px;
     gap: 8px; 
-    cursor: pointer;
 }
 
-/* --- Utility Classes & Micro-interactions --- */
+/* --- Utility Classes --- */
 .hidden {
     display: none;
 }
 
-/* Smooth scaling transition handler */
-.icon, li, #logout {
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hover {
-    transform: scale(1.1);
-}
-
 h2 {
-    text-align: center;
+    text-align: left;
     margin-top: 20px;
+    margin-left: 10px;
+    text-decoration: underline;
 }
 
 img {
@@ -178,20 +164,19 @@ img {
 .sub { margin-left: 70px; }
 .subSub { margin-left: 120px; }
 
-
-/* main */
-
+/* --- Main Layout Grid --- */
 .grid-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 20px;             
+    gap: 20px;              
     width: 100%;
     max-width: 1200px; 
     margin: 40px auto;      
     padding: 0 20px;
     box-sizing: border-box;
     flex-wrap: wrap;
+    flex-grow: 1; /* Pushes footer downwards naturally */
 }
 
 .card {
@@ -202,8 +187,8 @@ img {
     height: 120px;
     display: flex;
     flex-direction: row;   
-    align-items: center;     /* Centers everything vertically inside the card */
-    gap: 20px;               /* Clean, clear gap between the icon and the text block */
+    align-items: center;     
+    gap: 20px;               
     padding: 0 24px;
     filter: drop-shadow(10px 10px 6px rgba(24, 24, 24, 0.4));
     box-sizing: border-box;
@@ -211,48 +196,31 @@ img {
 
 .content {
     display: flex;
-    flex-direction: column;  /* Stacks value above label */
-    align-items: flex-start; /* Aligns both text strings cleanly to the left */
-    justify-content: center; /* Centers the text block vertically */
-    height: 100%;            /* Allows the flex container to use the full card height */
+    flex-direction: column;  
+    align-items: flex-start; 
+    justify-content: center; 
+    height: 100%;            
 }
 
 .value {
-    font-size: 24px;         /* Slightly larger to stand out cleanly */
+    font-size: 24px;         
     font-weight: bold;
-    line-height: 1.2;        /* Prevents the text box from clipping or spilling over */
-    margin: 0;               /* Resets browser defaults */
+    line-height: 1.2;        
+    margin: 0;               
 }
 
 .label {
     font-size: 14px;
     opacity: 0.8;
-    line-height: 1.2;        /* Keeps the text height tight and predictable */
-    margin-top: 4px;         /* This gives you explicit control over the space between number and text */
+    line-height: 1.2;        
+    margin-top: 4px;         
 }
 
-.icon-container{
+.icon-container {
     background-color: #541A1A;
 }
 
-@media (min-width: 768px) {
-    .grid-container {
-        margin-left: 20%; /* Pushes the cards away from your left sidebar */
-    }
-}
-
-/* utk recent */
-
-h2{
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    margin-left: 10px;
-    text-align: left;
-    text-decoration: underline;
-}
-
+/* --- Recent Table Section --- */
 .recent-table {
     border-collapse: separate;
     background-color: #541A1A;
@@ -260,7 +228,8 @@ h2{
     border-radius: 16px;
     padding: 20px;
     width: auto;
-    border-spacing: 0 15px; /* spacing between rows */
+    border-spacing: 0 15px; 
+    margin: 0 auto 40px auto; /* Centering table & spacing it from content */
 }
 
 .recent-table th {
@@ -268,24 +237,29 @@ h2{
     text-decoration: underline;
     padding-bottom: 15px;
     font-size: 20px;
-    margin: auto;
 }
 
 .recent-table td {
     padding-top: 10px;
-    margin: auto;
 }
 
+/* --- Responsive Media Queries --- */
+@media (min-width: 768px) {
+    .grid-container {
+        /* Clear fixed sidebar safely: nav width (200px) + margin-left (20px) + padding gap */
+        margin-left: 240px; 
+        justify-content: flex-start;
+    }
+}
 
 /* --- Footer --- */
 footer {
     display: flex;
     background-color: #541A1A;
-    height: 30%;
-    position: absolute;
-    bottom: 0;
+    height: 80px; /* Changed from percentage to explicit height for rendering safety */
     width: 100%;
     align-items: flex-end;
+    margin-top: auto; /* Ensures it pins down layout dynamically */
 }
 
 footer p {
@@ -293,4 +267,3 @@ footer p {
     margin-bottom: 15px;
     color: white;
 }
-
