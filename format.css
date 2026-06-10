@@ -6,6 +6,10 @@ body {
     padding: 0;
 }
 
+svg{
+    width: 20px;
+    height: 20px;
+}
 .center {
     display: flex;
     align-items: center;
@@ -13,7 +17,14 @@ body {
 }
 
 /* --- Header Section --- */
+span{
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 header {
+
     margin: 0;
     padding: 15px 20px;
     background-color: transparent;
@@ -29,6 +40,10 @@ header {
 }
 
 #header-container h1 {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     margin: 0;
     flex-grow:1;
     text-align: center;
@@ -126,7 +141,8 @@ svg {
 
 /* --- Utility Classes & Micro-interactions --- */
 .hidden {
-    display: none;
+    transform: translateX(-300%); 
+    display: block !important;
 }
 
 /* Smooth scaling transition handler */
@@ -156,47 +172,52 @@ img {
 
 .grid-container {
     display: flex;
-    flex-direction: column; /* This stacks the cards vertically */
-    gap: 20px;              /* Spacing between each card */
-    max-width: 320px;       /* Sets a nice horizontal boundary for the cards */
-    
-    /* Center positioning on the page */
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;             
+    width: 100%;
+    max-width: 1200px; 
     margin: 40px auto;      
     padding: 0 20px;
     box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
-.card{
-    background-color: #541A1A; /* Moved color here so the card body is maroon */
+.card {
+    background-color: #541A1A;
     color: #ffffff;
     border-radius: 16px;
-    width: 200px;
+    width: 240px; 
     height: 120px;
     display: flex;
-    align-items: center;
+    flex-direction: row;     /* Icon on the left, text on the right */
+    align-items: center;     /* Centers everything vertically inside the card */
+    gap: 20px;               /* Clean, clear gap between the icon and the text block */
     padding: 0 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
-    margin: 10px
 }
 
 .content {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column;  /* Stacks value above label */
+    align-items: flex-start; /* Aligns both text strings cleanly to the left */
+    justify-content: center; /* Centers the text block vertically */
+    height: 100%;            /* Allows the flex container to use the full card height */
 }
 
 .value {
-    font-size: 20px;
+    font-size: 24px;         /* Slightly larger to stand out cleanly */
     font-weight: bold;
-    margin-bottom: 4px;
-    white-space: nowrap; 
+    line-height: 1.2;        /* Prevents the text box from clipping or spilling over */
+    margin: 0;               /* Resets browser defaults */
 }
 
 .label {
     font-size: 14px;
     opacity: 0.8;
-    white-space: nowrap;
+    line-height: 1.2;        /* Keeps the text height tight and predictable */
+    margin-top: 4px;         /* This gives you explicit control over the space between number and text */
 }
 
 .icon-container{
@@ -205,7 +226,7 @@ img {
 
 @media (min-width: 768px) {
     .grid-container {
-        margin-left: 40%; /* Pushes the cards away from your left sidebar */
+        margin-left: 20%; /* Pushes the cards away from your left sidebar */
     }
 }
 
