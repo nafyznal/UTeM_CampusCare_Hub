@@ -58,7 +58,49 @@
       <span class="label">Essential</span>
     </div>
   </div>
-    </main>
+
+  <div class="table-recent">
+    <h2>Recent Order</h2>
+    <table class="recent-table">
+        <tr>
+            <th>Name</th>
+            <th>Request</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>Ali</td>
+            <td>Food</td>
+        </tr>
+
+        <tr>
+            <td>Abu</td>
+            <td>Essential</td>
+        </tr>
+    </table>
+  </div>
+  
+
+  <div class="table-recent">
+    <h2>Recent Donor</h2>
+    <table class="recent-table">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Amount</th>
+        </tr>
+
+        <tr>
+            <td>Ali</td>
+            <td>Food</td>
+        </tr>
+
+        <tr>
+            <td>Abu</td>
+            <td>Essential</td>
+        </tr>
+    </table>
+  </div>
     
 
     <script>

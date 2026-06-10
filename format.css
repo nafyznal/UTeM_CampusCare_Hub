@@ -36,10 +36,10 @@ span{
 }
 
 header {
-
-    margin: 0;
+    background-color: #ffffff;
+    height:auto;
+    margin:auto;
     padding: 15px 20px;
-    background-color: transparent;
     width: 100%;
     box-sizing: border-box;
 }
@@ -201,11 +201,11 @@ img {
     width: 240px; 
     height: 120px;
     display: flex;
-    flex-direction: row;     /* Icon on the left, text on the right */
+    flex-direction: row;   
     align-items: center;     /* Centers everything vertically inside the card */
     gap: 20px;               /* Clean, clear gap between the icon and the text block */
     padding: 0 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(10px 10px 6px rgba(24, 24, 24, 0.4));
     box-sizing: border-box;
 }
 
@@ -241,6 +241,41 @@ img {
     }
 }
 
+/* utk recent */
+
+h2{
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    margin-left: 10px;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.recent-table {
+    border-collapse: separate;
+    background-color: #541A1A;
+    color: white;
+    border-radius: 16px;
+    padding: 20px;
+    width: auto;
+    border-spacing: 0 15px; /* spacing between rows */
+}
+
+.recent-table th {
+    text-align: left;
+    text-decoration: underline;
+    padding-bottom: 15px;
+    font-size: 20px;
+    margin: auto;
+}
+
+.recent-table td {
+    padding-top: 10px;
+    margin: auto;
+}
+
 
 /* --- Footer --- */
 footer {
@@ -258,3 +293,4 @@ footer p {
     margin-bottom: 15px;
     color: white;
 }
+

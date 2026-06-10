@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="format.css">
     </head>
     <body>
-        <header class="center">
+        <header class="center" style="width:100%">
             <div id="header-container">
                 <div class="icon" id="menu-btn">
                     <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
