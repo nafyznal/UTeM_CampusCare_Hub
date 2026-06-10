@@ -61,17 +61,35 @@
     </main>
     
 
-    <script type="text/javascript">
-        // Sidebar Toggle
-        document.querySelector('#menu-btn').addEventListener('click', function() {
-            document.getElementById('nav-section').classList.toggle('hidden');
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Sidebar Toggle
+    const menuBtn = document.querySelector('#menu-icon'); 
+    const navSection = document.getElementById('nav-section');
+
+    if (menuBtn && navSection) {
+        menuBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            navSection.classList.toggle('hidden');
+        });
+    }
+
+    // Hover Effects
+    document.querySelectorAll('.icon, li, #logout')
+    .forEach(element => {
+
+        element.addEventListener("mouseover", function () {
+            this.classList.add("hover");
         });
 
-        // Combined Single Loop for Hover Effects
-        document.querySelectorAll('.icon, li, #logout').forEach(element => {
-            element.addEventListener("mouseover", () => element.classList.add("hover"));
-            element.addEventListener("mouseleave", () => element.classList.remove("hover"));
+        element.addEventListener("mouseleave", function () {
+            this.classList.remove("hover");
         });
-    </script>
+
+    });
+
+});
+</script>
 </body>
 </html>
