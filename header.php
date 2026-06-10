@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>header</title>
-        <link rel="stylesheet" type="text/css" href="item.css">
+        <link rel="stylesheet" type="text/css" href="format.css">
     </head>
     <body>
         <header class="center">
@@ -56,14 +56,19 @@
                     <a href="Approval.html">Approval</a>
                 </li>
                 <li id="scan"> 
-                    <svg id="scan-icon" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
-                        <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
-                        <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
-                        <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
-                        <line x1="7" y1="12" x2="17" y2="12"></line>
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="#FFFFFF" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round">
+
+                        <path d="M3 7l9-4 9 4-9 4-9-4z"/>
+                        <path d="M3 7v10l9 4 9-4V7"/> 
+                        <line x1="12" y1="11" x2="12" y2="21"/>
                     </svg>
-                    <a href="scan.html">Scan and Collect</a>
+                    <a href="item.html">Item Inventory</a>
                 </li>
             </ul>
             <hr/>
@@ -74,28 +79,5 @@
             </div>
         </nav>
     </body>
-
-        <script type="text/javascript">
-
-            // toggle utk sidebar
-            document.addEventListener("DOMContentLoaded", function() {
-                // 1. Sidebar Toggle Fix
-                const menuBtn = document.querySelector('#menu-btn');
-                const navSection = document.getElementById('nav-section');
-
-                if (menuBtn && navSection) {
-                    menuBtn.addEventListener('click', function(e) {
-                        e.preventDefault(); // Prevents default link/button click behaviors
-                        navSection.classList.toggle('hidden');
-                    });
-                }
-
-                // 2. Hover Effects Fix
-                document.querySelectorAll('.icon, li, #logout').forEach(element => {
-                    element.addEventListener("mouseover", () => element.classList.add("hover"));
-                    element.addEventListener("mouseleave", () => element.classList.remove("hover"));
-                });
-            });
-        </script>
     </html>
 </html>

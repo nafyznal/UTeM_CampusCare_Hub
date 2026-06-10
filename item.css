@@ -64,7 +64,19 @@ header{
 }
 
 /*Sidebar*/
-#nav-section{
+nav{
+    background-color: #541a1a;
+    color: white;
+    border-radius: 20px;
+    width: 200px;
+    height: auto;
+    position: fixed;
+    top: 12%;
+    margin-left: 20px;
+    filter: drop-shadow(10px,10px,6px rgba(24, 24, 24));
+}
+
+/*#nav-section{
     background: #541a1a;
     color: white;
     width: 220px;
@@ -80,7 +92,7 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
+}*/
 
 .user-info{
     display: flex;
