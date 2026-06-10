@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+$requestTime = "19/03/2026 11:45 AM";
+$requestType = "Mini food kit";
+$requestor = "Lutfi Hadi";
+?>
 <html>
 <head>
     <title>Request Approval</title>
@@ -61,9 +66,9 @@
                         </tr>
 
                         <tr>
-                            <td>19/03/2026 11:45 AM</td>
-                            <td>Mini food kit</td>
-                            <td>Lutfi Hadi</td>
+                            <td><?php echo $requestTime; ?></td>
+                                    <td><?php echo $requestType; ?></td>
+                                            <td><?php echo $requestor; ?></td>
                             <td>
                                 <button class="approve-btn" onclick="approveRequest()">Approve</button>
                                 <button class="reject-btn" onclick="rejectRequest()">Reject</button>
