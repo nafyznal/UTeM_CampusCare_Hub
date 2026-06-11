@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="format.css">
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <a href="donation.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div class="success-card">
+            <h1>Payment Successful</h1>
+
+            <div class="success-image">
+                <img src="successful.png" alt="Payment Successful">
+            </div>
+
+            <div class="payment-details">
+                <p><strong>Reference : </strong>
+                    <span id="reference"></span>
+                </p>
+                
+                <p><strong>Payment Date / Time : </strong>
+                    <span id="datetime"></span>
+                </p>
+
+                <p><strong>Payment With :
+                    <span id="paymentMethod"></span>
+                </strong></p>
+
+                <p><strong>Total Amount : </strong>
+                    <span id="amount"></span>
+                </p>
+
+                <p><strong>Status : </strong>
+                    Successful
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let ref = "CC" + Date.now();
+
+        let latestDonor =
+        JSON.parse(localStorage.getItem("latestDonation"));
+
+        if(latestDonor)
+        {
+            document.getElementById("reference").innerHTML = ref;
+
+            document.getElementById("datetime").innerHTML = latestDonor.dateTime;
+
+            document.getElementById("paymentMethod").innerHTML = latestDonor.payment;
+
+            document.getElementById("amount").innerHTML = latestDonor.amount;
+        }
+    </script>
+</body>
+</html>
