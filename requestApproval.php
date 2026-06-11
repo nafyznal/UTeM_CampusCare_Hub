@@ -68,6 +68,24 @@
                         </td>
                     </tr>
 
+                    <tr>
+                        <td>21/03/2026 02:15 PM</td>
+                        <td>Mini Food Kit</td>
+                        <td>Ahmad Firdaus</td>
+                        <td id="actionStatus3">Pending</td>
+                        <td>
+                            <button class="request-btn approve-btn"
+                                onclick="approveRequest(3)">
+                                Approve
+                            </button>
+
+                            <button class="request-btn reject-btn"
+                                onclick="rejectRequest(3)">
+                                Reject
+                            </button>
+                        </td>
+                    </tr>
+
                 </tbody>
 
             </table>
