@@ -1,63 +1,38 @@
-.approval-main {
-    padding: 20px;
+.content h2{
+    margin-bottom: 30px;
+    font-size: 32px;
 }
 
-.approval-box {
-    width: 90%;
-    margin: auto;
-    background: #6b1f1f;
-    padding: 20px;
-    border-radius: 20px;
-    color: white;
-}
-
-.approval-box h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    color: black;
-}
-
-th {
-    background: #d9d9d9;
-    padding: 10px;
-}
-
-td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ccc;
-}
-
-button {
-    padding: 6px 12px;
+.request-btn{
+    padding: 8px 15px;
     margin: 2px;
+
     border: none;
     border-radius: 5px;
+
+    color: white;
+    font-weight: bold;
     cursor: pointer;
 }
 
-button:first-child {
-    background-color: green;
-    color: white;
+.approve-btn{
+    background: green;
 }
 
-button:last-child {
-    background-color: red;
-    color: white;
+.reject-btn{
+    background: red;
 }
 
-.approved-text {
+.request-btn:hover{
+    opacity: 0.8;
+}
+
+.approved-text{
     color: green;
     font-weight: bold;
 }
 
-.rejected-text {
+.rejected-text{
     color: red;
     font-weight: bold;
 }
