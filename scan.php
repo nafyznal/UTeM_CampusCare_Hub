@@ -1,3 +1,25 @@
+<?php
+    
+    session_start(); 
+    // make sure session_start() duk atas sekali
+
+    $user_id = $_SESSION['user_id'] ?? 1;
+
+    $qrData = "http://localhost:8080/coding/collect.php?id=" . $user_id;
+
+
+    if(!isset($_SESSION['username']))
+        {
+            header("location: index.php");
+            exit;
+        }
+    $username=$_SESSION['username'];
+
+    include("header.php");
+
+?>
+
+<html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +29,13 @@
 </head>
 <link rel="stylesheet" href="format.css">
 <body>
-    <?php
-    include("header.php");
-    ?>
-    <main>
-        <p>Use the QR code below to scan and collect your points.</p>
-        <img src="icon/qr-code-svgrepo-com.svg" alt="QR Code" class="qr-code" width="200" height="200">
+    
+    <main class="center">
+        <div>
+            <p>Use the QR code below to scan and collect your points.</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?php echo urldecode($qrData);?>" alt="QR Code" class="qr-code">
+        </div>
+        
     </main>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -38,5 +61,10 @@
                 });
             });
         </script>
+
+    <?php
+    include("footer.php");
+    ?>
 </body>
+</html>
 </html>
