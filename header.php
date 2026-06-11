@@ -18,7 +18,7 @@
                     </svg>
                 </div>
                     
-                <h1>Admin Dashboard</h1>
+                <h1 style="color: #541A1A;">Admin Dashboard</h1>
                 
                 <div class="icon">
                     <a href="home.html" id="home-icon">
