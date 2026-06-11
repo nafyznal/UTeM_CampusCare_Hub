@@ -4,6 +4,8 @@ function approveRequest(index) {
     if (confirmApprove) {
         document.getElementById("actionStatus" + index).innerHTML =
             "<span class='approved-text'>Approved</span>";
+
+        alert("Request approved successfully!");
     }
 }
 
@@ -13,5 +15,7 @@ function rejectRequest(index) {
     if (confirmReject) {
         document.getElementById("actionStatus" + index).innerHTML =
             "<span class='rejected-text'>Rejected</span>";
+
+        alert("Request rejected successfully!");
     }
 }
