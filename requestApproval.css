@@ -3,6 +3,18 @@
     font-size: 32px;
 }
 
+.content table{
+    margin-top: 20px;
+}
+
+.content th{
+    font-size: 15px;
+}
+
+.content td{
+    font-size: 14px;
+}
+
 .request-btn{
     padding: 8px 15px;
     margin: 2px;
