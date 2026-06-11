@@ -18,7 +18,7 @@ $username = $_SESSION['username'] ?? 'Guest';
         <h1 style="color:#541A1A;">Scan and Collect</h1>
 
         <div class="icon">
-            <a href="home.php" id="home-icon">
+            <a href="homepage.php" id="home-icon">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24"
                      fill="none"

@@ -15,7 +15,7 @@
         }
     $username=$_SESSION['username'];
 
-    include("header.php");
+    include("scanheader.php");
 
 ?>
 
