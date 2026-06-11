@@ -1,7 +1,9 @@
-function approveRequest() {
-    alert("Request approved");
+function approveRequest(index) {
+    document.getElementById("actionStatus" + index).innerHTML =
+        "<span class='approved-text'>Approved</span>";
 }
 
-function rejectRequest() {
-    alert("Request rejected");
+function rejectRequest(index) {
+    document.getElementById("actionStatus" + index).innerHTML =
+        "<span class='rejected-text'>Rejected</span>";
 }
