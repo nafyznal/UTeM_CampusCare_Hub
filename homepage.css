@@ -11,6 +11,11 @@ body {
     justify-content: center;
 }
 
+svg{
+    width: 20px;
+    height: 20px;
+}
+
 header {
     margin: 0;
     padding: 10px 10px;
@@ -182,7 +187,7 @@ header {
 }
 
 .dropdown-closed {
-    display: none !important; /* Ditambah !important supaya fungsi buka tutup javascript asal berfungsi betul */
+    display: none !important; 
 }
 
 #menu-icon, #home-icon {
@@ -197,9 +202,9 @@ header {
 }
 
 .hero-banner {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/donation.webp');
     width: 100%;
     height: 320px;
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("donation.webp") center/cover no-repeat;
     border-radius: 40px;
     display: flex;
     align-items: flex-end;
@@ -334,4 +339,28 @@ header {
     font-size: 14px;
     line-height: 1.6;
     text-align: left;
+}
+
+/* Base settings for vectors to allow fluid scaling animations */
+.sidebar-svg {
+    transition: transform 0.2s ease, stroke 0.2s ease;
+}
+
+/* Whenever a menu-link or container is hovered, scale the internal icon slightly */
+.has-hover-icon:hover .sidebar-svg {
+    transform: scale(1.18);
+    stroke: #e9c4aa; /* Tweaks line highlights to cream tint on link hover! */
+}
+
+/* Specific interactive bounce for the logout icon sliding outward slightly */
+#logout:hover .sidebar-svg {
+    transform: translateX(-3px) scale(1.1);
+}
+
+/* Top bar navigation buttons response actions */
+.icon svg {
+    transition: transform 0.2s ease;
+}
+.icon:hover svg {
+    transform: scale(1.1);
 }
