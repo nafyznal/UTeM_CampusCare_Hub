@@ -12,48 +12,48 @@
 <body>
     <?php
     //Retrieve student information
-    $name = $_POST['name']; 
-    $email = $_POST['email']; 
-    $phone = $_POST['phone']; 
+    // $name = $_POST['name']; 
+    // $email = $_POST['email']; 
+    // $phone = $_POST['phone']; 
     $amount = $_POST['amount']; 
-    $frequency = $_POST['frequency']; 
-    $visibility = $_POST['visibility']; 
+    // $frequency = $_POST['frequency']; 
+    // $visibility = $_POST['visibility']; 
     $payment = $_POST['payment'];
 
     /* Category checkbox */ 
-    if(isset($_POST['category'])) 
-    { 
-        $category = implode(", ", $_POST['category']); 
-    }
-    else 
-    { 
-    $category = "None"; 
-    }
+    // if(isset($_POST['category'])) 
+    // { 
+    //     $category = implode(", ", $_POST['category']); 
+    // }
+    // else 
+    // { 
+    // $category = "None"; 
+    // }
 
     /* Anonymous donor */ 
-    $displayName = $name; 
+    // $displayName = $name; 
 
-    if($visibility == "Anonymous") 
-    { 
-        $displayName = "Anonymous"; 
-    }
-    else
-    {
-        $displayName;
-    }
+    // if($visibility == "Anonymous") 
+    // { 
+    //     $displayName = "Anonymous"; 
+    // }
+    // else
+    // {
+    //     $displayName;
+    // }
 
     $reference = "REF" . rand(10000,99999); 
     
     $dateTime = date("d/m/Y h:i:s A");
 
-    include 'config.php';
+    // include 'config.php';
 
-    $sql = "INSERT INTO donors
-            (donor_name, amount)
-            VALUES
-            ('$displayName', '$amount')";
+    // $sql = "INSERT INTO donors
+    //         (donor_name, amount)
+    //         VALUES
+    //         ('$displayName', '$amount')";
 
-    mysqli_query($conn, $sql);
+    // mysqli_query($conn, $sql);
     
     ?>
 
