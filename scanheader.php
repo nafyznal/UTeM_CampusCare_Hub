@@ -2,6 +2,9 @@
 $username = $_SESSION['username'] ?? 'Guest';
 ?>
 
+
+<link rel="stylesheet" type="text/css" href="formatHeader.css">
+
 <header class="center" style="width:100%">
     <div id="header-container">
 

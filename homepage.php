@@ -1,22 +1,25 @@
 <?php
-session_start();
-// Guard clause: kick unauthenticated users back to login
-if (!isset($_SESSION['username'])) {
-    header("location: index.php");
-    exit;
-}
+    session_start();
+    // Guard clause: kick unauthenticated users back to login
+    if (!isset($_SESSION['username'])) {
+        header("location: index.php");
+        exit;
+    }
 
-$username = $_SESSION['username'];
+    $username = $_SESSION['username'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTeM Campus Care - Home</title>
-    <link rel="stylesheet" href="homepage.css">
+    
+    <link rel="stylesheet" type="text/css" href="css/homepage.css">
 </head>
 <body>
+
 
 <?php include 'homepageHeader.php'; ?>
 
@@ -122,5 +125,6 @@ function prosesLogout() {
 }
 </script>
 
+<?php include'footer.php'?>
 </body>
 </html>

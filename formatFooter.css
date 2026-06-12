@@ -1,0 +1,13 @@
+/* --- Footer --- */
+footer {
+    background-color: #2f2f2f;
+    width: auto;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+
+footer p {
+    margin: 15px;
+    padding: 50px;
+    color: rgb(136, 135, 135);
+}

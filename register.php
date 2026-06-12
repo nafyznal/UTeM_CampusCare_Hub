@@ -3,22 +3,51 @@ session_start();
 
 $registered = false;
 $error = '';
+$file = 'userDatabase.txt';
 
+// Semua proses HANYA berjalan jika butang register ditekan
 if (isset($_POST['register'])) {
-  $name     = trim($_POST['name']);
-  $email    = trim($_POST['email']);
-  $password = $_POST['password'];
-  $role     = $_POST['role'];
+    
+    // 1. Ambil data dari borang (Guna ?? '' untuk elak error jika kosong)
+    $fname    = trim($_POST['name'] ?? '');
+    $email    = trim($_POST['email'] ?? '');
+    $gender   = $_POST['gender'] ?? '';
+    $password = $_POST['password'] ?? ''; // Jangan lupa simpan atau hash password!
 
-  if (empty($name) || empty($email) || empty($password) || empty($role)) {
-    $error = "Please fill in all fields.";   
-  } 
-  else {
-    $registered = true;
-    header("Location: successful.html");
-    exit;
-  }
+    // 2. Validasi: Pastikan semua ruangan wajib diisi
+    if (empty($fname) || empty($email) || empty($password) || empty($gender)) {
+        $error = "Please fill in all required fields.";   
+    }
+    else {
+        // Hash password demi keselamatan data pengguna
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // 3. Masukkan data ke dalam array (Hanya setelah dipastikan borang lengkap)
+        $data = [$fname, $email, $gender, $hashedPassword];
+
+        // 4. Buka fail untuk menulis ('a' bermaksud append / tambah di bawah sekali)
+        $fp = @fopen($file, 'a');
+
+        if ($fp) {
+            // Tulis baris baru menggunakan kaedah foreach yang awak mahukan
+            // Letak \n di hadapan untuk memastikan ia bermula di baris baru
+            @fwrite($fp, "\n"); 
+            foreach ($data as $v) {
+                @fwrite($fp, "$v\t");
+            }
+            
+            @fclose($fp);
+
+            $registered = true;
+            header("Location: successful.html");
+            exit;
+        } else {
+            $error = "Couldn't open file for writing!";
+        }
+    }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -41,19 +70,19 @@ if (isset($_POST['register'])) {
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
           <label>Name</label>
-          <input type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
+          <input type="text" name="name" required>
 
           <label>Email</label>
-          <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+          <input type="email" name="email" required>
 
           <label>Password</label>
           <input type="password" name="password" required>
 
           <label>Select Role</label>
-          <select id="role" name="role" required>
-            <option value="" disabled selected>--Select Role--</option>
-            <option value="donor">User</option>
-            <option value="admin">Admin</option>
+          <select id="gender" name="gender" required>
+            <option value="" disabled selected>--Select Gender--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
           </select>
 
           <button type="submit" name="register">Register</button>

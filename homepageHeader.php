@@ -1,12 +1,14 @@
 <?php
-// Ensure session is active before using this file
+// Pastikan sesi aktif sebelum menggunakan data pembolehubah ini
 $username = $_SESSION['username'] ?? 'Guest';
 ?>
+
+<link rel="stylesheet" type="text/css" href="css/formatHeader.css">
 
 <header class="center" style="width:100%">
     <div id="header-container">
 
-        <div class="icon" id="menu-btn">
+        <div class="icon" id="menu-btn" style="cursor: pointer;">
             <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24"
                  fill="none" stroke="#541A1A" stroke-width="2.5"
                  stroke-linecap="round" stroke-linejoin="round">
@@ -37,7 +39,7 @@ $username = $_SESSION['username'] ?? 'Guest';
     <ul class="sidebar-menu">
 
         <li>
-            <div class="menu-item-container has-hover-icon" onclick="toggleSubMenu(event)" style="display: flex; align-items: center; justify-content: space-between; width: 100%; box-sizing: border-box; padding: 12px 15px;">
+            <div class="menu-item-container has-hover-icon" onclick="toggleSubMenu(event)" style="display: flex; align-items: center; justify-content: space-between; width: 100%; box-sizing: border-box; padding: 12px 15px; cursor: pointer;">
                 <div style="display: flex; align-items: center; gap: 14px;">
                     <svg id="aid-icon" class="sidebar-svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="white" stroke-width="2.5"
@@ -55,7 +57,7 @@ $username = $_SESSION['username'] ?? 'Guest';
 
             <ul class="sub-menu dropdown-closed" id="aidSubMenu">
                 <li>
-                    <div class="sub-menu-btn" onclick="toggleFoodMenu(event)" style="display: flex; align-items: center; justify-content: space-between; width: 100%; box-sizing: border-box; padding: 10px 15px;">
+                    <div class="sub-menu-btn" onclick="toggleFoodMenu(event)" style="display: flex; align-items: center; justify-content: space-between; width: 100%; box-sizing: border-box; padding: 10px 15px; cursor: pointer;">
                         <span>Food</span>
                         <svg id="food-caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease; flex-shrink: 0; margin-left: auto;">
                             <polyline points="6 9 12 15 18 9"></polyline>

@@ -1,21 +1,53 @@
 <?php
 session_start();
 
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+$file = "userDatabase.txt";
 
-    if ($email == "azreenaathirah06@gmail.com" && $password == "12345") {
-       $name ="Azreen";
+if (isset($_POST['submit'])) {
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    $login_success = false;
+    $user_name = '';
+
+    if (file_exists($file)) {
+        $users = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        foreach ($users as $line) {
+            // Pecahkan baris guna TAB
+            $userData = explode("\t", $line);
+
+            if (count($userData) >= 4) {
+                $savedname  = trim($userData[0]);
+                $savedEmail  = trim($userData[1]);
+                $savedGender = trim($userData[2]);
+                // trim() di sini SANGAT PENTING untuk buang whitespace/tab terselit di hujung hash
+                $savedHash   = trim($userData[3]); 
+
+                if ($savedEmail === $email) {
+                    // Semak password
+                    if (password_verify($password, $savedHash)) {
+                        $login_success = true;
+                        $user_name = $savedname;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    if ($login_success) {
         $_SESSION['em'] = $email;
-        $_SESSION['pw'] = $password;
-        $_SESSION['username'] = "$name"; 
+        $_SESSION['username'] = $user_name; 
         header("Location: homepage.php");
         exit;
     } else {
         session_destroy();
-        echo "Sorry, your email or password is incorrect. Please try again.";
-        echo "<br><meta http-equiv=\"refresh\" content=\"3;URL=index.php\">";
+        echo "<div style='color:red; text-align:center; margin-top:20px;'>";
+        echo "Sorry, your email or password is incorrect. Please try again.<br>";
+        echo "Redirecting you back in 3 seconds...";
+        echo "</div>";
+        echo "<meta http-equiv=\"refresh\" content=\"3;URL=index.php\">";
         exit;
     }
 }
