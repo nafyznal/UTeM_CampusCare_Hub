@@ -117,9 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Toiletries -->
-    <div class="toiletries">
-        <span class="kfood">essential toiletries</span>
-        <div class="desc" id="miniDesc">
+    <div class="essential toiletries">
+        <span class="kfood">Toiletries</span>
+        <div class="desc" id="toiletriesDesc">
             <p>Description:</p>
             <p>Colgate, berus gigi, sabun mandi, sabun baju</p>
         </div>
@@ -130,9 +130,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- PersonalCare -->
-    <div class="personalCare">
-        <span class="kfood">essential PersonalCare</span>
-        <div class="desc" id="bigDesc">
+    <div class="essential personalCare">
+        <span class="kfood">Personal Care</span>
+        <div class="desc" id="personalCareDesc">
             <p>Description:</p>
             <p>Softener, sabun baju</p>
         </div>
@@ -143,9 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Sanitary Pad -->
-    <div class="sanitaryPad">
-        <span class="kfood">essential SanitaryPad</span>
-        <div class="desc" id="bigDesc">
+    <div class="essential sanitaryPad">
+        <span class="kfood">Sanitary Pad</span>
+        <div class="desc" id="sanitaryPadDesc">
             <p>Description:</p>
             <p>Oreo, Lexus, Chocolate "Aik Cheong"</p>
         </div>
