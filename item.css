@@ -6,221 +6,36 @@ body{
     min-height: 100vh;
 }
 
-svg{
-    width: 20px;
-    height: 20px;
-}
-
-/*Header*/
-.center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-span{
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-header{
-    margin: 0;
-    padding: 15px 20px;
-    background-color: transparent;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#header-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-#header-container h1 {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    margin: 0;
-    flex-grow:1;
-    text-align: center;
-    font-size: 24px;
-}
-
-.icon{
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-#menu-icon{
-    filter: drop-shadow(2px 2px 2px rgb(100, 100, 100));
-}
-
-#home-icon{
-    filter: drop-shadow(3px 3px 2px rgb(100, 100, 100));
-}
-
-/*Sidebar*/
-nav{
-    background-color: #541a1a;
-    color: white;
-    border-radius: 20px;
-    width: 200px;
-    height: auto;
-    position: fixed;
-    top: 12%;
-    margin-left: 20px;
-    filter: drop-shadow(10px,10px,6px rgba(24, 24, 24));
-}
-
-/*#nav-section{
-    background: #541a1a;
-    color: white;
-    width: 220px;
-    height: 82vh;
-    border-radius: 20px;
-
-    position: fixed;
-    top: 90px;
-    left: 20px;
-
-    padding: 20px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}*/
-
-.user-info{
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-.user-info p{
-    margin: 0 0 0 10px;
-    font-weight: bold;
-}
-
-hr{
-    border: 0;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 15px 0;
-}
-
-#nav-list ul{
-    padding: 0;
-    margin: 20px 0;
-}
-
-#nav-list ul li{
-    list-style: none;
-    margin-left: 20px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-#nav-list li a{
-    color: white;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;    
-}
-
-svg{
-    vertical-align: middle;
-    margin-right: 12px;
-    flex-shrink: 0;
-    width: 30px;
-    height: 30px;
-}
-
-/*Logout*/
-#logout{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    gap: 8px;
-    cursor: pointer;
-}
-
-.hidden{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    gap: 8px;
-    cursor: pointer;
-}
-
-/*Utility classes & micro-interations*/
-.hidden{
-    transform: translateX(-300%);
-    display: block !important;
-}
-
-/*Smooth scalling transition handler*/
-.icon, li, #logout{
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hover{
-    transform: scale(1.0);
-}
-
-img{
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-.sub { margin-left: 70px; }
-.subSub { margin-left: 120px; }
-
 /*Inventory Content*/
 .content{
-    margin-left: 280px;
+    margin-left: 265px;
     margin-right: 20px;
-    margin-top: 30px;
-
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 24px;
+    width: auto;
     background: #541a1a;
     border-radius: 40px;
-
-    padding: 40px;
+    padding: 20px;
     color: white;
 
-    min-height: 82vh;
+    /* min-height: 80vh; */
 }
 
 .content h2{
-    margin-bottom: 30px;
-    font-size: 32px;
+    margin-left: 60px;
+    margin-bottom: 10px;
+    font-size: 28px;
 }
 
 /*Button*/
 .add-btn{
     display: block;
     margin: 0 auto 40px;
-
     padding: 12px 25px;
-
     border: none;
     border-radius: 25px;
-
     background: white;
-
     font-weight: bold;
     cursor: pointer;
 }
@@ -268,25 +83,25 @@ td a:hover{
 .kit-container{
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 10px;
+    width: 100%;
 }
 
 .kit-card{
+    margin-left: 60px;
+    margin-bottom: 10px;
     background: #d7c2ad;
     color: black;
-
-    width: 600px;
-
+    width: 550px;
     border-radius: 15px;
-    padding: 20px;
+    padding: 15px;
 }
 
 .kit-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .kit-header h3{
@@ -297,10 +112,8 @@ td a:hover{
 .delete-kit-btn{
     border: none;
     background: white;
-
     padding: 10px 20px;
     border-radius: 20px;
-
     cursor: pointer;
     font-weight: bold;
 }
@@ -311,7 +124,7 @@ td a:hover{
 
 .card-btn{
     text-align: center;
-    margin-top: 80px;
+    margin-top: 20px;
 }
 
 .add-item-btn{
@@ -329,12 +142,13 @@ td a:hover{
     background: #efefef;
 }
 
-.new-kit-area{
+/* .new-kit-area{
     text-align: center;
     margin-top: 30px;
-}
+} */
 
-/*Better table appearance inside card*/
+/*Better Item table appearance inside card*/
+
 .kit-card table{
     width: 100%;
     border-collapse: collapse;
@@ -350,3 +164,42 @@ td a:hover{
     background: white;
     border: 1px solid #777;
 }
+
+/* Inventory table */
+.kit-inventory{
+    width: auto;
+    margin-left: 80px; 
+    margin-bottom: 10px;
+    color: black;
+    width: 550px;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.kit-inventory table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.kit-inventory th{
+    background: #bcc6cf;
+    color: black;
+    padding: 18px;
+}
+
+.kit-inventory td{
+    background: white;
+    color: black;
+    text-align: center;
+    padding: 15px;
+}
+
+.kit-inventory td a{
+    text-decoration: none;
+    color: #541a1a;
+    font-weight: bold;
+}
+
+.kit-inventory td a:hover{
+    text-decoration: underline;
+} 

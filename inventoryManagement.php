@@ -17,6 +17,8 @@
         <div class="content">
             <h2>ITEM MANAGEMENT</h2>
 
+            <div class="kit-container">
+                <div class ="kit-inventory">
             <button class="add-btn">
                 +ADD NEW KIT
             </button>
@@ -35,8 +37,8 @@
                         <td>Mini Food Kit</td>
                         <td>Foods</td>
                         <td>
-                            <a href="#">Edit</a> | 
-                            <a href="#">Delete</a>
+                            <a href="itemManagement.php">Edit</a> | 
+                            <a href="itemManagement.php">Delete</a>
                         </td>
                     </tr>
 
@@ -52,6 +54,8 @@
                 </tbody>
 
             </table>
+</div>
+            </div>
             
         </div>
     </main>
@@ -62,5 +66,8 @@
             document.getElementById("nav-section").classList.toggle("hidden");
         });
      </script>
+
+     <?php include("footer.php"); 
+     ?>
 </body>
 </html>

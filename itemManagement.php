@@ -71,7 +71,6 @@
 
             </div>
 
-            
         </div>
     </main>
 
@@ -81,5 +80,8 @@
             document.getElementById("nav-section").classList.toggle("hidden");
         });
      </script>
+
+     <?php include("footer.php")
+     ?>
 </body>
 </html>
