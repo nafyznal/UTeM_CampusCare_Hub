@@ -17,7 +17,7 @@ $username = $_SESSION['username'] ?? 'Guest';
             </svg>
         </div>
 
-        <h1>Scan and Collect</h1>
+        <h1>Kit</h1>
 
         <div class="icon">
             <a href="homepage.php" id="home-icon">
@@ -79,12 +79,12 @@ $username = $_SESSION['username'] ?? 'Guest';
                     </div>
 
                     <ul class="sub-sub-menu dropdown-closed" id="foodSubMenu">
-                        <li><a href="#">Kit</a></li>
-                        <li><a href="#">Meal</a></li>
+                        <li><a href="kit.php">Kit</a></li>
+                        <li><a href="meal.php">Meal</a></li>
                     </ul>
                 </li>
 
-                <li><a href="#">Essential</a></li>
+                <li><a href="essential.php">Essential</a></li>
             </ul>
         </li>
 

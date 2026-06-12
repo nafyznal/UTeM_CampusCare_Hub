@@ -22,11 +22,11 @@ if (isset($_POST['submit'])) {
                 $savedEmail  = trim($userData[1]);
                 $savedGender = trim($userData[2]);
                 // trim() di sini SANGAT PENTING untuk buang whitespace/tab terselit di hujung hash
-                $savedHash   = trim($userData[3]); 
+                $savedPwd   = trim($userData[3]); 
 
                 if ($savedEmail === $email) {
                     // Semak password
-                    if (password_verify($password, $savedHash)) {
+                    if ($savedPwd === $password) {
                         $login_success = true;
                         $user_name = $savedname;
                         break;
@@ -37,19 +37,31 @@ if (isset($_POST['submit'])) {
     }
 
     if ($login_success) {
-        $_SESSION['em'] = $email;
-        $_SESSION['username'] = $user_name; 
-        header("Location: homepage.php");
-        exit;
+    $_SESSION['em'] = $email;
+    $_SESSION['username'] = $user_name; 
+
+    // Tetapkan emel admin yang unik di sini
+    $admin_email = "adminHub@gmail.com"; 
+
+    // Semak adakah emel yang log masuk sepadan dengan emel admin
+    if ($_SESSION['em'] === $admin_email) {
+        header("Location: adminDashboard.php"); // Bawa ke page admin
     } else {
-        session_destroy();
-        echo "<div style='color:red; text-align:center; margin-top:20px;'>";
-        echo "Sorry, your email or password is incorrect. Please try again.<br>";
-        echo "Redirecting you back in 3 seconds...";
-        echo "</div>";
-        echo "<meta http-equiv=\"refresh\" content=\"3;URL=index.php\">";
-        exit;
+        header("Location: homepage.php"); // Bawa ke page user biasa
     }
+    exit;
+} else {
+    session_start();
+    session_unset();
+    session_destroy();
+    
+    echo "<div style='color:red; text-align:center; margin-top:20px;'>";
+    echo "Sorry, your email or password is incorrect. Please try again.<br>";
+    echo "Redirecting you back in 3 seconds...";
+    echo "</div>";
+    echo "<meta http-equiv=\"refresh\" content=\"3;URL=index.php\">";
+    exit;
+}
 }
 ?>
 <!DOCTYPE html>

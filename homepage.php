@@ -15,11 +15,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTeM Campus Care - Home</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/homepage.css">
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
-
 
 <?php include 'homepageHeader.php'; ?>
 
@@ -123,8 +121,21 @@ document.addEventListener("DOMContentLoaded", function () {
 function prosesLogout() {
     window.location.href = "logout.php";
 }
+
+document.querySelectorAll(".icon").forEach(icon=>{
+    icon.addEventListener("mouseover",()=>{
+        icon.classList.add("hover")
+    });
+
+    icon.addEventListener("mouseleave",()=>{
+        icon.classList.remove("hover")
+    });
+
+});
+
 </script>
 
 <?php include'footer.php'?>
+
 </body>
 </html>

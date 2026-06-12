@@ -1,36 +1,37 @@
-<?php
-    session_start(); 
-
-    $user_id = $_SESSION['user_id'] ?? 1;
-    $qrData = "http://localhost:8080/coding/collect.php?id=" . $user_id;
-
-    if(!isset($_SESSION['username'])) {
-        header("location: index.php");
-        exit;
-    }
-    $username = $_SESSION['username'];
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scan and Collect</title>
-    <link rel="stylesheet" type="text/css" href="format.css">
+    <title>UTeM Campus Care - History</title>
+    <link rel="stylesheet" href="format.css">
 </head>
 <body>
+    <?php  include'historyHeader.php'?>
 
-    <?php include("scanheader.php"); ?>
-    
-    <main class="center">
-        <div>
-            <p>Use the QR code below to scan and collect your points.</p>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?php echo urlencode($qrData);?>" alt="QR Code" class="qr-code">
+    <main class="main-container" id="mainContent">
+        <div class="title-container">
+            <h1 class="page-title">History</h1>
+        </div>
+
+        <div class="table-container">
+            <table class="history-table">    
+                    <tr>
+                        <th>Date</th>
+                        <th>Request</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>20/5/2026</td>
+                        <td>Mini Kit</td>
+                        <td>Approved</td>
+                    </tr>  
+            </table>
         </div>
     </main>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+         document.addEventListener("DOMContentLoaded", function () {
 
             const menuBtn = document.getElementById('menu-btn');
             const sidebar = document.getElementById('mySidebar');
@@ -78,8 +79,7 @@
             });
 
         });
-        </script>
+    </script>
 
-    <?php include("footer.php"); ?>
 </body>
 </html>

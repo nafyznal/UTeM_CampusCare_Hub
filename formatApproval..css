@@ -1,0 +1,108 @@
+/* --- Recent Table Section & Admin Table --- */
+.table-recent, .content {
+    background-color: #541A1A;
+    color: white;
+    border-radius: 16px;
+    padding: 24px;
+    filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
+    box-sizing: border-box;
+}
+
+/* Memastikan jadual mengambil ruang penuh kontena */
+table, .recent-table {
+    width: 100%;
+    border-collapse: collapse; /* Menghilangkan garisan berganda pada border */
+    margin-top: 15px;
+}
+
+/* Rekabentuk Header Jadual */
+th, .recent-table th {
+    text-align: left;
+    padding: 12px 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    color: #F1E2D1; /* Warna kontra lembut untuk teks tulisan header */
+}
+
+/* Memberikan ruang bernafas pada sel data jadual */
+td, .recent-table td {
+    padding: 14px 15px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/* Buang border bawah untuk baris terakhir dalam jadual */
+tr:last-child td, .recent-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- Status Badges (Kekal Konsisten) --- */
+.status-approved, .approved-text { color: #4BB543; font-weight: bold; }
+.status-pending { color: #F4C430; font-weight: bold; }
+.status-rejected, .rejected-text { color: #ff4d4d; font-weight: bold; }
+
+/* --- Responsive Media Queries --- */
+@media (min-width: 992px) {
+    .grid-container {
+        margin-left: 250px; 
+        width: calc(100% - 250px);
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 24px;
+    }
+
+    .card {
+        grid-column: span 2;
+    }
+
+    .table-recent, .content {
+        grid-column: span 6; /* Menggunakan penuh 6 lajur skrin besar jika ia jadual utama */
+    }
+}
+
+/* --- Admin Title & Interaction Buttons --- */
+.content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #ffffff;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.request-btn {
+    padding: 8px 16px;
+    margin: 2px 4px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.approve-btn {
+    background-color: #2e7d32; /* Hijau Material Design */
+}
+
+.approve-btn:hover {
+    background-color: #1b5e20;
+    transform: translateY(-1px);
+}
+
+.reject-btn {
+    background-color: #d32f2f; /* Merah Material Design */
+}
+
+.reject-btn:hover {
+    background-color: #c62828;
+    transform: translateY(-1px);
+}
+
+.request-btn:active {
+    transform: translateY(1px); /* Efek butang mendap ke dalam apabila diklik */
+}

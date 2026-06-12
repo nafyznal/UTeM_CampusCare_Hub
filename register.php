@@ -20,10 +20,10 @@ if (isset($_POST['register'])) {
     }
     else {
         // Hash password demi keselamatan data pengguna
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // 3. Masukkan data ke dalam array (Hanya setelah dipastikan borang lengkap)
-        $data = [$fname, $email, $gender, $hashedPassword];
+        $data = [$fname, $email, $gender, $password];
 
         // 4. Buka fail untuk menulis ('a' bermaksud append / tambah di bawah sekali)
         $fp = @fopen($file, 'a');

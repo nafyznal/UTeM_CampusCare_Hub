@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donation Form</title>
 
-    <link rel="stylesheet" href="donationFormat.css">
+    <link rel="stylesheet" text="text/css" href="formatDonation.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-    
-
 <div class="container">
 
     <!-- Back Button -->
@@ -134,43 +131,11 @@
         </form>
 
         <!-- Donators Box -->
-        <!--<?php
-            //Retrieve student information
-            $name = $_POST['name'];  
-            $amount = $_POST['amount']; 
-        ?> -->
 
         <div class="donators-box">
 
             <h2>DONATORS</h2>
 
-            <div id="donorList">
-                <div id="donorList">
-
-                <?php
-                $sql = "SELECT donor_name, amount
-                FROM donors
-                ORDER BY id DESC";
-
-                // $result = mysqli_query($conn, $sql);
-
-                // if(mysqli_num_rows($result) > 0)
-                // {
-                //     while($row = mysqli_fetch_assoc($result))
-                //     {
-                //         echo "<p>"
-                //         . htmlspecialchars($row['donor_name'])
-                //         . " - RM "
-                //         . htmlspecialchars($row['amount'])
-                //         . "</p>";
-                //     }
-                // }
-                // else
-                // {
-                //     echo "<p>No donors yet.</p>";
-                // }
-
-                ?>
 
                 </div>
 
@@ -184,4 +149,3 @@
 
 </body>
 </html>
-```

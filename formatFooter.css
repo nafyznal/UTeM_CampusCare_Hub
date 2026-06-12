@@ -1,13 +1,12 @@
-/* --- Footer --- */
 footer {
+    position: fixed;
     background-color: #2f2f2f;
-    width: auto;
-    margin-top: auto;
-    box-sizing: border-box;
+    width: 100%;
+    bottom: 0; /* ← Anchors to the bottom of the viewport */
 }
 
 footer p {
-    margin: 15px;
-    padding: 50px;
-    color: rgb(136, 135, 135);
+    margin: 0;
+    padding: 20px 30px;
+    color: #888787;
 }

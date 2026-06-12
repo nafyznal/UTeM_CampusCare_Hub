@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="donationFormat.css">
+    <link rel="stylesheet" href="formatDonation.css">
 </head>
 <body>
     <?php
@@ -16,19 +16,19 @@
     // $email = $_POST['email']; 
     // $phone = $_POST['phone']; 
     $amount = $_POST['amount']; 
-    $frequency = $_POST['frequency']; 
-    $visibility = $_POST['visibility']; 
+    // $frequency = $_POST['frequency']; 
+    // $visibility = $_POST['visibility']; 
     $payment = $_POST['payment'];
 
     /* Category checkbox */ 
-    if(isset($_POST['category'])) 
-    { 
-        $category = implode(", ", $_POST['category']); 
-    }
-    else 
-    { 
-    $category = "None"; 
-    }
+    // if(isset($_POST['category'])) 
+    // { 
+    //     $category = implode(", ", $_POST['category']); 
+    // }
+    // else 
+    // { 
+    // $category = "None"; 
+    // }
 
     /* Anonymous donor */ 
     // $displayName = $name; 
@@ -46,7 +46,7 @@
     
     $dateTime = date("d/m/Y h:i:s A");
 
-    include 'config.php';
+    // include 'config.php';
 
     // $sql = "INSERT INTO donors
     //         (donor_name, amount)
