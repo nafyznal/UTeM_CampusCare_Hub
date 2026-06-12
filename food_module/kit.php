@@ -1,289 +1,219 @@
 <?php
-$conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
-if($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
-}
+// === HANDLE FORM SUBMISSION ===
+$message = "";
+$success = false;
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $Kit_Id = $_POST['Kit_Id'];
-    $status = "Pending";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $Kit_Id  = $_POST['Kit_Id'] ?? 'Unknown';
+    $status  = "Pending";
+    $date    = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO request (Kit_Id, Status, RequestDate) VALUES ('Kit_Id', 'status', NOW())";
+    $data = $date . " | " . $Kit_Id . " | " . $status . "\n";
 
-    if($conn->query($sql) === TRUE){
+    if (file_put_contents("requests.txt", $data, FILE_APPEND | LOCK_EX) !== false) {
         $message = "Request untuk $Kit_Id berjaya disimpan!";
-    }else{
-        $message = "Error: " . $conn->error;
+        $success = true;
+    } else {
+        $message = "Error: Gagal menulis data ke dalam fail.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kit</title>
+    <link rel="stylesheet" type="text/css" href="format.css">
+    <style>
+        .kit {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background-color: grey;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 7pt;
+            margin: 10pt;
+            padding: 7pt;
+            width: 65%;
+        }
+        .kit {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background-color: grey;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 7pt;
+            margin: 10pt;
+            padding: 7pt;
+            width: 65%;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        .mini { background-image: url("image/miniKit.jpeg"); }
+        .big  { background-image: url("image/bigKit.jpeg"); }
 
-<style>
-.kit{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    background-color: grey;
-    background-size: cover;
-    background-position: center;
-    color: white;
-    border-radius: 7pt;
-    margin: 10pt;
-    padding: 7pt;
-}
-.mini{
-    background-image: url("image/miniKit.jpeg");
-}
-.big{
-    background-image: url("image/bigKit.jpeg");
-}
-.desc, .desc1{
-    color: white;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 6px;
-    font-size: 14px;
-}
-.kit.mini.desc,
-.kit.big.desc1{
-    display: none;
-}
-.kit.mini:hover .desc,
-.kit.big:hover .desc2{
-    display: block;
-}
-@keyframes fadeIn{
-    from{opacity: 0; transform: scale(0.9);}
-    to{opacity: 1; transform: scale(1);}
-}
-</style>
+        .desc {
+            display: none;
+            color: white;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* Show descriptions on mobile (no hover available) */
+        @media (max-width: 768px) {
+            .desc { display: block !important; }
+        }
+
+        /* === POPUP === */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .popup-content {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        #backIcon {
+            position: absolute;
+            top: 10px; left: 10px;
+            cursor: pointer;
+            width: 24px;
+        }
+
+        .medium { width: 50px; height: 50px; }
+    </style>
 </head>
-
 <body>
-<header class="center">
-    <div class="header-container">
-        <div class="icon">
-                <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </div>
-                
-            <h1>Food</h1>
-            <div class="icon">
-                <a href="home.html" id="home-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                    </svg>
-                </a>
-            </div>
-            
-        </div>
-</header>
-        
-<section id="nav-section">
-    <div class="user-info">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
-        <p>Hi, John!</p>
-    </div>
-    <hr style="border-color:rgba(255,255,255,0.3); margin:12px 0;"/>
 
-    <ul id="nav-list">
-        <li id="aid">
-            <svg id="aid-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-                <line x1="12" y1="8" x2="12" y2="16"></line>
-                <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
-            <a>Aid</a>
-        </li>
-        <li id="food" class="sub hidden">
-            <p><b>Food</b></p>
-        </li>
-        <li class="subSub hidden">
-            <a href="kit.html">Kit</a>
-        </li>
-        <li class="subSub hidden">
-            <a href="meal.html">Meal</a>
-        </li>
-        <li class="sub hidden">
-            <a href="essential.html"><b>Essential</b></a>
-        </li>
-        <li id="history">
-                
-            <svg id="history-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Counter-clockwise clock arrow -->
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                    <polyline points="3 3 3 8 8 8"></polyline>
-                    <!-- Clock hands -->
-                    <line x1="12" y1="7" x2="12" y2="12"></line>
-                    <line x1="12" y1="12" x2="16" y2="14"></line>
-            </svg>
-            <a href="History.html">History</a>
-        </li>
-        <li id="scan"> 
-            <svg id="scan-icon" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
-                    <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
-                    <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
-                    <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
-                    <line x1="7" y1="12" x2="17" y2="12"></line>
-            </svg>
-            <a href="scan.html">Scan and Collect</a>
-        </li>
-    </ul>
-</nav>
-<hr/>
+<?php include 'kitHeader.php'; ?>
 
-<div id="logout">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"/><path d="M20 3H9a2 2 0 0 0-2 2v4h2V5h11v14H9v-4H7v4a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/></svg>
-        <p style="margin:0; font-weight:bold; font-size:14px; letter-spacing:1px;">LOGOUT</p>
-    </div>
-</section>
-
-<!-- Right Side -->
 <div id="rightSide">
-    <div class="food">
-        <button type="button" class="dfood" onclick="location.href='kit.html'">KIT</button>
-        <button type="button" class="dfood" onclick="location.href='meal.html'">MEAL</button>
+
+    <!-- Tab Navigation -->
+    <div class="food" id="flex-container">
+        <button type="button" class="dfood" onclick="location.href='kit.php'">KIT</button>
+        <button type="button" class="dfood" onclick="location.href='meal.php'">MEAL</button>
     </div>
+
+    <!-- Mini Kit -->
     <div class="kit mini">
         <span class="kfood">Mini Kit</span>
-        <div id="miniDesc" class="desc" style="display: none;">
+        <div class="desc" id="miniDesc">
             <p>Description:</p>
-            <p>Buscuit, Nescafe, Maggie</p>
+            <p>Biscuit, Nescafe, Maggie</p>
         </div>
-        <button type="button" class="request">Request</button>
+        <form method="POST" action="">
+            <input type="hidden" name="Kit_Id" value="KIT-001">
+            <button type="submit" class="request">Request Mini Kit</button>
+        </form>
     </div>
+
+    <!-- Big Kit -->
     <div class="kit big">
         <span class="kfood">Big Kit</span>
-        <div id="bigDesc" class="desc1" style="display: none;">
+        <div class="desc" id="bigDesc">
             <p>Description:</p>
-            <p>Oreo, Lexus, Chocolate"Aik Cheong"</p>
+            <p>Oreo, Lexus, Chocolate "Aik Cheong"</p>
         </div>
-        <button type="button" class="request">Request</button>
+        <form method="POST" action="">
+            <input type="hidden" name="Kit_Id" value="KIT-002">
+            <button type="submit" class="request">Request Big Kit</button>
+        </form>
     </div>
+
 </div>
 
-<!-- Popup done request -->
-<?php if(!empty($message)); ?>
+<!-- Popup -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <img src="image/arrowUpLeft.svg" id="backIcon">
-        <img src="image/success.png" class="medium">
-        <h3>Request success</h3>
+        <img src="image/arrowUpLeft.svg" id="backIcon" alt="Close">
+        <img src="<?php echo $success ? 'image/success.png' : 'image/error.png'; ?>" class="medium" alt="Status">
+        <h3 id="popupMessage"><?php echo htmlspecialchars($message); ?></h3>
     </div>
-</div> 
-
 </div>
-</body>
 
-<script type="text/javascript">
-    // sidebar toggle
-    document.querySelector('#menu-icon').addEventListener('click', function() {
-        document.getElementById('nav-section').classList.toggle('hidden');
-    });
+<script>
+    // === POPUP: Auto-show if server returned a message ===
+    const serverMessage = <?php echo json_encode($message); ?>;
 
+    if (serverMessage !== "") {
+        document.getElementById('popup').style.display = 'flex';
+    }
 
-    document.querySelectorAll('li').forEach(li => {
-        
-        // 2. Listen for the mouse entering the link
-        li.addEventListener("mouseover", () => {
-            li.classList.add("hover");
-        });
-
-        // 3. Listen for the mouse leaving the link
-        li.addEventListener("mouseleave", () => {
-            li.classList.remove("hover");
-        });
-    });
-
-    document.querySelectorAll('.icon').forEach(icon => {
-        
-        // 2. Listen for the mouse entering the link
-        icon.addEventListener("mouseover", () => {
-            icon.classList.add("hover");
-        });
-
-        // 3. Listen for the mouse leaving the link
-        icon.addEventListener("mouseleave", () => {
-            icon.classList.remove("hover");
-        });
-    });
-
-    document.querySelectorAll('#logout').forEach(logout => {
-
-        // 2. Listen for the mouse entering the link
-        logout.addEventListener("mouseover", () => {
-            logout.classList.add("hover");
-        });
-
-        // 3. Listen for the mouse leaving the link
-        logout.addEventListener("mouseleave", () => {
-            logout.classList.remove("hover");
-        });
-    });
-
-    document.querySelector('#aid').addEventListener('click', function() {
-        const subItems = document.querySelectorAll('.sub');
-        subItems.forEach(item => {
-            item.classList.toggle('hidden');
-        });
-
-        // Smart cleanup: If Level 1 is closing, force close Level 2 as well
-        const firstSub = document.querySelector('.sub');
-        if (firstSub.classList.contains('hidden')) {
-            document.querySelectorAll('.subSub').forEach(child => {
-                child.classList.add('hidden');
-            });
-        }
-    }); // FIXED: Properly closed this event listener block
-
-    // 4. Level 2 Accordion Toggle: Clicking "Food" toggles ".subSub"
-    document.querySelector('#food').addEventListener('click', function() {
-        const subsub = document.querySelectorAll('.subSub');
-        subsub.forEach(item => {
-            item.classList.toggle('hidden');
-        });
-    });
-    document.querySelectorAll('.request').forEach(btn => {
-        btn.addEventListener('click', ()=>{
-            document.getElementById('popup').style.display = 'flex';
-        });
-    });
-    document.getElementById('backIcon').addEventListener('click', ()=>{
+    document.getElementById('backIcon').addEventListener('click', () => {
         document.getElementById('popup').style.display = 'none';
     });
 
-    const miniBox = document.querySelector('.kit.mini');
-    const desc = document.getElementById('miniDesc');
-    miniBox.addEventListener('mouseenter', () =>{
-        desc.style.display = 'block';
-    });
-    miniBox.addEventListener('mouseleave', () =>{
-        desc.style.display = 'none';
+    // === KIT HOVER DESCRIPTIONS ===
+    function addHoverToggle(boxSelector, descId) {
+        const box  = document.querySelector(boxSelector);
+        const desc = document.getElementById(descId);
+        if (!box || !desc) return;
+        box.addEventListener('mouseenter', () => desc.style.display = 'block');
+        box.addEventListener('mouseleave', () => desc.style.display = 'none');
+    }
+
+    addHoverToggle('.kit.mini', 'miniDesc');
+    addHoverToggle('.kit.big',  'bigDesc');
+
+    // === SIDEBAR & DROPDOWN ===
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('mySidebar');
+
+        menuBtn?.addEventListener('click', function (e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (sidebar && !sidebar.contains(e.target) && !menuBtn?.contains(e.target)) {
+                sidebar.classList.add('hidden');
+            }
+        });
     });
 
-    const bigBox = document.querySelector('.kit.big');
-    const desc1 = document.getElementById('bigDesc');
-    bigBox.addEventListener('mouseenter', () =>{
-        desc1.style.display = 'block';
-    });
-    bigBox.addEventListener('mouseleave', () =>{
-        desc1.style.display = 'none';
-    });
+    window.toggleSubMenu = function (e) {
+        e.stopPropagation();
+        document.getElementById('aidSubMenu')?.classList.toggle('dropdown-closed');
+    };
 
+    window.toggleFoodMenu = function (e) {
+        e.stopPropagation();
+        document.getElementById('foodSubMenu')?.classList.toggle('dropdown-closed');
+    };
+
+    function prosesLogout() {
+        window.location.href = "logout.php";
+    }
+
+    // === ICON HOVER EFFECT ===
+    document.querySelectorAll(".icon").forEach(icon => {
+        icon.addEventListener("mouseover",  () => icon.classList.add("hover"));
+        icon.addEventListener("mouseleave", () => icon.classList.remove("hover"));
+    });
 </script>
+
+<?php include 'footer.php'; ?>
+</body>
 </html>
