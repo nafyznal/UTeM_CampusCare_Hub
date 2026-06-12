@@ -26,19 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Kit</title>
     <link rel="stylesheet" type="text/css" href="format.css">
     <style>
-        .kit {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            background-color: grey;
-            background-size: cover;
-            background-position: center;
-            color: white;
-            border-radius: 7pt;
-            margin: 10pt;
-            padding: 7pt;
+        /* untuk rightSide */
+        #rightSide{
+            float: right;
             width: 65%;
+            margin-top: 70px;
+            padding: 20px 10px;          
+            right: 0;          
+            height: calc(100% - 70px);
         }
         .essential {
             display: flex;
