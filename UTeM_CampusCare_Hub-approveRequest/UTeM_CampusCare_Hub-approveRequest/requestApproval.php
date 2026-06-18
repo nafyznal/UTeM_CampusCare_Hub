@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Approval</title>
 
-    <link rel="stylesheet" type="text/css" href="format.css">
     <link rel="stylesheet" href="requestApproval.css">
 </head>
 
 <body>
 
     <?php
-    include("headerApproval.php");
+    include("header.php");
     ?>
 
     <main>
@@ -32,14 +31,22 @@
                 </thead>
 
                 <tbody>
+
                     <tr>
                         <td>19/03/2026 11:45 AM</td>
                         <td>Mini Food Kit</td>
                         <td>Lutfi Hadi</td>
                         <td id="actionStatus1">Pending</td>
                         <td>
-                            <button class="request-btn approve-btn" onclick="approveRequest(1)">Approve</button>
-                            <button class="request-btn reject-btn" onclick="rejectRequest(1)">Reject</button>
+                            <button class="request-btn approve-btn"
+                                onclick="approveRequest(1)">
+                                Approve
+                            </button>
+
+                            <button class="request-btn reject-btn"
+                                onclick="rejectRequest(1)">
+                                Reject
+                            </button>
                         </td>
                     </tr>
 
@@ -49,28 +56,33 @@
                         <td>Alya Sofea</td>
                         <td id="actionStatus2">Pending</td>
                         <td>
-                            <button class="request-btn approve-btn" onclick="approveRequest(2)">Approve</button>
-                            <button class="request-btn reject-btn" onclick="rejectRequest(2)">Reject</button>
+                            <button class="request-btn approve-btn"
+                                onclick="approveRequest(2)">
+                                Approve
+                            </button>
+
+                            <button class="request-btn reject-btn"
+                                onclick="rejectRequest(2)">
+                                Reject
+                            </button>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td>21/03/2026 02:15 PM</td>
-                        <td>Mini Food Kit</td>
-                        <td>Ahmad Firdaus</td>
-                        <td id="actionStatus3">Pending</td>
-                        <td>
-                            <button class="request-btn approve-btn" onclick="approveRequest(3)">Approve</button>
-                            <button class="request-btn reject-btn" onclick="rejectRequest(3)">Reject</button>
-                        </td>
-                    </tr>
                 </tbody>
+
             </table>
 
         </div>
     </main>
 
     <script src="requestApproval.js"></script>
+
+    <script>
+        document.getElementById("menu-icon").addEventListener("click", function()
+        {
+            document.getElementById("nav-section").classList.toggle("hidden");
+        });
+    </script>
 
     <?php
     include("footer.php");

@@ -3,7 +3,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Request Approval Content */
+
 .content{
     margin-left: 280px;
     margin-right: 20px;
@@ -23,7 +23,7 @@ body{
     font-size: 32px;
 }
 
-/* Table */
+
 table{
     width: 100%;
     border-collapse: collapse;
@@ -43,7 +43,7 @@ td{
     border: 1px solid #777;
 }
 
-/* Buttons */
+
 .request-btn{
     padding: 8px 15px;
     margin: 2px;
@@ -68,7 +68,7 @@ td{
     opacity: 0.8;
 }
 
-/* Status */
+
 .approved-text{
     color: green;
     font-weight: bold;
