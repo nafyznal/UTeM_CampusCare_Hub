@@ -1,100 +1,80 @@
+<?php
+session_start();
+// include("connectDonation.php");
+
+// POST data
+$name = $_POST['name'];
+$amount = $_POST['amount'];
+$visibility = $_POST['visibility'];
+$payment = $_POST['payment'];
+
+if ($visibility == "Anonymous")
+{
+    $displayName = "Anonymous";
+}
+else
+{
+    $displayName = $name;
+}
+
+$_SESSION['name'] = $displayName;
+$_SESSION['amount'] = $amount;
+
+// ⚠️ REQUIRED by your DB but NOT in form → temporary default
+// $staffID = "STF001";   // you must later replace with login staff system
+
+// Date format MUST be DATE (not datetime)
+$dateTime = date("d/m/Y h:i:s A");
+
+// Reference number (optional for UI only)
+$reference = "REF" . rand(10000, 99999);
+
+// $sql = "INSERT INTO donation(DonorName, DonationType, Amount, Date)
+//         VALUES('$name', '$payment','$amount', '$dateTime')";
+// mysqli_query($conn, $sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Successful</title>
 
+    <link rel="stylesheet" href="donation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <link rel="stylesheet" href="format.css">
 </head>
+
 <body>
-    <?php
-    //Retrieve student information
-    // $name = $_POST['name']; 
-    // $email = $_POST['email']; 
-    // $phone = $_POST['phone']; 
-    $amount = $_POST['amount']; 
-    // $frequency = $_POST['frequency']; 
-    // $visibility = $_POST['visibility']; 
-    $payment = $_POST['payment'];
 
-    /* Category checkbox */ 
-    // if(isset($_POST['category'])) 
-    // { 
-    //     $category = implode(", ", $_POST['category']); 
-    // }
-    // else 
-    // { 
-    // $category = "None"; 
-    // }
+<div class="container">
 
-    /* Anonymous donor */ 
-    // $displayName = $name; 
+    <a href="donation.php" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
 
-    // if($visibility == "Anonymous") 
-    // { 
-    //     $displayName = "Anonymous"; 
-    // }
-    // else
-    // {
-    //     $displayName;
-    // }
+    <div class="success-card">
+        <h1>Payment Successful</h1>
 
-    $reference = "REF" . rand(10000,99999); 
-    
-    $dateTime = date("d/m/Y h:i:s A");
+        <div class="success-image">
+            <img src="successful.png" alt="Success">
+        </div>
 
-    // include 'config.php';
+        <div class="payment-details">
 
-    // $sql = "INSERT INTO donors
-    //         (donor_name, amount)
-    //         VALUES
-    //         ('$displayName', '$amount')";
+            <p><strong>Reference:</strong> <?php echo $reference; ?></p>
 
-    // mysqli_query($conn, $sql);
-    
-    ?>
+            <p><strong>Payment Date / Time :</strong> <?php echo $dateTime; ?></p>
 
-     <div class="container">
+            <p><strong>Payment With :</strong> <?php echo $payment; ?></p>
 
-        <a href="donation.php" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
+            <p><strong>Total Amount:</strong> RM <?php echo number_format($amount,2); ?></p>
 
-        <div class="success-card">
-            <h1>Payment Successful</h1>
-
-            <div class="success-image">
-                <img src="successful.png" alt="Payment Successful">
-            </div>
-
-            <div class="payment-details">
-                <p><strong>Reference : </strong>
-                    <span id="reference"></span>
-                    <?php echo $reference; ?>
-                </p>
-                
-                <p><strong>Payment Date / Time : </strong>
-                    <span id="datetime"></span>
-                    <?php echo $dateTime; ?>
-                </p>
-
-                <p><strong>Payment With :
-                    <?php echo $payment; ?>
-                </strong></p>
-
-                <p><strong>Total Amount : </strong>
-                    <?php echo $amount; ?>
-                </p>
-
-                <p><strong>Status : </strong>
-                    Successful
-                </p>
-            </div>
+            <p><strong>Status:</strong> Successful</p>
 
         </div>
+
     </div>
+</div>
+
 </body>
 </html>

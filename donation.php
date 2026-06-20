@@ -1,16 +1,22 @@
+<?php
+session_start();
+include("connectDonation.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donation Form</title>
+    <title>Donate</title>
 
-    <link rel="stylesheet" href="format.css">
+    <link rel="stylesheet" href="donation.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
+
 <div class="container">
 
     <!-- Back Button -->
@@ -22,12 +28,11 @@
 
     <div class="donation-section">
 
-        <!-- Donation Form -->
-        <form method="POST" action="processDonation.php">
+        <div class="donation-form">
 
-            <div class="donation-form">
+            <form action="processDonation.php" method="POST">
 
-                <!-- Amount & Frequency -->
+                <!-- Amount and Frequency -->
                 <div class="top-row">
 
                     <div>
@@ -44,6 +49,7 @@
                             <option value="Weekly">Weekly</option>
                             <option value="Monthly">Monthly</option>
                         </select>
+
                     </div>
 
                 </div>
@@ -52,17 +58,13 @@
                 <h2>Donation Category</h2>
 
                 <div class="checkbox-row">
-
                     <input type="checkbox" name="category[]" value="Foods">
                     <label>Foods</label>
-
                 </div>
 
                 <div class="checkbox-row">
-
                     <input type="checkbox" name="category[]" value="Necessities">
                     <label>Necessities</label>
-
                 </div>
 
                 <!-- Personal Information -->
@@ -126,20 +128,34 @@
                     Proceed Payment
                 </button>
 
-            </div>
+            </form>
 
-        </form>
+        </div>
 
-        <!-- Donators Box -->
-
+        <!-- DONATORS -->
         <div class="donators-box">
 
             <h2>DONATORS</h2>
 
+            <!-- ni bleh display sorg so kena connect database dlu -->
+            <?php
+            if(isset($_SESSION['name']))
+            {
+                echo "<p>" . $_SESSION['name'] ." - RM" .$_SESSION['amount'] ."</p>";
+            }
+            ?>
 
-                </div>
+            <!-- If using sql boleh display smua -->
+            <!-- $sql = "SELECT * FROM donation ORDER BY DonorName";
+            $result = mysqli_query($conn, $sql);
 
-            </div>
+            while($row = mysqli_fetch_assoc($result))
+            {
+                echo "<p>" . $row['name'] .
+                 " donated RM" .
+                 $row['amount'] .
+                  "</p>";
+            } -->
 
         </div>
 
@@ -149,4 +165,3 @@
 
 </body>
 </html>
-```
