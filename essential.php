@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div id="rightSide">
 
-<!-- Kit Request -->
+<!-- Essential Request -->
 <?php
 $conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
 if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }

@@ -15,6 +15,20 @@
             margin-right: auto;    
             min-height: calc(100vh - 70px - 50px);
         }
+        .dfood {
+            background-color: #541A1A;   /* warna asal */
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 5px;
+        }
+        /* Hover effect */
+        .dfood:hover {
+            background-color: #6a2323;   /* warna maroon lebih cerah bila hover */
+            transform: scale(1.05);      /* sedikit zoom bila hover */
+        }
         .kit {
             margin: 20px auto 30px auto;
             display: flex;

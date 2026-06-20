@@ -35,6 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-right: auto;    /* center di tengah */
             min-height: calc(100vh - 70px - 50px); /* muat antara header & footer */
         }
+        .dfood {
+            background-color: #541A1A;   /* warna asal */
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 5px;
+        }
+        /* Hover effect */
+        .dfood:hover {
+            background-color: #6a2323;   /* warna maroon lebih cerah bila hover */
+            transform: scale(1.05);      /* sedikit zoom bila hover */
+        }
         .meal {
             margin: 20px auto 30px auto;
             display: flex;
@@ -111,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" class="dfood" onclick="location.href='meal.php'">MEAL</button>
     </div>
 
-<!-- Kit Request -->
+<!-- Meal Request -->
 <?php
 $conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
 if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
