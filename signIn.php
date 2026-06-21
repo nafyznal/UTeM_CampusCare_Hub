@@ -1,24 +1,4 @@
-<?php
-    session_start();
 
-    $registered = false;
-    $error = '';
-
-    if (isset($_POST['register'])) {
-    $name     = trim($_POST['name']);
-    $email    = trim($_POST['email']);
-    $password = $_POST['password'];
-    $role     = $_POST['role'];
-
-    if (empty($name) || empty($email) || empty($password) || empty($role)) {
-        $error = "Please fill in all fields.";
-    } 
-    else 
-        {
-        $registered = true;
-        }
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +10,8 @@
 </head>
 
 <body>
-
+<?php
+include("signinHeader.php");?>
     <header class="header">
         <div id="header-container" >
             <div class="menu-icon" id="menuBtn" onclick="toggleSidebar()">

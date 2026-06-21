@@ -3,23 +3,7 @@ $username = $_SESSION['username'] ?? 'Guest';
 ?>
 <link rel="stylesheet" type="text/css" href="formatHeader.css">
 
-<header>
-    <div id="header-container">
 
-        <div class="icon" id="menu-btn">
-            <svg id="menu-icon" viewBox="0 0 24 24" fill="none"
-                 stroke="#541A1A" stroke-width="2.5"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-        </div>
-
-        <h1>UTeM CampuscareHub</h1>
-
-    </div>
-</header>
 
 <section class="sidebar hidden" id="mySidebar">
 
@@ -28,11 +12,13 @@ $username = $_SESSION['username'] ?? 'Guest';
             <circle cx="12" cy="8" r="5"/>
             <path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/>
         </svg>
-        <span class="greeting">Hi, <?= htmlspecialchars($username) ?></span>
+        <span class="greeting">Hi</span>
+        <button type="button" name="login" onclick="window.location.href='index.php'" style="margin-top: 5px; padding: 2px 12px; background-color: #c98a8a; color: white; border: none; border-radius: 4px; cursor: pointer;"> 
+                    LOGIN
+                </button>
     </div>
 
     <hr>
-
     <ul class="sidebar-menu">
 
         <li>

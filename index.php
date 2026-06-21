@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-$servername = "localhost:3306";
+$servername = "127.0.0.1:3307";
 $username   = "root";
-$password   = "root1234";  
+$password   = "";  
 $dbname     = "campuscare_hub";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -11,6 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 if (isset($_POST['submit'])) {
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -19,35 +20,37 @@ if (isset($_POST['submit'])) {
     $user_name     = '';
     $is_admin      = false;
 
-    // 1. Check admin
-    $stmt = $conn->prepare("SELECT name, password FROM admin WHERE email = ?");
+    //  Check admin
+$stmt = $conn->prepare("SELECT name, password FROM admin WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    if ($password === $row['password']) {
+        $login_success = true;
+        $user_name     = $row['name'];
+        $is_admin      = true;
+    }
+}
+
+// 2. check student utk yg login
+if (!$login_success) {
+    $stmt = $conn->prepare("SELECT name, password, StudentId FROM student WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        if ($password === $row['password']) {
+        if (password_verify($password, $row['password'])) {
             $login_success = true;
             $user_name     = $row['name'];
-            $is_admin      = true;
+            $_SESSION['StudentId'] = $row['StudentId'];
         }
     }
+}
 
-    // 2. Kalau belum login, check student
-    if (!$login_success) {
-        $stmt = $conn->prepare("SELECT name, password, StudentId FROM student WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($row = $result->fetch_assoc()) {
-            if (password_verify($password, $row['password'])) {
-                $login_success = true;
-                $user_name     = $row['name'];
-                $_SESSION['StudentId'] = $row['StudentId'];
-            }
-        }
-    }
     if ($login_success) {
         $_SESSION['em']       = $email;
         $_SESSION['username'] = $user_name;
