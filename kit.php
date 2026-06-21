@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,6 +107,42 @@
         <button type="button" class="dfood" onclick="location.href='kit.php'">KIT</button>
         <button type="button" class="dfood" onclick="location.href='meal.php'">MEAL</button>
     </div>
+<?php 
+$message = "";
+$success = false;
+
+$conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
+if($conn->connect_error){
+    die("Connection failed: " .$conn->connect_error);
+}
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $Kit_Id = $_POST['Kit_Id'] ?? '';
+    $StudentId = $_SESSION['StudentId'] ?? '';
+    $status = "Pending";
+    $date = date("Y-m-d");
+
+    $check = $conn->prepare("SELECT 1 FROM request WHERE StudentId=? AND Kit_Id=?");
+    $check->bind_param("is", $StudentId, $Kit_Id);
+    $check->execute();
+    $check->store_result();
+
+    if($check->num_rows > 0){
+        $message = "You already request this kit.";
+        $success = false;
+    }else{
+        $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
+
+        if($stmt->execute()){
+            $message = "Request for $Kit_Id submitted successfully!";
+            $success = true;
+        }else{
+            $message = "Error: " .$stmt->error;
+            $success = false;
+        }
+    }
+}
+?>
 
 <!-- Kit Request -->
 <?php

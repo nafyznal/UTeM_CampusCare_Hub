@@ -1,69 +1,77 @@
 <?php
 session_start();
 
-$file = "userDatabase.txt";
+$servername = "localhost:3306";
+$username   = "root";
+$password   = "root1234";  
+$dbname     = "campuscare_hub";
 
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 if (isset($_POST['submit'])) {
-    $email = trim($_POST['email'] ?? '');
+    $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
     $login_success = false;
-    $user_name = '';
+    $user_name     = '';
+    $is_admin      = false;
 
-    if (file_exists($file)) {
-        $users = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    // 1. Check admin
+    $stmt = $conn->prepare("SELECT name, password FROM admin WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        foreach ($users as $line) {
-            // Pecahkan baris guna TAB
-            $userData = explode("\t", $line);
-
-            if (count($userData) >= 4) {
-                $savedname  = trim($userData[0]);
-                $savedEmail  = trim($userData[1]);
-                $savedGender = trim($userData[2]);
-                // trim() di sini SANGAT PENTING untuk buang whitespace/tab terselit di hujung hash
-                $savedPwd   = trim($userData[3]); 
-
-                if ($savedEmail === $email) {
-                    // Semak password
-                    if ($savedPwd === $password) {
-                        $login_success = true;
-                        $user_name = $savedname;
-                        break;
-                    }
-                }
-            }
+    if ($row = $result->fetch_assoc()) {
+        if ($password === $row['password']) {
+            $login_success = true;
+            $user_name     = $row['name'];
+            $is_admin      = true;
         }
     }
 
-    if ($login_success) {
-    $_SESSION['em'] = $email;
-    $_SESSION['username'] = $user_name; 
+    // 2. Kalau belum login, check student
+    if (!$login_success) {
+        $stmt = $conn->prepare("SELECT name, password, StudentId FROM student WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    // Tetapkan emel admin yang unik di sini
-    $admin_email = "adminHub@gmail.com"; 
-
-    // Semak adakah emel yang log masuk sepadan dengan emel admin
-    if ($_SESSION['em'] === $admin_email) {
-        header("Location: adminDashboard.php"); // Bawa ke page admin
-    } else {
-        header("Location: homepage.php"); // Bawa ke page user biasa
+        if ($row = $result->fetch_assoc()) {
+            if (password_verify($password, $row['password'])) {
+                $login_success = true;
+                $user_name     = $row['name'];
+                $_SESSION['StudentId'] = $row['StudentId'];
+            }
+        }
     }
-    exit;
-} else {
-    session_start();
-    session_unset();
-    session_destroy();
-    
-    echo "<div style='color:red; text-align:center; margin-top:20px;'>";
-    echo "Sorry, your email or password is incorrect. Please try again.<br>";
-    echo "Redirecting you back in 3 seconds...";
-    echo "</div>";
-    echo "<meta http-equiv=\"refresh\" content=\"3;URL=index.php\">";
-    exit;
-}
+    if ($login_success) {
+        $_SESSION['em']       = $email;
+        $_SESSION['username'] = $user_name;
+
+        if ($is_admin) {
+            header("Location: adminDashboard.php");
+        } else {
+            header("Location: homepage.php");
+        }
+        exit;
+    } else {
+        session_unset();
+        session_destroy();
+
+        echo "<div style='color:red; text-align:center; margin-top:20px;'>";
+        echo "Sorry, your email or password is incorrect. Please try again.<br>";
+        echo "Redirecting you back in 3 seconds...";
+        echo "</div>";
+        echo "<meta http-equiv=\"refresh\" content=\"3;URL=index.php\">";
+        exit;
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

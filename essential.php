@@ -1,23 +1,5 @@
-<?php
-// === HANDLE FORM SUBMISSION ===
-$message = "";
-$success = false;
+<?php session_start(); ?>
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $Kit_Id  = $_POST['Kit_Id'] ?? 'Unknown';
-    $status  = "Pending";
-    $date    = date("Y-m-d H:i:s");
-
-    $data = $date . " | " . $Kit_Id . " | " . $status . "\n";
-
-    if (file_put_contents("requests.txt", $data, FILE_APPEND | LOCK_EX) !== false) {
-        $message = "Request untuk $Kit_Id berjaya disimpan!";
-        $success = true;
-    } else {
-        $message = "Error: Gagal menulis data ke dalam fail.";
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,6 +86,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include 'aidHeader.php'; ?>
 
 <div id="rightSide">
+
+<?php 
+$message = "";
+$success = false;
+
+$conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
+if($conn->connect_error){
+    die("Connection failed: " .$conn->connect_error);
+}
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $Kit_Id = $_POST['Kit_Id'] ?? '';
+    $StudentId = $_SESSION['StudentId'] ?? '';
+    $status = "Pending";
+    $date = date("Y-m-d");
+
+    $check = $conn->prepare("SELECT 1 FROM request WHERE StudentId=? AND Kit_Id=?");
+    $check->bind_param("is", $StudentId, $Kit_Id);
+    $check->execute();
+    $check->store_result();
+
+    if($check->num_rows > 0){
+        $message = "You already request this kit.";
+        $success = false;
+    }else{
+        $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
+
+        if($stmt->execute()){
+            $message = "Request for $Kit_Id submitted successfully!";
+            $success = true;
+        }else{
+            $message = "Error: " .$stmt->error;
+            $success = false;
+        }
+    }
+}
+?>
 
 <!-- Essential Request -->
 <?php
