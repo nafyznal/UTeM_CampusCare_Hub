@@ -82,17 +82,17 @@ include("signinHeader.php");?>
                     <div class="card">
                         <span class="card-number">01</span>
                         <h3 class="card-title">Free Daily Meals</h3>
-                        <div class="card-image"><img src="donation3.png" alt="Meals"></div>
+                        <div class="card-image"><img src="images/donation3.png" alt="Meals"></div>
                     </div>
                     <div class="card">
                         <span class="card-number">02</span>
                         <h3 class="card-title">Essential Supplies</h3>
-                        <div class="card-image"><img src="donation1.jpeg" alt="Supplies"></div>
+                        <div class="card-image"><img src="images/donation1.jpeg" alt="Supplies"></div>
                     </div>
                     <div class="card">
                         <span class="card-number">03</span>
                         <h3 class="card-title">Academic Support</h3>
-                        <div class="card-image"><img src="donation2.webp" alt="Academic"></div>
+                        <div class="card-image"><img src="images/donation2.webp" alt="Academic"></div>
                     </div>
                 </div>
 
