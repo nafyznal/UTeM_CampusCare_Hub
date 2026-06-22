@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Approval</title>
 
-    <link rel="stylesheet" href="formatHeader.css">
     <link rel="stylesheet" href="requestApproval.css">
-    <link rel="stylesheet" href="formatFooter.css">
 </head>
 
 <body>
 
-    <?php include("headerApproval.php"); ?>
+    <?php include("header.php"); ?>
 
     <main>
         <div class="approval-content">
