@@ -34,7 +34,7 @@ span, h1, h2, th, td{
     user-select: none;
 }
 
-/* Header */
+
 header{
     background-color: #ffffff;
     height: auto;
@@ -63,7 +63,7 @@ header{
     filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
 }
 
-/* Sidebar */
+
 nav{
     background-color: #541A1A;
     color: white;

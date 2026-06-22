@@ -5,76 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Approval</title>
 
-    <link rel="stylesheet" type="text/css" href="format.css">
+    <link rel="stylesheet" href="formatHeader.css">
     <link rel="stylesheet" href="requestApproval.css">
+    <link rel="stylesheet" href="formatFooter.css">
 </head>
 
 <body>
 
-    <?php
-    include("headerApproval.php");
-    ?>
+    <?php include("headerApproval.php"); ?>
 
     <main>
-        <div class="content">
-
+        <div class="approval-content">
             <h2>REQUEST APPROVAL</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Type</th>
-                        <th>Requestor</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+            <div class="approval-table-container">
+                <table class="approval-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Type</th>
+                            <th>Requestor</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    <tr>
-                        <td>19/03/2026 11:45 AM</td>
-                        <td>Mini Food Kit</td>
-                        <td>Lutfi Hadi</td>
-                        <td id="actionStatus1">Pending</td>
-                        <td>
-                            <button class="request-btn approve-btn" onclick="approveRequest(1)">Approve</button>
-                            <button class="request-btn reject-btn" onclick="rejectRequest(1)">Reject</button>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>19/03/2026 11:45 AM</td>
+                            <td>Mini Food Kit</td>
+                            <td>Lutfi Hadi</td>
+                            <td id="actionStatus1">Pending</td>
+                            <td>
+                                <button class="request-btn approve-btn" onclick="approveRequest(1)">Approve</button>
+                                <button class="request-btn reject-btn" onclick="rejectRequest(1)">Reject</button>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>20/03/2026 09:30 AM</td>
-                        <td>Essential Kit</td>
-                        <td>Alya Sofea</td>
-                        <td id="actionStatus2">Pending</td>
-                        <td>
-                            <button class="request-btn approve-btn" onclick="approveRequest(2)">Approve</button>
-                            <button class="request-btn reject-btn" onclick="rejectRequest(2)">Reject</button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>20/03/2026 09:30 AM</td>
+                            <td>Essential Kit</td>
+                            <td>Alya Sofea</td>
+                            <td id="actionStatus2">Pending</td>
+                            <td>
+                                <button class="request-btn approve-btn" onclick="approveRequest(2)">Approve</button>
+                                <button class="request-btn reject-btn" onclick="rejectRequest(2)">Reject</button>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>21/03/2026 02:15 PM</td>
-                        <td>Mini Food Kit</td>
-                        <td>Ahmad Firdaus</td>
-                        <td id="actionStatus3">Pending</td>
-                        <td>
-                            <button class="request-btn approve-btn" onclick="approveRequest(3)">Approve</button>
-                            <button class="request-btn reject-btn" onclick="rejectRequest(3)">Reject</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+                        <tr>
+                            <td>21/03/2026 02:15 PM</td>
+                            <td>Mini Food Kit</td>
+                            <td>Ahmad Firdaus</td>
+                            <td id="actionStatus3">Pending</td>
+                            <td>
+                                <button class="request-btn approve-btn" onclick="approveRequest(3)">Approve</button>
+                                <button class="request-btn reject-btn" onclick="rejectRequest(3)">Reject</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 
-    <script src="requestApproval.js"></script>
+    <?php include("footer.php"); ?>
 
-    <?php
-    include("footer.php");
-    ?>
+    <script src="requestApproval.js"></script>
 
 </body>
 </html>

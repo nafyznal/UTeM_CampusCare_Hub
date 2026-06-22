@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="page">
+    <div class="top-title">Dashboard</div>
+    <div class="menu-icon"><i class="fa-solid fa-bars"></i></div>
+    <a class="home-icon" href="admin.html"><i class="fa-solid fa-house"></i></a>
+
+    <div class="sidebar">
+      <div class="profile"><i class="fa-regular fa-circle-user"></i><span>Hi!<br>Blablabla</span></div>
+      <div class="nav">
+        <a href="dashboard.html"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
+        <a href="approval.html"><i class="fa-solid fa-clock"></i>Approval</a>
+        <a href="item.html"><i class="fa-solid fa-list"></i>Item</a>
+      </div>
+      <div class="logout"><a href="#"><i class="fa-solid fa-power-off"></i>Logout</a></div>
+    </div>
+
+    <div class="content">
+      <div class="cards">
+        <div class="stat-card"><i class="fa-regular fa-user"></i><span><strong>2</strong>Request</span></div>
+        <div class="stat-card"><i class="fa-solid fa-utensils"></i><span><strong>RM 75</strong>Food</span></div>
+        <div class="stat-card"><i class="fa-solid fa-list-check"></i><span><strong>Rm 0</strong>Essential</span></div>
+      </div>
+
+      <div class="dashboard-panels">
+        <div class="panel">
+          <h3>Recent Order</h3>
+          <table class="small-table">
+            <tr><th>Name</th><th>Request</th><th>Status</th></tr>
+            <tr><td>Ali</td><td>Mini kit</td><td>☑</td></tr>
+            <tr><td>Adam</td><td>Mini kit</td><td>☒</td></tr>
+          </table>
+        </div>
+
+        <div class="panel">
+          <h3>Recent Donator</h3>
+          <table class="small-table">
+            <tr><th>Name</th><th>Amount</th><th>Status</th></tr>
+            <tr><td>Ali</td><td>RM50</td><td>Food</td></tr>
+            <tr><td>Aliya</td><td>RM15</td><td>Food</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
