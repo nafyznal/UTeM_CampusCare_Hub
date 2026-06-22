@@ -14,21 +14,21 @@
     ?>
 
     <main>
-        <div class="content">
-            <h2>ITEM MANAGEMENT</h2>
+    <div class="inventory-content">
+        <h2>ITEM MANAGEMENT</h2>
 
-            <div class="kit-container">
+        <div class="kit-container">
 
-                <div class="kit-card">
+            <div class="kit-card">
 
-                    <div class="kit-header">
-                        <h3 >Mini Food Kit</h3>
+                <div class="kit-header">
+                    <h3>Mini Food Kit</h3>
+                    <button class="delete-kit-btn">
+                        Delete Kit
+                    </button>
+                </div>
 
-                        <button class="delete-kit-btn">
-                            Delete Kit
-                        </button>
-                    </div>
-
+                <div class="table-container">
                     <table>
                         <thead>
                             <tr>
@@ -37,7 +37,6 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <tr>
                                 <td>Maggie</td>
@@ -47,7 +46,6 @@
                                     <a href="#">Delete</a>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>Biscuit</td>
                                 <td>20</td>
@@ -56,23 +54,22 @@
                                     <a href="#">Delete</a>
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
+                </div>
 
-                    <div class="card-btn">
-                        <button class="add-item-btn">
-                            Add Item
-                        </button>
-
-                    </div>
-
+                <div class="card-btn">
+                    <button class="add-item-btn">
+                        Add Item
+                    </button>
                 </div>
 
             </div>
 
         </div>
-    </main>
+
+    </div>
+</main>
 
      <script>
         document.getElementById("menu-icon").addEventListener("click", function()
