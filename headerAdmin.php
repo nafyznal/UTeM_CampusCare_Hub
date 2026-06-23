@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>header</title>
-        <link rel="stylesheet" type="text/css" href="format.css">
+        <link rel="stylesheet" type="text/css" href="formatAdmin.css">
     </head>
     <body>
         <header class="center" style="width:100%">
@@ -46,7 +46,7 @@
                         <rect x="3" y="16" width="7" height="5" rx="1" />
                         <rect x="14" y="12" width="7" height="9" rx="1" />
                     </svg>
-                    <a href="adminDashboard.html">Dashboard</a>
+                    <a href="adminDashboard.php">Dashboard</a>
                 </li>
                 <li id="approval">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

@@ -1,13 +1,55 @@
+<?php 
+    $conn = mysqli_connect("localhost","root","","campuscare_hub");
+
+    if(!$conn){
+        die("Connection Failed! :". mysqli_connect_error());
+    }
+
+    $sql = "SELECT request.*, student.Name, kit.KitName 
+            FROM request
+            JOIN student ON request.StudentId = student.StudentId
+            JOIN kit ON request.Kit_Id = kit.Kit_Id
+            ORDER BY request.RequestID DESC";
+    $result = mysqli_query($conn, $sql);
+
+    $sql_count = "SELECT COUNT(*) as total FROM request";
+    $result_count = mysqli_query($conn, $sql_count);
+    $row_count = mysqli_fetch_assoc($result_count);
+
+    $sql_food = "SELECT SUM(Amount) as totalFood FROM donation WHERE DonationType = 'Food'";
+    // SUM utk tmbh data contoh nya amount donation
+    $result_food = mysqli_query($conn, $sql_food);
+    $row_food = mysqli_fetch_assoc($result_food);
+
+    $sql_Necessity = "SELECT SUM(Amount) as totalNecessity FROM donation WHERE DonationType = 'Necessity'";
+    // SUM utk tmbh data contoh nya amount donation
+    $result_Necessity = mysqli_query($conn, $sql_Necessity);
+    $row_Necessity = mysqli_fetch_assoc($result_Necessity);
+
+    $sql_donor = "SELECT * FROM Donation ORDER BY DonationID DESC";
+    $result_donor = mysqli_query($conn, $sql_donor);
+    $row_donor = mysqli_fetch_assoc($result_donor);
+
+
+
+
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meSta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="format.css">
+    <link rel="stylesheet" href="formatAdmin.css">
 </head>
 <body>
-    <?php include("header.php"); ?>
+    <?php include("headerAdmin.php"); ?>
     
     <main class="grid-container">
         <div class="card">
@@ -19,7 +61,7 @@
                 </svg>
             </div>
             <div class="content">
-                <span class="value">2</span>
+                <span class="value"><?php echo $row_count['total'] ?></span>
                 <span class="label">Request</span>
             </div>
         </div>
@@ -35,7 +77,12 @@
                 </svg>
             </div>
             <div class="content">
-                <span class="value">RM 75</span>
+                <span class="value">
+                    <?php 
+                    $totalFood = $row_food['totalFood'] ?? 0;
+                    echo "RM" . " " . $totalFood;
+                    ?>
+                </span>
                 <span class="label">Food</span>
             </div>
         </div>
@@ -51,13 +98,18 @@
                 </svg>
             </div>
             <div class="content">
-                <span class="value">RM 0</span>
-                <span class="label">Essential</span>
+                <span class="value">
+                    <?php 
+                        $totalNec = $row_Necessity['totalNecessity'] ?? 0;
+                        echo "RM". " " . $totalNec;
+                    ?>
+                </span>
+                <span class="label">Necessity</span>
             </div>
         </div>
 
         <div class="table-recent">
-        <h2>Recent Order</h2>
+        <h2>Recent Request</h2>
         <table class="recent-table">
             <thead>
                 <tr>
@@ -68,17 +120,22 @@
             </thead>
 
             <tbody>
+                <?php 
+                    while ($row = mysqli_fetch_assoc($result)) {
+                ?>
                 <tr>
-                    <td>Ali</td>
-                    <td>Mini Kit</td>
-                    <td class="status-approved">Approved</td>
+                    <td><?php echo $row['Name'];?></td>
+                    <td><?php echo $row['KitName'];?></td>
+                    <td class="
+                    <?php 
+                        if($row['Status'] == 'Approved') echo 'status-approved';
+                        else if ($row['Status'] == 'Pending' ) echo 'status-pending';
+                        else if ($row['Status'] == 'Rejected') echo 'status-rejected';
+                    
+                    ?>">
+                    <?php echo $row['Status'];?></td>
                 </tr>
-
-                <tr>
-                    <td>Abu</td>
-                    <td>Essential</td>
-                    <td class="status-pending">Pending</td>
-                </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -96,15 +153,24 @@
 
             <tbody>
                 <tr>
-                    <td>Ali</td>
-                    <td>Food</td>
-                    <td>RM 50</td>
-                </tr>
-
-                <tr>
-                    <td>Abu</td>
-                    <td>Essential</td>
-                    <td>RM 25</td>
+                    <td>
+                        <?php 
+                        $donorName = $row_donor['DonorName'] ?? '';
+                        echo $donorName;
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                        $type = $row_donor['DonationType'] ?? '';
+                        echo $type;
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                        $Amount = $row_donor['Amount'] ?? '';
+                        echo "RM" . " ". $Amount;
+                        ?>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -134,6 +200,20 @@
             });
         });
     });
+
+    $(document).ready(function(){
+
+        // Fade in
+        $('body').hide().fadeIn(1000);
+
+        // Sidebar Toggle (jQuery way)
+        $('#menu-icon').click(function(e){
+            e.preventDefault();
+            $('#nav-section').toggleClass('hidden');
+        });
+
+    });
+
     </script>
 
     <?php include("footer.php"); ?>
