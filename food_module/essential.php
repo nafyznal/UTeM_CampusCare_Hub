@@ -1,23 +1,5 @@
-<?php
-// === HANDLE FORM SUBMISSION ===
-$message = "";
-$success = false;
+<?php session_start(); ?>
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $Kit_Id  = $_POST['Kit_Id'] ?? 'Unknown';
-    $status  = "Pending";
-    $date    = date("Y-m-d H:i:s");
-
-    $data = $date . " | " . $Kit_Id . " | " . $status . "\n";
-
-    if (file_put_contents("requests.txt", $data, FILE_APPEND | LOCK_EX) !== false) {
-        $message = "Request untuk $Kit_Id berjaya disimpan!";
-        $success = true;
-    } else {
-        $message = "Error: Gagal menulis data ke dalam fail.";
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,16 +8,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Kit</title>
     <link rel="stylesheet" type="text/css" href="format.css">
     <style>
-        /* untuk rightSide */
-        #rightSide{
-            float: right;
+        #rightSide{ 
+            margin-top: 70px;      /* sama dengan tinggi header */
+            margin-bottom: 50px;   /* sama dengan tinggi footer */
+            padding: 20px 10px;
             width: 65%;
-            margin-top: 70px;
-            padding: 20px 10px;          
-            right: 0;          
-            height: calc(100% - 70px);
+            margin-left: auto;
+            margin-right: auto;    /* center di tengah */
+            min-height: calc(100vh - 70px - 50px); /* muat antara header & footer */
         }
         .essential {
+            margin: 20px auto 30px auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -45,15 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-position: center;
             color: white;
             border-radius: 7pt;
-            margin: 10pt;
             padding: 7pt;
             width: 65%;
         }
-
-        .toiletries { background-image: url("image/toiletries.jpeg"); }
-        .personalCare  { background-image: url("image/personalCare.jpeg"); }
-        .sanitaryPad { background-image: url("image/sanitaryPad.jpeg");}
-
         .desc {
             display: none;
             color: white;
@@ -62,7 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 6px;
             font-size: 14px;
         }
-
+        .essential .desc{
+            display: none;
+        }
+        .essential:hover .desc{
+            display: block;
+        }
         /* Show descriptions on mobile (no hover available) */
         @media (max-width: 768px) {
             .desc { display: block !important; }
@@ -101,54 +83,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<?php include 'kitHeader.php'; ?>
+<?php include 'aidHeader.php'; ?>
 
 <div id="rightSide">
 
-    <!-- Tab Navigation -->
-    <div class="food" id="flex-container">
-        <button type="button" class="dfood" onclick="location.href='kit.php'">KIT</button>
-        <button type="button" class="dfood" onclick="location.href='meal.php'">MEAL</button>
-    </div>
+<?php 
+$message = "";
+$success = false;
 
-    <!-- Toiletries -->
-    <div class="essential toiletries">
-        <span class="kfood">Toiletries</span>
-        <div class="desc" id="toiletriesDesc">
+$conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
+if($conn->connect_error){
+    die("Connection failed: " .$conn->connect_error);
+}
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $Kit_Id = $_POST['Kit_Id'] ?? '';
+    $StudentId = $_SESSION['StudentId'] ?? '';
+    $status = "Pending";
+    $date = date("Y-m-d");
+
+    $check = $conn->prepare("SELECT 1 FROM request WHERE StudentId=? AND Kit_Id=?");
+    $check->bind_param("is", $StudentId, $Kit_Id);
+    $check->execute();
+    $check->store_result();
+
+    if($check->num_rows > 0){
+        $message = "You already request this kit.";
+        $success = false;
+    }else{
+        $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
+
+        if($stmt->execute()){
+            $message = "Request for $Kit_Id submitted successfully!";
+            $success = true;
+        }else{
+            $message = "Error: " .$stmt->error;
+            $success = false;
+        }
+    }
+}
+?>
+
+<!-- Essential Request -->
+<?php
+$conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+
+$result = $conn->query("SELECT Kit_Id, KitName, Description, Picture FROM kit WHERE Kit_Id LIKE 'ESS%'");
+
+while ($row = $result->fetch_assoc()) {
+?>
+    <div class="essential" style="background-image:url('<?php echo $row['Picture']; ?>');">
+        <span class="kfood"><?php echo $row['KitName']; ?></span>
+        <div class="desc">
             <p>Description:</p>
-            <p>Colgate, berus gigi, sabun mandi, sabun baju</p>
+            <p><?php echo $row['Description']; ?></p>
         </div>
         <form method="POST" action="">
-            <input type="hidden" name="Kit_Id" value="KIT-001">
-            <button type="submit" class="request">Request Mini Kit</button>
+            <input type="hidden" name="Kit_Id" value="<?php echo $row['Kit_Id']; ?>">
+            <button type="submit" class="request">Request <?php echo $row['KitName']; ?></button>
         </form>
     </div>
-
-    <!-- PersonalCare -->
-    <div class="essential personalCare">
-        <span class="kfood">Personal Care</span>
-        <div class="desc" id="personalCareDesc">
-            <p>Description:</p>
-            <p>Softener, sabun baju</p>
-        </div>
-        <form method="POST" action="">
-            <input type="hidden" name="Kit_Id" value="KIT-002">
-            <button type="submit" class="request">Request Big Kit</button>
-        </form>
-    </div>
-
-    <!-- Sanitary Pad -->
-    <div class="essential sanitaryPad">
-        <span class="kfood">Sanitary Pad</span>
-        <div class="desc" id="sanitaryPadDesc">
-            <p>Description:</p>
-            <p>Oreo, Lexus, Chocolate "Aik Cheong"</p>
-        </div>
-        <form method="POST" action="">
-            <input type="hidden" name="Kit_Id" value="KIT-002">
-            <button type="submit" class="request">Request Big Kit</button>
-        </form>
-    </div>
+<?php
+}
+?>
 </div>
 
 <!-- Popup -->
@@ -171,18 +169,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     document.getElementById('backIcon').addEventListener('click', () => {
         document.getElementById('popup').style.display = 'none';
     });
-
-    // === KIT HOVER DESCRIPTIONS ===
-    function addHoverToggle(boxSelector, descId) {
-        const box  = document.querySelector(boxSelector);
-        const desc = document.getElementById(descId);
-        if (!box || !desc) return;
-        box.addEventListener('mouseenter', () => desc.style.display = 'block');
-        box.addEventListener('mouseleave', () => desc.style.display = 'none');
-    }
-
-    addHoverToggle('.kit.mini', 'miniDesc');
-    addHoverToggle('.kit.big',  'bigDesc');
 
     // === SIDEBAR & DROPDOWN ===
     document.addEventListener("DOMContentLoaded", function () {
