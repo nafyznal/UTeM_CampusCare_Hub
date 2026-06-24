@@ -43,8 +43,8 @@
                                 <td>Mini Food Kit</td>
                                 <td>Foods</td>
                                 <td>
-                                    <a href="#">Edit</a> |
-                                    <a href="#">Delete</a>
+                                    <a href="itemManagement.php">Manage</a>
+                                    <!-- <a href="#">Delete</a> -->
                                 </td>
                             </tr>
 
@@ -52,8 +52,8 @@
                                 <td>Hygiene Kit</td>
                                 <td>Personal Care</td>
                                 <td>
-                                    <a href="#">Edit</a> |
-                                    <a href="#">Delete</a>
+                                    <a href="itemManagement.php">Manage</a>
+                                    <!-- <a href="#">Delete</a> -->
                                 </td>
                             </tr>
 

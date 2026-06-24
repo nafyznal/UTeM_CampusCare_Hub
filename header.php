@@ -43,7 +43,7 @@
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 <polyline points="9 11 11 13 15 9" />
             </svg>
-            <a href="Approval.html">Approval</a>
+            <a href="requestApproval.php">Approval</a>
         </li>
         <li id="scan"> 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
@@ -51,7 +51,7 @@
                 <path d="M3 7v10l9 4 9-4V7"/>
                 <line x1="12" y1="11" x2="12" y2="21"/>
             </svg>
-            <a href="item.html">Item Inventory</a>
+            <a href="inventoryManagement.php">Item Inventory</a>
         </li>
     </ul>
     <hr/>

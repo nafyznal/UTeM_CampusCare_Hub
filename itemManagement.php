@@ -24,7 +24,7 @@
                 <div class="kit-header">
                     <h3>Mini Food Kit</h3>
                     <button class="delete-kit-btn">
-                        Delete Kit
+                        Add Item
                     </button>
                 </div>
 
@@ -59,8 +59,8 @@
                 </div>
 
                 <div class="card-btn">
-                    <button class="add-item-btn">
-                        Add Item
+                    <button class="add-item-btn" >
+                        <a href = "inventoryManagement.php">Back </a>
                     </button>
                 </div>
 
