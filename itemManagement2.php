@@ -12,55 +12,56 @@
     <?php
     include("header.php");
     ?>
-<main>
-    <div class="inventory-content">
 
+    <main>
+    <div class="inventory-content">
         <h2>ITEM MANAGEMENT</h2>
 
         <div class="kit-container">
 
-            <div class="kit-inventory">
+            <div class="kit-card">
 
-                <button class="add-btn" onclick="addItem()">
-                    + ADD NEW KIT
-                </button>
+                <div class="kit-header">
+                    <h3>Mini Hygiene Kit</h3>
+                    <button class="delete-kit-btn" onclick="addItem()">
+                        Add Item
+                    </button>
+                </div>
 
                 <div class="table-container">
-
                     <table>
-
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Category</th>
+                                <th>Stock</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-
                         <tbody id="itemTable">
-
                             <tr>
-                                <td>Mini Food Kit</td>
-                                <td>Foods</td>
+                                <td>Body Wash</td>
+                                <td>30</td>
                                 <td>
-                                    <a href="itemManagement.php">Manage</a>
-                                    <!-- <a href="#">Delete</a> -->
+                                    <a href="#" onclick="editItem (this)">Edit</a> |
+                                    <a href="#" onclick="deleteItem (this)">Delete</a>
                                 </td>
                             </tr>
-
                             <tr>
-                                <td>Hygiene Kit</td>
-                                <td>Personal Care</td>
+                                <td>Shampoo</td>
+                                <td>20</td>
                                 <td>
-                                    <a href="itemManagement2.php">Manage</a>
-                                    <!-- <a href="#">Delete</a> -->
+                                    <a href="#" onclick="editItem(this)">Edit</a> |
+                                    <a href="#" onclick="deleteItem(this)">Delete</a>
                                 </td>
                             </tr>
-
                         </tbody>
-
                     </table>
+                </div>
 
+                <div class="card-btn">
+                    <button class="add-item-btn" >
+                        <a href = "inventoryManagement.php">Back </a>
+                    </button>
                 </div>
 
             </div>
@@ -147,10 +148,73 @@
                     <a href="#" onclick="deleteItem(this)">Delete</a>
                 </td>
             `;
+            }
+
+       
+        // Edit item
+        function editItem(element)
+        {
+            let row = element.parentElement.parentElement;
+
+            let currentName = row.cells[0].innerText;
+            let currentStock = row.cells[1].innerText;
+
+            let newName = prompt("Edit item name:", currentName);
+
+            if(newName == null)
+                return;
+
+            newName = newName.trim();
+
+            if(newName == "")
+            {
+                alert("Item name cannot be empty!");
+                return;
+            }
+
+            let newStock = prompt("Edit stock quantity:", currentStock);
+
+            if(newStock == null)
+                return;
+
+            newStock = newStock.trim();
+
+            if(newStock == "")
+            {
+                alert("Stock quantity cannot be empty!");
+                return;
+            }
+
+            if(isNaN(newStock))
+            {
+                alert("Stock quantity must be a number!");
+                return;
+            }
+
+            newStock = parseInt(newStock);
+
+            if(newStock < 0)
+            {
+                alert("Stock quantity cannot be negative!");
+                return;
+            }
+
+            row.cells[0].innerText = newName;
+                row.cells[1].innerText = newStock;
+        }
+
+        // Delete item
+        function deleteItem(element)
+        {
+            if(confirm("Are you sure you want to delete this item?"))
+            {
+                let row = element.parentElement.parentElement;
+                row.remove();
+            }
         }
      </script>
 
-     <?php include("footer.php"); 
+     <?php include("footer.php")
      ?>
 </body>
 </html>
