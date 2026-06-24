@@ -1,0 +1,16 @@
+footer {
+    width: 100%;
+    background-color: #2f2f2f;
+    padding: 20px 0;
+    transition: transform 0.3s ease;
+}
+
+footer p {
+    margin: 0;
+    padding: 20px 30px;
+    color: #888787;
+}
+
+footer.hidden-footer {
+    transform: translateY(100%);
+}

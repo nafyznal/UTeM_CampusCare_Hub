@@ -1,6 +1,9 @@
-/* --- Global Styles --- */
+/* === GLOBAL === */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
-    display: none;
     background-color: #F1E2D1;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
@@ -10,50 +13,35 @@ body {
     min-height: 100vh;
 }
 
+span, h1, h2, th, td {
+    user-select: none;
+}
+
+img {
+    display: block;
+    margin: 20px auto 0;
+}
+
+/* === UTILITIES === */
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Consolidated Transitions & Micro-interactions */
-.icon, li, #logout {
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+.hidden {
+    display: none !important;
 }
 
-.icon:hover,
-li:hover,
-#logout:hover,
-.hover {
-    transform: scale(1.08);
-}
-
-span{
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    
-}
-
-/* --- Header Section --- */
-h1, h2, th, td {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
+/* === HEADER === */
 header {
-    background-color: #ffffff;
-    height: auto;
-    margin: auto;
+    background-color: white;
     padding: 30px;
-    width: 100%;
-    box-sizing: border-box;
+    position: sticky;
 }
 
 #header-container {
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -64,40 +52,44 @@ header {
     flex-grow: 1;
     text-align: center;
     font-size: 24px;
+    color: #541A1A;
 }
 
-#menu-icon {
-    filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
-}
-
+#menu-icon,
 #home-icon {
     filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
+    cursor: pointer;
 }
 
-/* --- Sidebar Navigation --- */
-nav {
+/* === SIDEBAR === */
+.sidebar {
     background-color: #541A1A;
     color: white;
     border-radius: 20px;
     width: 200px;
-    height: auto;
+    max-height: 80vh;
     position: fixed;
-    top: 12%;
+    top: 90px;
+    left: 0;
     margin-left: 20px;
+    padding-bottom: 0;
     filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
     z-index: 10;
+    display: flex;
+    flex-direction: column;
 }
 
-.user-info {
+.sidebar-profile {
     display: flex;
     align-items: center;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin: 20px 0 0 20px;
+    flex-shrink: 0;
 }
 
-.user-info p {
-    margin: 0 0 0 10px;
+.sidebar-profile .greeting {
+    margin-left: 10px;
     font-weight: bold;
+    font-size: 15px;
 }
 
 hr {
@@ -105,207 +97,195 @@ hr {
     height: 1px;
     background: rgba(255, 255, 255, 0.2);
     margin: 15px 0;
+    flex-shrink: 0;
 }
 
-/* --- Navigation List & Global SVGs --- */
+/* === NAVIGATION LIST === */
 ul {
+    list-style: none;
     padding: 0;
-    margin: 20px 0;
+    margin: 0;
 }
 
-li {
-    list-style: none; 
-    margin-left: 20px; 
-    margin-bottom: 25px;
+.sidebar-menu {
+    margin: 15px 0;
+    flex: 1;
+}
+
+/* Menu utama */
+.sidebar-menu > li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-menu > li:hover {
+    transform: scale(1.05);
+}
+
+.sidebar-menu > li > a {
     display: flex;
     align-items: center;
-}
-
-li a {
+    gap: 14px;
     color: white;
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
+    padding: 10px 15px;
 }
 
-/* Base icon assignments */
-svg {
-    width: 24px;
-    height: 24px;
-    
+/* === MENU ITEM CONTAINER (Aid) === */
+.menu-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    cursor: pointer;
 }
 
-li svg {
-    vertical-align: middle;
-    margin-right: 12px;
+.menu-item-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* === SUB-MENU === */
+.sub-menu {
+    padding: 0 0 0 20px;
+}
+
+.sub-menu > li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.sub-menu > li > a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 15px;
+    display: block;
+}
+
+/* === SUB-MENU BUTTON (Food) === */
+.sub-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+}
+
+/* === SUB-SUB-MENU === */
+.sub-sub-menu {
+    padding: 0 0 0 15px;
+}
+
+.sub-sub-menu li {
+    margin-bottom: 4px;
+}
+
+.sub-sub-menu li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 15px;
+    display: block;
+}
+
+/* === DROPDOWN === */
+.dropdown-closed {
+    display: none !important;
+}
+
+/* === CARET ICON === */
+.caret-icon {
+    width: 16px !important;
+    height: 16px !important;
     flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+/* === ICONS === */
+svg {
     width: 30px;
     height: 30px;
 }
 
-/* --- Logout Trigger --- */
+.sidebar-svg {
+    width: 30px !important;
+    height: 30px !important;
+    flex-shrink: 0;
+}
+
+/* === SIDEBAR FOOTER (Logout) === */
+.sidebar-footer {
+    flex-shrink: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px 0;
+}
+
 #logout {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    margin-top: 25px; 
-    margin-bottom: 25px;
-    gap: 8px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- Utility Classes --- */
-.hidden {
-    display: none;
+#logout:hover {
+    transform: scale(1.08);
 }
 
+.hover {
+    transform: scale(1.08);
+    transition: all 0.4s ease;
+}
+
+/* === CONTENT === */
 h2 {
     text-align: left;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    margin: 10px 0 15px;
     font-size: 22px;
 }
 
-img {
-    margin-top: 20px;
-    margin-left: 20px;
-}
 
-/* --- Main Layout Container*/
-.grid-container {
-    display: grid;
-    align-items: start;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;              
-    width: 100%;
-    max-width: 1200px; 
-    margin: 40px auto;      
-    padding: 0 20px;
-    box-sizing: border-box;
-    flex-grow: 1; 
-}
+/* profile container */
 
-/* Card Improvements */
-.card {
+#profile-container{
     background-color: #541A1A;
-    color: #ffffff;
-    border-radius: 16px;
-    height: 120px;
-    display: flex;
-    flex-direction: row;   
-    align-items: center;     
-    gap: 20px;               
-    padding: 0 24px;
-    filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
-    box-sizing: border-box;
-}
-
-.icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    width: 50px;
-    height: 50px;
-}
-
-.icon-container svg {
-    width: 28px;
-    height: 28px;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;  
-    align-items: flex-start; 
-    justify-content: center; 
-}
-
-.value {
-    font-size: 20px;         
+    margin: 20px;
+    width: 60%;
+    border-radius: 10px;
     font-weight: bold;
-    line-height: 1.1;        
-}
-
-.label {
-    font-size: 14px;
-    opacity: 0.8;
-    margin-top: 4px;         
-}
-
-/* --- Recent Table Section --- */
-.table-recent {
-    grid-column: span 2; /* Spans full widths when layout splits elements */
-    background-color: #541A1A;
     color: white;
-    border-radius: 16px;
-    padding: 24px;
     filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
 }
 
-.recent-table {
-    width: 100%;
-    border-collapse: collapse; /* Essential for clean table borders */
-    margin-top: 10px;
+#profile-container table{
+    padding: 30px;
 }
 
-.recent-table th {
-    text-align: left;
-    padding-bottom: 12px;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Clean underline separator */
+#profile-container th{
+    padding: 15px;
 }
 
-/* Give text breathing room horizontally and vertically */
-.recent-table td {
-    padding: 12px 8px; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 15px;
-}
-
-.recent-table tr:last-child td {
-    border-bottom: none;
-}
-
-/* Optional badges formatting for missing table columns */
-.status-approved { color: #4BB543; font-weight: bold; }
-.status-pending { color: #F4C430; font-weight: bold; }
-
-/* --- Responsive Media Queries --- */
-@media (min-width: 992px) {
-    .grid-container {
-        margin-left: 250px; 
-        width: calc(100% - 250px);
-
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 24px;
-    }
-
-    /* Each card takes up 2 spaces out of 6 (3 cards fit perfectly in row 1) */
-    .card {
-        grid-column: span 2;
-    }
-
-    /* Each table takes up 3 spaces out of 6 (Splits row 2 perfectly in half side-by-side) */
-    .table-recent {
-        grid-column: span 3; 
-    }
-}
-
-/* --- Footer --- */
-footer {
-    background-color: #2f2f2f;
-    height: 20%;
-    width: 100%;
-    margin-top: auto;
-    margin-bottom: 0;
-}
-
-footer p {
-    padding: 20px;
-    margin: 15px;
-    color: rgb(136, 135, 135);
+img{
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
 }

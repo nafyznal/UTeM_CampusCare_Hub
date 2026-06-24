@@ -1,4 +1,14 @@
-<link rel="stylesheet" type="text/css" href="formatAdmin.css">
-<footer>
-<p>&copyUTeMCampusCareHub</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><Footer></Footer></title>
+    <link rel="stylesheet" type="text/css" href="formatFooter.css">
+</head>
+<body>
+    <footer>
+    <p>&copyUTeMCampusCareHub</p>
 </footer>
+</body>
+</html>
