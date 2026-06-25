@@ -117,6 +117,74 @@ td a:hover{
     text-decoration:underline;
 }
 
+/* ==========================================
+   POPUP MODAL WINDOW STYLES
+   ========================================== */
+.modal-overlay {
+    display: none; /* Hidden by default until toggled by JavaScript */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Translucent dim backdrop overlay */
+    z-index: 9999; /* Higher stacking index ensures alignment over layout cards */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #F1E2D1; /* Matches your layout dashboard light-beige color */
+    padding: 30px;
+    border-radius: 20px;
+    width: 380px;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    color: #541A1A;
+    display: flex;
+    flex-direction: column;
+    animation: modalFadeIn 0.3s ease-in-out;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #541A1A;
+    font-weight: bold;
+}
+.close-btn:hover {
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input, .form-group select {
+    padding: 10px;
+    border: 2px solid #541A1A
+}
+
 /* TABLET */
 
 @media screen and (max-width:768px){
