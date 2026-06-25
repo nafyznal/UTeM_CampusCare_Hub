@@ -15,8 +15,6 @@
         }
     $username=$_SESSION['username'];
 
-    include("header.php");
-
 ?>
 
 <html>
@@ -29,7 +27,9 @@
 </head>
 <link rel="stylesheet" href="format.css">
 <body>
-    
+    <?php 
+    include'headerScan.php';
+    ?>
     <main class="center">
         <div>
             <p>Use the QR code below to scan and collect your points.</p>
@@ -39,28 +39,55 @@
     </main>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                // Sidebar Toggle
-                const menuBtn = document.querySelector('#menu-icon'); 
-                const navSection = document.getElementById('nav-section');
 
-                if (menuBtn && navSection) {
-                    menuBtn.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        navSection.classList.toggle('hidden');
+                const menuBtn = document.getElementById('menu-btn');
+                const sidebar = document.getElementById('nav-section');
+
+                if (menuBtn && sidebar) {
+                    menuBtn.addEventListener('click', function (event) {
+                        event.stopPropagation();
+                        sidebar.classList.toggle('hidden');
                     });
                 }
 
-                // Hover Effects
-                document.querySelectorAll('.icon, li, #logout').forEach(element => {
-                    element.addEventListener("mouseover", function () {
-                        this.classList.add("hover");
-                    });
-                    element.addEventListener("mouseleave", function () {
-                        this.classList.remove("hover");
-                    });
+                // Dropdown toggles mapped to the explicit IDs inside your header file
+                window.toggleSubMenu = function (event) {
+                    event.stopPropagation();
+                    const subMenu = document.getElementById('aidSubMenu');
+                    if (subMenu) subMenu.classList.toggle('dropdown-closed');
+                };
+
+                window.toggleFoodMenu = function (event) {
+                    event.stopPropagation();
+                    const foodMenu = document.getElementById('foodSubMenu');
+                    if (foodMenu) foodMenu.classList.toggle('dropdown-closed');
+                };
+
+                // Close sidebar dynamically if user clicks outside of it
+                document.addEventListener('click', function (event) {
+                    if (sidebar && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+                        sidebar.classList.add('hidden');
+                    }
                 });
+
             });
-        </script>
+
+            function prosesLogout() {
+                window.location.href = "index.php";
+            }
+
+            document.querySelectorAll(".icon").forEach(icon=>{
+                icon.addEventListener("mouseover",()=>{
+                    icon.classList.add("hover")
+                });
+
+                icon.addEventListener("mouseleave",()=>{
+                    icon.classList.remove("hover")
+                });
+
+            });
+
+            </script>
 
     <?php
     include("footer.php");

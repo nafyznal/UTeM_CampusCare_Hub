@@ -1,7 +1,7 @@
 <?php
 $username = $_SESSION['username'] ?? 'Guest';
 ?>
-
+<link rel="stylesheet" type="text/css" href="formatHeader.css">
 <header class="center" style="width:100%">
     <div id="header-container">
 
@@ -35,19 +35,27 @@ $username = $_SESSION['username'] ?? 'Guest';
     </div>
 </header>
 
-<section class="sidebar hidden" id="mySidebar">
+<nav class="sidebar hidden" id="nav-section">
 
     <div class="sidebar-profile">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a">
-            <circle cx="12" cy="8" r="5"/>
-            <path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/>
-        </svg>
+        <a href="profile.php">
+            <?php if (!empty($_SESSION['profile_pic'])): ?>
+                <img src="<?= htmlspecialchars($_SESSION['profile_pic']) ?>" alt="Profile">
+            <?php else: ?>
+                <svg width="30" height="30" viewBox="0 0 24 24" 
+                    fill="none" stroke="#c98a8a" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="5"/>
+                    <path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/>
+                </svg>
+            <?php endif; ?>
+        </a>
 
         <span class="greeting">
             Hi, <?= htmlspecialchars($username) ?>
         </span>
     </div>
-
+    </hr>
     <ul class="sidebar-menu">
 
         <li>
@@ -59,7 +67,7 @@ $username = $_SESSION['username'] ?? 'Guest';
                     <line x1="12" y1="8" x2="12" y2="16"></line>
                     <line x1="8" y1="12" x2="16" y2="12"></line>
                 </svg>
-                Aid
+                <span>Aid</span>
             </div>
 
             <ul class="sub-menu dropdown-closed" id="aidSubMenu">
@@ -135,4 +143,4 @@ $username = $_SESSION['username'] ?? 'Guest';
         </a>
     </div>
 
-</section>
+</nav>
