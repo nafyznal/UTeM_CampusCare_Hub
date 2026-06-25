@@ -9,13 +9,13 @@
     <link rel="stylesheet" type="text/css" href="format.css">
     <style>
         #rightSide{ 
-            margin-top: 70px;      /* sama dengan tinggi header */
-            margin-bottom: 50px;   /* sama dengan tinggi footer */
+            margin-top: 70px;      
+            margin-bottom: 50px;   
             padding: 20px 10px;
             width: 65%;
             margin-left: auto;
-            margin-right: auto;    /* center di tengah */
-            min-height: calc(100vh - 70px - 50px); /* muat antara header & footer */
+            margin-right: auto;    
+            min-height: calc(100vh - 70px - 50px); 
         }
         .essential {
             margin: 20px auto 30px auto;
@@ -44,6 +44,21 @@
         }
         .essential:hover .desc{
             display: block;
+        }
+        .request {
+            display: inline-block;       
+            white-space: nowrap;                 
+            padding: 10px 20px;         
+            border-radius: 15px;
+            font-size: 14px;
+            cursor: pointer;
+            min-width: fit-content;     
+            max-width: 100%;             
+            box-sizing: border-box;  
+        }
+        .request:hover{
+            background-color: #6a2323;
+            transform: scale(1.05);
         }
         /* Show descriptions on mobile (no hover available) */
         @media (max-width: 768px) {
@@ -83,7 +98,7 @@
 </head>
 <body>
 
-<?php include 'aidHeader.php'; ?>
+<?php include 'kitHeader.php'; ?>
 
 <div id="rightSide">
 
@@ -91,33 +106,62 @@
 $message = "";
 $success = false;
 
-$conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
+$conn = new mysqli("localhost:3307", "root", "", "campuscare_hub");
 if($conn->connect_error){
     die("Connection failed: " .$conn->connect_error);
 }
-if($_SERVER['REQUEST_METHOD']==='POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $Kit_Id = $_POST['Kit_Id'] ?? '';
     $StudentId = $_SESSION['StudentId'] ?? '';
     $status = "Pending";
     $date = date("Y-m-d");
 
-    $check = $conn->prepare("SELECT 1 FROM request WHERE StudentId=? AND Kit_Id=?");
-    $check->bind_param("is", $StudentId, $Kit_Id);
-    $check->execute();
-    $check->store_result();
+    $grpStmt = $conn->prepare("SELECT id_group FROM student WHERE StudentId=?");
+    $grpStmt->bind_param("i", $StudentId);
+    $grpStmt->execute();
+    $grpStmt->bind_result($id_group);
+    $grpStmt->fetch();
+    $grpStmt->close();
 
-    if($check->num_rows > 0){
-        $message = "You already request this kit.";
-        $success = false;
-    }else{
+    $intervalDays = 0;
+    if (strpos($id_group, 'B') === 0) $intervalDays = 14;
+    elseif (strpos($id_group, 'M') === 0) $intervalDays = 30;
+    elseif (strpos($id_group, 'T') === 0) $intervalDays = 60;
+
+    $lastStmt = $conn->prepare("SELECT RequestDate 
+                                FROM request 
+                                WHERE StudentId=? AND Kit_Id=? 
+                                ORDER BY RequestDate DESC LIMIT 1");
+    $lastStmt->bind_param("is", $StudentId, $Kit_Id);
+    $lastStmt->execute();
+    $lastStmt->bind_result($lastDate);
+    $hasLast = $lastStmt->fetch();
+    $lastStmt->close();
+
+    if ($hasLast) {
+        $nextAllowed = date("Y-m-d", strtotime($lastDate . " +$intervalDays days"));
+        if ($date < $nextAllowed) {
+            $message = "You can only request $Kit_Id again after $nextAllowed.";
+            $success = false;
+        } else {
+            $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
+            if ($stmt->execute()) {
+                $message = "Request for $Kit_Id submitted successfully!";
+                $success = true;
+            } else {
+                $message = "Error: " . $stmt->error;
+                $success = false;
+            }
+        }
+    } else {
         $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
-
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             $message = "Request for $Kit_Id submitted successfully!";
             $success = true;
-        }else{
-            $message = "Error: " .$stmt->error;
+        } else {
+            $message = "Error: " . $stmt->error;
             $success = false;
         }
     }
@@ -126,7 +170,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
 <!-- Essential Request -->
 <?php
-$conn = new mysqli("localhost", "root", "root1234", "campuscare_hub");
+$conn = new mysqli("localhost:3307", "root", "", "campuscare_hub");
 if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
 
 $result = $conn->query("SELECT Kit_Id, KitName, Description, Picture FROM kit WHERE Kit_Id LIKE 'ESS%'");
@@ -141,7 +185,7 @@ while ($row = $result->fetch_assoc()) {
         </div>
         <form method="POST" action="">
             <input type="hidden" name="Kit_Id" value="<?php echo $row['Kit_Id']; ?>">
-            <button type="submit" class="request">Request <?php echo $row['KitName']; ?></button>
+            <br><button type="submit" class="request">Request <?php echo $row['KitName']; ?></button>
         </form>
     </div>
 <?php
@@ -152,8 +196,8 @@ while ($row = $result->fetch_assoc()) {
 <!-- Popup -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <img src="image/arrowUpLeft.svg" id="backIcon" alt="Close">
-        <img src="<?php echo $success ? 'image/success.png' : 'image/error.png'; ?>" class="medium" alt="Status">
+        <img src="images/arrowUpLeft.svg" id="backIcon" alt="Close">
+        <img src="<?php echo $success ? 'images/success.png' : 'images/error.png'; ?>" class="medium" alt="Status">
         <h3 id="popupMessage"><?php echo htmlspecialchars($message); ?></h3>
     </div>
 </div>

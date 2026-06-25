@@ -17,7 +17,7 @@ $username = $_SESSION['username'] ?? 'Guest';
             </svg>
         </div>
 
-        <h1>Kit</h1>
+        <h1>Aid</h1>
 
         <div class="icon">
             <a href="homepage.php" id="home-icon">
