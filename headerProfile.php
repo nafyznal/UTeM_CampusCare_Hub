@@ -60,14 +60,16 @@ $username = $_SESSION['username'] ?? 'Guest';
 
         <li>
             <div class="menu-item-container" onclick="toggleSubMenu(event)">
-                <svg id="aid-icon" width="24" height="24" viewBox="0 0 24 24"
-                     fill="white" stroke="#541A1A" stroke-width="2.5"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-                    <line x1="12" y1="8" x2="12" y2="16"></line>
-                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                </svg>
-                <span>Aid</span>
+                <div class="menu-item-left">
+                    <svg id="aid-icon" width="24" height="24" viewBox="0 0 24 24"
+                        fill="white" stroke="#541A1A" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    <span>Aid</span>
+                </div>
             </div>
 
             <ul class="sub-menu dropdown-closed" id="aidSubMenu">
@@ -78,12 +80,12 @@ $username = $_SESSION['username'] ?? 'Guest';
                     </div>
 
                     <ul class="sub-sub-menu dropdown-closed" id="foodSubMenu">
-                        <li><a href="#">Kit</a></li>
-                        <li><a href="#">Meal</a></li>
+                        <li><a href="kit.php">Kit</a></li>
+                        <li><a href="kit.php">Meal</a></li>
                     </ul>
                 </li>
 
-                <li><a href="#">Essential</a></li>
+                <li><a href="essential.php">Essential</a></li>
             </ul>
         </li>
 

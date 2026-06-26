@@ -12,7 +12,18 @@
     include'connect.php';
     ?>
 
-    <img src="icon/DSC00336.JPG"><br>
+    <div class="responsive">
+        <div class="image">
+            <img src="icon/DSC00336.JPG" alt="Profile Picture" class="profile" onclick="openLightbox(this)"><br>
+            <div class="desc">Profile Picture</div>
+        </div>
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Profile Picture">
+    </div>
+    
     <center>
         <div id="profile-container" class="center">
             
@@ -80,7 +91,7 @@
             window.location.href = "logout.php";
         }
 
-        document.querySelectorAll(".icon").forEach(icon=>{
+        document.querySelectorAll(".icon,img").forEach(icon=>{
             icon.addEventListener("mouseover",()=>{
                 icon.classList.add("hover")
             });
@@ -89,6 +100,22 @@
                 icon.classList.remove("hover")
             });
 
+        });
+
+        function openLightbox(img) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
         });
     </script>
     <?php include'footer.php' ?>
