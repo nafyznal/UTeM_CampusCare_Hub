@@ -1,8 +1,7 @@
 <?php
 $username = $_SESSION['username'] ?? 'Guest';
 ?>
-
-<link rel="stylesheet" type="text/css" href="formatProfile.css">
+<link rel="stylesheet" type="text/css" href="formatHeader.css">
 <header class="center" style="width:100%">
     <div id="header-container">
 
@@ -16,10 +15,10 @@ $username = $_SESSION['username'] ?? 'Guest';
             </svg>
         </div>
 
-        <h1 style="color:#541A1A;">User Profile</h1>
+        <h1 style="color:#541A1A;">Profile Information</h1>
 
         <div class="icon">
-            <a href="home.php" id="home-icon">
+            <a href="homepage.php" id="home-icon">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24"
                      fill="none"
@@ -38,17 +37,25 @@ $username = $_SESSION['username'] ?? 'Guest';
 
 <nav class="sidebar hidden" id="nav-section">
 
-    <div class="user-info">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a">
-            <circle cx="12" cy="8" r="5"/>
-            <path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/>
-        </svg>
+    <div class="sidebar-profile">
+        <a href="viewProfile.php">
+            <?php if (!empty($_SESSION['profile_pic'])): ?>
+                <img src="<?= htmlspecialchars($_SESSION['profile_pic']) ?>" alt="Profile">
+            <?php else: ?>
+                <svg width="30" height="30" viewBox="0 0 24 24" 
+                    fill="none" stroke="#c98a8a" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="5"/>
+                    <path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/>
+                </svg>
+            <?php endif; ?>
+        </a>
 
-        <span>
+        <span class="greeting">
             Hi, <?= htmlspecialchars($username) ?>
         </span>
     </div>
-
+    </hr>
     <ul class="sidebar-menu">
 
         <li>
@@ -60,7 +67,7 @@ $username = $_SESSION['username'] ?? 'Guest';
                     <line x1="12" y1="8" x2="12" y2="16"></line>
                     <line x1="8" y1="12" x2="16" y2="12"></line>
                 </svg>
-                Aid
+                <span>Aid</span>
             </div>
 
             <ul class="sub-menu dropdown-closed" id="aidSubMenu">
