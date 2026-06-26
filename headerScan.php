@@ -18,7 +18,7 @@ $username = $_SESSION['username'] ?? 'Guest';
         <h1 style="color:#541A1A;">Scan and Collect</h1>
 
         <div class="icon">
-            <a href="home.php" id="home-icon">
+            <a href="homepage.php" id="home-icon">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24"
                      fill="none"
@@ -38,7 +38,7 @@ $username = $_SESSION['username'] ?? 'Guest';
 <nav class="sidebar hidden" id="nav-section">
 
     <div class="sidebar-profile">
-        <a href="profile.php">
+        <a href="viewProfile.php">
             <?php if (!empty($_SESSION['profile_pic'])): ?>
                 <img src="<?= htmlspecialchars($_SESSION['profile_pic']) ?>" alt="Profile">
             <?php else: ?>
