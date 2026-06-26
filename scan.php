@@ -76,7 +76,7 @@
                 window.location.href = "index.php";
             }
 
-            document.querySelectorAll(".icon,svg").forEach(icon=>{
+            document.querySelectorAll("svg").forEach(icon=>{
                 icon.addEventListener("mouseover",()=>{
                     icon.classList.add("hover")
                 });
