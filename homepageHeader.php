@@ -1,53 +1,32 @@
 <?php
-    include('connect.php');
-    $conn = mysqli_connect("localhost:3301","root","","campuscare_hub");
-
-    if(!$conn){
-        die("Connection Failed! :". mysqli_connect_error());
-    }
-
-    $username = $_SESSION['username'] ?? 'Guest';
+$username = $_SESSION['username'] ?? 'Guest';
 ?>
-<link rel="stylesheet" type="text/css" href="formatProfile.css">
-<header class="center" style="width:100%">
+<link rel="stylesheet" type="text/css" href="formatHomepage.css">
+
+<header>
     <div id="header-container">
 
         <div class="icon" id="menu-btn">
-            <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24"
-                 fill="none" stroke="#541A1A" stroke-width="2.5"
+            <svg id="menu-icon" viewBox="0 0 24 24" fill="none"
+                 stroke="#541A1A" stroke-width="2.5"
                  stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
         </div>
 
-        <h1 style="color:#541A1A;">Profile Information</h1>
-
-        <div class="icon">
-            <a href="homepage.php" id="home-icon">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="#541A1A"
-                     stroke-width="2"
-                     stroke-linecap="round"
-                     stroke-linejoin="round">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </a>
-        </div>
+        <h1>UTeM CampuscareHub</h1>
 
     </div>
 </header>
 
-<nav class="sidebar hidden" id="nav-section">
+<section class="sidebar hidden" id="mySidebar">
 
     <div class="sidebar-profile">
         <a href="viewProfile.php">
-            <?php if (!empty($_SESSION['ProfilePic'])): ?>
-                <img src="<?= htmlspecialchars($_SESSION['ProfilePic']) ?>" alt="Profile">
+            <?php if (!empty($_SESSION['profile_pic'])): ?>
+                <img src="<?= htmlspecialchars($_SESSION['profile_pic']) ?>" alt="Profile">
             <?php else: ?>
                 <svg width="30" height="30" viewBox="0 0 24 24" 
                     fill="none" stroke="#c98a8a" stroke-width="2"
@@ -148,4 +127,4 @@
         </a>
     </div>
 
-</nav>
+</section>

@@ -1,3 +1,31 @@
+<?php 
+    session_start();
+    include('connect.php');
+
+    if (!isset($_SESSION['StudentId'])) {
+        header("location: index.php");
+        exit;
+    }
+
+    $username = $_SESSION['StudentId'];
+    
+    
+        if (isset($_SESSION['StudentId'])) {
+            $StudentId = $_SESSION['StudentId'];
+
+            $sql_user = "SELECT * from student WHERE StudentId='$StudentId'";
+            $result_user = $conn->query($sql_user);
+
+            if($result_user && $result_user->num_rows > 0){
+                $row = $result_user->fetch_assoc();
+            }
+        }
+    
+    
+    ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +36,21 @@
 </head>
 <body>
     <?php 
-    include'headerProfile.php';
-    include'connect.php';
+    include('headerProfile.php');
     ?>
 
     <div class="responsive">
         <div class="image">
-            <img src="icon/DSC00336.JPG" alt="Profile Picture" class="profile" onclick="openLightbox(this)"><br>
-            <div class="desc">Profile Picture</div>
+            <?php if (!empty($row['ProfilePic']) && file_exists($row['ProfilePic'])): ?>
+                <img src="<?php echo htmlspecialchars($row['ProfilePic']); ?>" 
+                    alt="Profile Picture" class="profile" onclick="openLightbox(this)">
+            <?php else: ?>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="profile" onclick="openLightbox(this)">
+                    <circle cx="50" cy="50" r="50" fill="#541A1A"/>
+                    <circle cx="50" cy="38" r="18" fill="white"/>
+                    <ellipse cx="50" cy="85" rx="28" ry="20" fill="white"/>
+                </svg>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -30,28 +65,29 @@
             <table>
                 <tr>
                     <th>Student ID : </th>
-                    <td></td>
+                    <td><?php echo isset($row['StudentId']) ? htmlspecialchars($row['StudentId']) : "";?></td>
                 </tr>
                 <tr>
                     <th>Name : </th>
-                    <td></td>
+                    <td><?php echo isset($row['Name']) ? htmlspecialchars($row['Name']) : "";?></td>
                 </tr>
                 <tr>
                     <th>Email : </th>
-                    <td></td>
+                    <td><?php echo isset($row['Email']) ? htmlspecialchars($row['Email']) : "";?></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th>Category : </th>
-                    <td></td>
-                </tr>
+                    <td><?php //echo isset($row['Email']) ? htmlspecialchars($row['Email']) : "";?></td>
+                </tr> -->
                 <tr>
                     <th>Gender : </th>
-                    <td></td>
+                    <td><?php echo isset($row['Gender']) ? htmlspecialchars($row['Gender']) : "";?></td>
                 </tr>
             </table>
         </div>
 
     </center>
+    <?php include('updateProfile.php') ?>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
@@ -91,7 +127,7 @@
             window.location.href = "logout.php";
         }
 
-        document.querySelectorAll(".icon,img").forEach(icon=>{
+        document.querySelectorAll(".icon,img,svg").forEach(icon=>{
             icon.addEventListener("mouseover",()=>{
                 icon.classList.add("hover")
             });
@@ -118,7 +154,7 @@
             if (e.key === 'Escape') closeLightbox();
         });
     </script>
-    <?php include'footer.php' ?>
+    <?php include('footer.php') ?>
 </body>
 
 </html>
