@@ -1,3 +1,15 @@
+<style>
+    button{
+    background-color: #541A1A;
+        border-radius: 20px;
+        color: white;
+        border: none;
+        padding: 5px;
+        margin: 5px;
+    }
+</style>
+
+
 <?php 
 include('connect.php');
 
@@ -42,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($error)) {
         $sql_update = "UPDATE student SET ProfilePic='$profilePicPath' WHERE StudentId='$studentId'";
         if ($conn->query($sql_update)) {
-            $_SESSION['ProfilePic'] = $profilePicPath; // add this line
+            $_SESSION['ProfilePic'] = $profilePicPath;
             echo "<script>window.location.href='viewProfile.php';</script>";
             exit();
         }else {

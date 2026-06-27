@@ -81,8 +81,26 @@ header {
 
 .sidebar-profile {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    margin: 20px 0 0 20px;
+    padding: 15px;
+}
+
+.sidebar-profile img {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: none !important;
+    display: block;
+}
+
+.sidebar-profile a {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
     flex-shrink: 0;
 }
 
@@ -220,6 +238,7 @@ svg {
     height: 30px;
 }
 
+
 .sidebar-svg {
     width: 30px !important;
     height: 30px !important;
@@ -266,8 +285,10 @@ h2 {
 /* profile container */
 
 #profile-container{
+    display: -webkit-box;
+
     background-color: #541A1A;
-    margin: 20px;
+    margin: 20px auto;
     width: 60%;
     border-radius: 10px;
     font-weight: bold;
@@ -276,11 +297,20 @@ h2 {
 }
 
 #profile-container table{
+    width: 100%;
     padding: 30px;
+    table-layout: fixed;
 }
 
 #profile-container th{
     padding: 15px;
+    width: 40%;
+    text-align: right;
+}
+
+#profile-container td{
+    word-break: break-all;
+    padding: 10px;
 }
 
 img{
@@ -296,7 +326,7 @@ img{
     object-fit: cover;
     width: 150px;
     height: 150px;
-    border: solid 3px #541A1A;
+    border: none;
     border-radius: 50%;
     filter: drop-shadow(2.5px 2.5px 6px rgba(24, 24, 24, 0.3));
 }
@@ -411,4 +441,41 @@ footer {
 footer p {
     margin: 15px;
     color: rgb(136, 135, 135);
+}
+
+/* totalreq */
+
+.box-analysis {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+#totalreq {
+    background-color: #541A1A;
+    color: white;
+    border-radius: 15px;
+    padding: 20px 40px;
+    text-align: center;
+    filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));
+    min-width: 150px;
+}
+
+#totalreq svg {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+}
+
+#totalreq p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+#totalreq h2 {
+    margin: 5px 0 0;
+    font-size: 36px;
+    font-weight: bold;
 }

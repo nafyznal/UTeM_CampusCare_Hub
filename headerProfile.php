@@ -1,12 +1,9 @@
 <?php
-    include('connect.php');
-    $conn = mysqli_connect("localhost:3301","root","","campuscare_hub");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-    if(!$conn){
-        die("Connection Failed! :". mysqli_connect_error());
-    }
-
-    $username = $_SESSION['username'] ?? 'Guest';
+$username = $_SESSION['username'] ?? 'Guest';
 ?>
 <link rel="stylesheet" type="text/css" href="formatProfile.css">
 <header class="center" style="width:100%">
@@ -46,8 +43,8 @@
 
     <div class="sidebar-profile">
         <a href="viewProfile.php">
-            <?php if (!empty($_SESSION['ProfilePic'])): ?>
-                <img src="<?= htmlspecialchars($_SESSION['ProfilePic']) ?>" alt="Profile">
+            <?php if (!empty($_SESSION['Picture'])): ?>
+                <img src="<?= htmlspecialchars($_SESSION['Picture']) ?>" alt="Profile">
             <?php else: ?>
                 <svg width="30" height="30" viewBox="0 0 24 24" 
                     fill="none" stroke="#c98a8a" stroke-width="2"
