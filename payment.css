@@ -8,161 +8,85 @@ body{
     font-family:Arial, Helvetica, sans-serif;
     background:#F1E2D1;
 }
-/* MAIN CONTAINER */
 
-.container{
-    max-width:1200px;
-    width:100%;
-    margin:40px auto;
-    padding:0 20px;
+/* DONATION PAGE */
+
+.donate-container{
+    min-height:100vh;
+    padding:30px;
 }
 
 .back-btn{
+    font-size:30px;
     color:#541A1A;
     text-decoration:none;
-    font-size:25px;
 }
 
 h1{
     text-align:center;
     color:#541A1A;
-    font-size:60px;
-    margin-bottom:40px;
+    font-size:48px;
+    letter-spacing:10px;
+    margin:20px 0 50px;
+}
+
+.wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:60px;
+}
+
+.payment-box,
+.donator-box{
+    background:#6E1515;
+    color:white;
+    border-radius:25px;
+    padding:25px;
+    width:350px;
+}
+
+.payment-box label{
+    display:block;
+    margin:10px 0 5px;
+    font-size:14px;
+}
+
+.payment-box input,
+.payment-box select{
+    width:100%;
+    padding:8px;
+    border:none;
+    border-radius:8px;
+}
+
+.radio{
+    display:flex;
+    gap:20px;
+    margin:10px 0;
+}
+
+.payment-box button{
+    width:100%;
+    padding:10px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#F1D0B5;
+    color:#541A1A;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.donator-box h3{
+    text-align:center;
+    margin-bottom:20px;
     letter-spacing:3px;
 }
 
-h2{
-    margin-bottom:20px;
-    color:white;
+.donator-box hr{
+    margin:12px 0;
 }
-
-/* DONATION SECTION */
-
-.donation-section{
-    display:grid;
-    grid-template-columns:3fr 2fr;
-    gap:30px;
-    align-items:start;
-}
-
-/* CARDS */
-
-.donation-form,.donators-box,.success-card{
-    background:#6E1515; /* Updated to match payment.css maroon card background */
-    color:#F1E2D1;      /* Updated text color to match the cream accent color */
-    border-radius:30px;
-    padding:35px;
-    box-shadow:0 8px 20px rgba(0,0,0,.15);
-}
-
-/* FORM */
-
-.top-row{
-    display:flex;
-    gap:20px;
-    margin-bottom:15px;
-}
-
-.top-row div{
-    flex:1;
-}
-
-label{
-    display:block;
-    margin-bottom:8px;
-}
-
-input[type=text], input[type=email], input[type=number], select{
-    width:100%;
-    height:42px;
-    border:none;
-    border-radius:20px;
-    padding:0 15px;
-}
-
-.checkbox-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:12px;
-}
-
-.radio-group label{
-    margin-bottom:15px;
-}
-
-.payment-method{
-    display:flex;
-    gap:40px;
-    margin-bottom:25px;
-}
-
-.payment-btn{
-    width:100%;
-    border:none;
-    border-radius:15px;
-    background:#F1D0B5; /* Updated to match payment.css button background */
-    color:#541A1A;
-    font-size:18px;
-    font-weight:bold;
-    padding:15px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.payment-btn:hover{
-    transform:scale(1.03);
-}
-
-/* DONATORS */
-
-.donor-card{
-    padding:15px 0;
-    border-bottom:1px solid rgba(255,255,255,.3);
-}
-
-.donor-card:last-child{
-    border-bottom:none;
-}
-
-.donor-name{
-    font-size:18px;
-    font-weight:bold;
-}
-
-.donor-amount{
-    margin-top:8px;
-}
-
-/* SUCCESS PAGE */
-
-/* .success-card{
-    max-width:700px;
-    margin:auto;
-}
-
-.success-card h1{
-    color:white;
-    margin-bottom:20px;
-}
-
-.success-image{
-    text-align:center;
-}
-
-.success-image img{
-    width:180px;
-    max-width:100%;
-}
-
-.payment-details{
-    margin-top:25px;
-}
-
-.payment-details p{
-    margin-bottom:15px;
-    line-height:1.8;
-} */
 
 /* GATEWAY + SUCCESS PAGE */
 
@@ -190,7 +114,7 @@ input[type=text], input[type=email], input[type=number], select{
 .gateway-card h2,
 .success-card h3{
     font-size:30px;
-    margin-bottom:25px;
+    margin-bottom:35px;
 }
 
 .gateway-card p,
@@ -237,16 +161,42 @@ input[type=text], input[type=email], input[type=number], select{
     width:50%;
 }
 
-.gateway-card button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:8px;
-    background:#F1D0B5;
-    color:#541A1A;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:16px;
+.btn-return{
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border: 2px solid;
+    border-radius: 8px;
+    background: #F1D0B5;
+    color: #541A1A;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.gateway-action-group {
+    display: flex;
+    flex-direction: column; /* Stacks the elements vertically */
+    gap: 12px;              /* Creates space between the top and bottom button */
+    margin-top: 25px;   
+    width: 100%;
+}
+
+.gateway-action-group a {
+    width: 100%;            /* Forces the link wrapper to take full width */
+}
+
+.gateway-card button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border: 2px solid;
+    border-radius: 8px;
+    background: #F1D0B5;
+    color: #541A1A;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .tick{
@@ -267,75 +217,73 @@ input[type=text], input[type=email], input[type=number], select{
     line-height:1.6;
 }
 
-
-
-/*TABLET */
-
-@media screen and (max-width:992px){
-
-    .donation-section{
-        grid-template-columns:1fr;
-    }
-
-}
-
-/* MOBILE */
+/* TABLET */
 
 @media screen and (max-width:768px){
 
     h1{
-        font-size:45px;
+        font-size:36px;
     }
 
-    .top-row{
+    .wrapper{
         flex-direction:column;
+        align-items:center;
+        gap:30px;
     }
 
-    .payment-method{
-        flex-direction:column;
-        gap:15px;
+    .payment-box,
+    .donator-box{
+        width:90%;
+        max-width:450px;
     }
 
-    .donation-form,
-    .donators-box,
-    .success-card{
-        padding:25px;
-    }
-
-    /* blabla */
     .gateway-card,
     .success-card{
         width:85vw;
         padding:40px 30px;
     }
-
 }
 
-/* SMALL PHONES */
+/* PHONE */
 
 @media screen and (max-width:480px){
 
-    .container{
-        padding:0 10px;
+    body{
+        overflow-x:hidden;
     }
 
-    h1{
-        font-size:35px;
-    }
-
-    .back-btn{
-        font-size:28px;
-    }
-
-    .donation-form,
-    .donators-box,
-    .success-card{
-        border-radius:20px;
+    .donate-container{
         padding:20px;
     }
 
-    .success-image img{
-        width:130px;
+    .back-btn{
+        font-size:24px;
+    }
+
+    h1{
+        font-size:30px;
+        letter-spacing:6px;
+        margin:10px 0 30px;
+    }
+
+    .wrapper{
+        flex-direction:column;
+        align-items:center;
+        gap:22px;
+        width:100%;
+    }
+
+    .payment-box,
+    .donator-box{
+        width:100%;
+        max-width:300px;
+        padding:20px;
+        border-radius:20px;
+    }
+
+    .radio{
+        flex-direction:column;
+        gap:8px;
     }
 
     .gateway,
@@ -405,5 +353,4 @@ input[type=text], input[type=email], input[type=number], select{
     .success-card p{
         line-height:1.6;
     }
-
 }

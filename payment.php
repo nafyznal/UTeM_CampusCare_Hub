@@ -1,34 +1,25 @@
-<?php
-session_start();
-include("connectDonation.php");
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate</title>
-
-    <link rel="stylesheet" href="donation.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="payment.css">
+</head>
 </head>
 
 <body>
 
-<div class="container">
+<div class="donate-container">
 
-    <a href="index.php" class="back-btn">
-        <i class="fa-solid fa-arrow-left"></i>
-    </a>
+    <a href="#" class="back-btn">&#8592;</a>
 
     <h1>DONATE</h1>
 
-    <div class="donation-section">
+    <div class="donation-form">
 
-        <div class="donation-form">
-
-            <form action="paymentGateway.php" method="POST">
+        <form action="paymentGateway.php" method="POST">
 
                 <div class="top-row">
 
@@ -124,38 +115,15 @@ include("connectDonation.php");
 
             </form>
 
-        </div>
-
-        <div class="donators-box">
-
-            <h2>DONATORS</h2>
-
-            <div class="donators-list" style="max-height: 400px; overflow-y: auto;">
-                <?php
-                // Fetch all donations ordered by the latest contribution first
-                $sqlFetch = "SELECT DonorName, Amount FROM donation ORDER BY DonationID DESC";
-                $result = mysqli_query($conn, $sqlFetch);
-
-                if (mysqli_num_rows($result) > 0) {
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $donorName = htmlspecialchars($row['DonorName']);
-                        $donorAmount = number_format($row['Amount'], 2);
-                        
-                        echo "<p><strong>" . $donorName . "</strong> - RM " . $donorAmount . "</p>";
-                    }
-                } 
-                else 
-                {
-                    echo "<p class='no-donations'>No donations yet. Be the first!</p>";
-                }
-                ?>
-            </div>
-
+        <div class="donator-box">
+            <h3>DONATORS</h3>
+            <hr><hr><hr><hr><hr>
+            <hr><hr><hr><hr><hr>
         </div>
 
     </div>
 
-</div>
+</>
 
 </body>
 </html>
