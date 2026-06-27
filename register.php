@@ -31,7 +31,6 @@ if(isset($_POST['register'])){
         $error = "Access Denied! Only official UTeM student emails (@student.utem.edu.my) are allowed.";
   } 
   else { 
-
         $checkUtem = $conn->prepare("SELECT id_group FROM student_utem WHERE emailStudent = ?");
         $checkUtem->bind_param("s", $email);
         $checkUtem->execute();
@@ -44,7 +43,6 @@ if(isset($_POST['register'])){
             $utemData = $resUtem->fetch_assoc();
             $id_group = $utemData['id_group'];
             $checkUtem->close();
-
 
             if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];

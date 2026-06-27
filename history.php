@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// utk dptkn StudentId bagi student yang sedang log masuk menggunakan email
+
 $student_id = null;
 $stmtUser = $conn->prepare("SELECT StudentId FROM student WHERE email = ?");
 if ($stmtUser) {
@@ -35,12 +35,9 @@ if ($stmtUser) {
     $stmtUser->close();
 }
 
-
 $history_data = [];
 
-
 if ($student_id !== null) {
-
     $query = "SELECT r.RequestDate, r.Kit_Id, r.Status, k.KitName 
               FROM request r 
               LEFT JOIN kit k ON r.Kit_Id = k.Kit_Id 

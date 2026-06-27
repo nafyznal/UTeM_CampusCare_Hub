@@ -13,7 +13,6 @@ $username = $_SESSION['username'] ?? 'Guest';
         <button type="button" name="login" onclick="window.location.href='index.php'" style="margin-top: 5px; padding: 2px 12px; background-color: #c98a8a; color: white; border: none; border-radius: 4px; cursor: pointer;"> LOGIN</button>
     </div>
 
-  
     <ul class="sidebar-menu">
 
         <li>

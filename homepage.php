@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (foodMenu) foodMenu.classList.toggle('dropdown-closed');
     };
 
-    // Close sidebar dynamically if user clicks outside of it
+ 
     document.addEventListener('click', function (event) {
         if (sidebar && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
             sidebar.classList.add('hidden');
