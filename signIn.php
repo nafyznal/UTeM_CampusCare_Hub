@@ -104,43 +104,35 @@ include("signinHeader.php");?>
         </section>
     </main>
 
-    <script>
-        let sidebar = document.getElementById('mySidebar');
-        let mainContent = document.getElementById('mainContent');
-        let menuBtn = document.getElementById('menuBtn');
+<script>
+    const sidebar = document.getElementById('mySidebar');
+    const menuBtn = document.getElementById('menuBtn');
 
-        function toggleSidebar() {
-            sidebar.classList.toggle('hidden');
-           
+    function toggleSidebar()
+    {
+        sidebar.classList.toggle('hidden');
+    }
+    
+    function toggleSubMenu(event) 
+    {
+        event.stopPropagation(); 
+        let subMenu = document.getElementById('aidSubMenu');  
+        subMenu.classList.toggle('dropdown-closed');
+    }
+
+    function toggleFoodMenu(event) 
+    {
+        event.stopPropagation(); 
+        let foodSubMenu = document.getElementById('foodSubMenu');
+        foodSubMenu.classList.toggle('dropdown-closed');
+    }
+
+    document.addEventListener('click', function(event) {
+        if (!sidebar.classList.contains('hidden') && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+            sidebar.classList.add('hidden');
         }
-
-        function toggleSubMenu(event) {
-            event.stopPropagation();
-            let subMenu = document.getElementById('aidSubMenu');  
-            subMenu.classList.toggle('dropdown-closed');
-     
-        }
-
-        function toggleFoodMenu(event) {
-            event.stopPropagation();
-           
-            let foodSubMenu = document.getElementById('foodSubMenu');
-            let foodCaret = document.getElementById('food-caret');
-           
-            foodSubMenu.classList.toggle('dropdown-closed');
-        }
-
-        document.addEventListener('click', function(event) {
-            if (!sidebar.classList.contains('hidden') && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-               
-                sidebar.classList.add('hidden');
-              
-            }
-        });
-
-        function prosesLogout() {
-            window.location.href = "index.php";
-        }
-    </script>
+    });
+</script>
+  
 </body>
 </html>

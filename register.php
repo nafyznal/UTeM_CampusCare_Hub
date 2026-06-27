@@ -4,13 +4,12 @@ session_start();
 $registered = false;
 $error = '';
 
-
+// Sambungan database (Port 3307)
 $servername = "127.0.0.1:3307";
 $username = "root";
 $password = "";
 $dbname = "campuscare_hub";
 
-// Hubungkan ke database 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if($conn->connect_error){
@@ -21,69 +20,88 @@ if(isset($_POST['register'])){
   $name = trim($_POST['name'] ?? '');
   $email = trim($_POST['email'] ?? '');
   $password = $_POST['password'] ?? '';
-  $gender = $_POST['gender'] ?? '';
+  $phone = trim($_POST['phone'] ?? ''); 
+  $gender = $_POST['gender'] ?? ''; 
+  $profilePic = 'uploads/default.jpg'; 
 
-  if (empty($name) || empty($email) || empty($password) || empty($gender)) {
+  if (empty($name) || empty($email) || empty($password) || empty($phone) || empty($gender)) {
         $error = "Please fill in all required fields.";
-  } else {
-        // 1. Semak sama ada email wujud dalam table namestudent_b40 (Whitelist)
-        $stmt = $conn->prepare("SELECT id_b40 FROM namestudent_b40 WHERE emailStudent = ?");
-        
-        if ($stmt === false) {
-            die("Ralat SQL (Semakan Whitelist Gagal): " . $conn->error);
-        }
+  } 
+  else if (!str_ends_with(strtolower($email), '@student.utem.edu.my')) {
+        $error = "Access Denied! Only official UTeM student emails (@student.utem.edu.my) are allowed.";
+  } 
+  else { 
 
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $checkUtem = $conn->prepare("SELECT id_group FROM student_utem WHERE emailStudent = ?");
+        $checkUtem->bind_param("s", $email);
+        $checkUtem->execute();
+        $resUtem = $checkUtem->get_result();
 
-        if ($row = $result->fetch_assoc()) {
-            $id_b40 = $row['id_b40'];
-            $stmt->close(); // Tutup statement pertama selepas selesai guna
-
-            // 2. Semak jika email ini sudah pernah mendaftar di table student sebelum ini
-            $checkExist = $conn->prepare("SELECT email FROM student WHERE email = ?");
-            
-            if ($checkExist === false) {
-                die("Ralat SQL (Gagal menyemak jadual 'student'). Pastikan jadual 'student' wujud di phpMyAdmin! Error: " . $conn->error);
-            }
-
-            $checkExist->bind_param("s", $email);
-            $checkExist->execute();
-            $resExist = $checkExist->get_result();
-
-            if ($resExist->num_rows > 0) {
-                $error = "This email has already been registered!";
-                $checkExist->close();
-            } else {
-                $checkExist->close();
-
-
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                
-                $insert = $conn->prepare("INSERT INTO student (id_b40, name, email, password, gender) VALUES (?, ?, ?, ?, ?)");
-                
-             
-                if ($insert === false) {
-                    die("Ralat SQL (INSERT Gagal): " . $conn->error . ". Sila semak semula nama kolum di dalam table 'student' anda.");
-                }
-
-                $insert->bind_param("issss", $id_b40, $name, $email, $hashedPassword, $gender);
-
-                if ($insert->execute()) {
-                    $registered = true;
-                    $insert->close();
-                    header("Location: successful.html");
-                    exit;
-                } else {
-                    $error = "Error inserting data: " . $insert->error;
-                    $insert->close();
-                }
-            }
+        if ($resUtem->num_rows == 0) {
+            $error = "Access Denied! Your email is not found in the official UTeM Student records.";
+            $checkUtem->close();
         } else {
-            // Email tak jumpa dalam namestudent_b40
-            $error = "Sorry, your email is not registered as a B40 student.";
-            $stmt->close();
+            $utemData = $resUtem->fetch_assoc();
+            $id_group = $utemData['id_group'];
+            $checkUtem->close();
+
+
+            if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+                $fileName = $_FILES['profile_pic']['name'];
+                $fileTmpName = $_FILES['profile_pic']['tmp_name'];
+                $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+                if (in_array($fileExtension, $allowedExtensions)) {
+                    $newFileName = time() . '_' . uniqid() . '.' . $fileExtension;
+                    $uploadDirectory = 'uploads/';
+                    
+                    if (!is_dir($uploadDirectory)) {
+                        mkdir($uploadDirectory, 0777, true);
+                    }
+
+                    $targetFilePath = $uploadDirectory . $newFileName;             
+                    if (move_uploaded_file($fileTmpName, $targetFilePath)) {
+                        $profilePic = $targetFilePath; // Ganti kepada path gambar baru
+                    } else {
+                        $error = "Failed to upload profile picture.";
+                    }
+                } else {
+                    $error = "Invalid file type. Only JPG, JPEG, PNG, and WEBP are allowed.";
+                }
+            }
+
+            if (empty($error)) {
+                $checkExist = $conn->prepare("SELECT Email FROM student WHERE Email = ?");
+                $checkExist->bind_param("s", $email);
+                $checkExist->execute();
+                $resExist = $checkExist->get_result();
+
+                if ($resExist->num_rows > 0) {
+                    $error = "This email has already been registered!";
+                    $checkExist->close();
+                } else {
+                    $checkExist->close();
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
+                    $insert = $conn->prepare("INSERT INTO student (Name, Email, Password, Gender, Picture, id_group) VALUES (?, ?, ?, ?, ?, ?)");
+                    
+                    if ($insert === false) {
+                        die("Error SQL: " . $conn->error);
+                    }
+
+                    $insert->bind_param("ssssss", $name, $email, $hashedPassword, $gender, $profilePic, $id_group);
+
+                    if ($insert->execute()) {
+                        $registered = true;
+                        $insert->close();
+                        header("Location: successful.html");
+                        exit;
+                    } else {
+                        $error = "Error inserting data: " . $insert->error;
+                        $insert->close();
+                    }
+                }
+            }
         }
   }
 }
@@ -104,25 +122,31 @@ if(isset($_POST['register'])){
         <h1>REGISTER</h1>
 
         <?php if (!empty($error)): ?>
-          <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+          <p style="color:red; font-weight:bold; text-align:center; padding: 0 10px;"><?= htmlspecialchars($error) ?></p>
         <?php endif; ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
           <label>Name</label>
-          <input type="text" name="name" required>
+          <input type="text" name="name" value="<?= htmlspecialchars($name ?? '') ?>" required>
 
           <label>Email</label>
-          <input type="email" name="email" required>
+          <input type="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" placeholder="D032xxxx@student.utem.edu.my" required>
 
           <label>Password</label>
           <input type="password" name="password" required>
 
+          <label>Number Phone</label>
+          <input type="text" name="phone" value="<?= htmlspecialchars($phone ?? '') ?>" placeholder="e.g. 0123456789" required>
+
           <label>Gender</label>
-          <select id="gender" name="gender" required>
+          <select name="gender" required>
             <option value="" disabled selected>--Select Gender--</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
+
+          <label>Profile Picture (Optional)</label>
+          <input type="file" name="profile_pic" accept="image/*" style="padding: 10px 0;">
 
           <button type="submit" name="register">Register</button>
         </form>

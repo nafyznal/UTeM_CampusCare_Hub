@@ -72,9 +72,7 @@ $conn->close();
     <?php include 'historyHeader.php'; ?>
 
     <main class="main-container" id="mainContent">
-        <div class="title-container">
-            <h1 class="page-title">History</h1>
-        </div>
+        <div class="title-container"></div>
 
         <div class="table-container">
             <table class="history-table">    

@@ -8,17 +8,12 @@ $username = $_SESSION['username'] ?? 'Guest';
 <section class="sidebar hidden" id="mySidebar">
 
     <div class="sidebar-profile">
-        <svg viewBox="0 0 24 24" fill="#c98a8a">
-            <circle cx="12" cy="8" r="5"/>
-            <path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
         <span class="greeting">Hi</span>
-        <button type="button" name="login" onclick="window.location.href='index.php'" style="margin-top: 5px; padding: 2px 12px; background-color: #c98a8a; color: white; border: none; border-radius: 4px; cursor: pointer;"> 
-                    LOGIN
-                </button>
+        <button type="button" name="login" onclick="window.location.href='index.php'" style="margin-top: 5px; padding: 2px 12px; background-color: #c98a8a; color: white; border: none; border-radius: 4px; cursor: pointer;"> LOGIN</button>
     </div>
 
-    <hr>
+  
     <ul class="sidebar-menu">
 
         <li>
@@ -59,48 +54,8 @@ $username = $_SESSION['username'] ?? 'Guest';
             </ul>
         </li>
 
-        <li>
-            <a href="history.php">
-                <svg class="sidebar-svg" viewBox="0 0 24 24" fill="none"
-                     stroke="white" stroke-width="2.5"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                    <polyline points="3 3 3 8 8 8"/>
-                    <line x1="12" y1="7" x2="12" y2="12"/>
-                    <line x1="12" y1="12" x2="16" y2="14"/>
-                </svg>
-                <span>History</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="scan.php">
-                <svg class="sidebar-svg" viewBox="0 0 24 24" fill="none"
-                     stroke="white" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
-                    <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
-                    <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
-                    <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
-                    <line x1="7" y1="12" x2="17" y2="12"/>
-                </svg>
-                <span>Scan and Collect</span>
-            </a>
-        </li>
-
     </ul>
 
-    <div class="sidebar-footer">
-        <a href="logout.php" id="logout">
-            <svg class="sidebar-svg" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                <polyline points="16 17 21 12 16 7"/>
-                <line x1="21" y1="12" x2="9" y2="12"/>
-            </svg>
-            <span>Logout</span>
-        </a>
-    </div>
+    
 
 </section>
