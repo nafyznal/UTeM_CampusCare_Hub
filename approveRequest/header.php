@@ -21,7 +21,7 @@
     </div>
 </header>
 
-<nav id="nav-section">
+<nav id="nav-section" class="hidden">
     <div class="user-info">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="#c98a8a"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 3.5-8 9-8s9 3 9 8"/></svg>
         <p>Hi, Admin!</p>

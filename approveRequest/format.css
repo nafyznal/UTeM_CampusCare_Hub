@@ -152,7 +152,7 @@ li svg {
 
 /* --- Utility Classes --- */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 h2 {
