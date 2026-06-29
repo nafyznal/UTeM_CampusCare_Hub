@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<?php include 'homepageHeader.php'; ?>
+<?php include ('homepageHeader.php'); ?>
 
 <main class="main-container" id="mainContent">
 
@@ -85,7 +85,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const menuBtn = document.getElementById('menu-btn');
-    const sidebar = document.getElementById('mySidebar');
+    const sidebar = document.getElementById('nav-section');
 
     if (menuBtn && sidebar) {
         menuBtn.addEventListener('click', function (event) {
@@ -120,7 +120,7 @@ function prosesLogout() {
     window.location.href = "index.php";
 }
 
-document.querySelectorAll(".icon,svg").forEach(icon=>{
+document.querySelectorAll(".icon,svg,img").forEach(icon=>{
     icon.addEventListener("mouseover",()=>{
         icon.classList.add("hover")
     });

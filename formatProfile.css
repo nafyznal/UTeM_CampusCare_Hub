@@ -95,6 +95,16 @@ header {
     display: block;
 }
 
+.sidebar-profile svg{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: none !important;
+    display: block;
+
+}
+
 .sidebar-profile a {
     display: block;
     width: 80px;

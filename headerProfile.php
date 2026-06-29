@@ -46,7 +46,7 @@ $username = $_SESSION['username'] ?? 'Guest';
             <?php if (!empty($_SESSION['Picture'])): ?>
                 <img src="<?= htmlspecialchars($_SESSION['Picture']) ?>" alt="Profile">
             <?php else: ?>
-                <svg width="30" height="30" viewBox="0 0 24 24" 
+                <svg viewBox="0 0 24 24" 
                     fill="none" stroke="#c98a8a" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="8" r="5"/>

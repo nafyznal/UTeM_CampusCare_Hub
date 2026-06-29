@@ -21,12 +21,12 @@ $username = $_SESSION['username'] ?? 'Guest';
     </div>
 </header>
 
-<section class="sidebar hidden" id="mySidebar">
+<nav class="sidebar hidden" id="nav-section">
 
     <div class="sidebar-profile">
         <a href="viewProfile.php">
-            <?php if (!empty($_SESSION['profile_pic'])): ?>
-                <img src="<?= htmlspecialchars($_SESSION['profile_pic']) ?>" alt="Profile">
+            <?php if (!empty($_SESSION['Picture'])): ?>
+                <img src="<?= htmlspecialchars($_SESSION['Picture']) ?>" alt="Profile">
             <?php else: ?>
                 <svg width="30" height="30" viewBox="0 0 24 24" 
                     fill="none" stroke="#c98a8a" stroke-width="2"
@@ -127,4 +127,4 @@ $username = $_SESSION['username'] ?? 'Guest';
         </a>
     </div>
 
-</section>
+</nav>
