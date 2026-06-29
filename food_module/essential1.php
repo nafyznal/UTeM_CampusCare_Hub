@@ -98,7 +98,7 @@
 </head>
 <body>
 
-<?php include 'kitHeader.php'; ?>
+<?php include 'kit1Header.php'; ?>
 
 <div id="rightSide">
 

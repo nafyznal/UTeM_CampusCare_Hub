@@ -112,14 +112,14 @@
 </head>
 <body>
 
-<?php include 'kitHeader.php'; ?>
+<?php include 'kit1Header.php'; ?>
 
 <div id="rightSide">
 
     <!-- Tab Navigation -->
     <div class="food" id="flex-container">
-        <button type="button" class="dfood" onclick="location.href='kit.php'">KIT</button>
-        <button type="button" class="dfood" onclick="location.href='meal.php'">MEAL</button>
+        <button type="button" class="dfood" onclick="location.href='kit1.php'">KIT</button>
+        <button type="button" class="dfood" onclick="location.href='meal1.php'">MEAL</button>
     </div>
 
 <?php 
