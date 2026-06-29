@@ -76,18 +76,5 @@
 
 <script src="requestApproval.js"></script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-    const menuBtn = document.getElementById("menu-btn");
-    const sidebar = document.getElementById("nav-section");
-
-    if(menuBtn && sidebar){
-        menuBtn.addEventListener("click", function(){
-            sidebar.classList.toggle("hidden");
-        });
-    }
-});
-</script>
-
 </body>
 </html>
