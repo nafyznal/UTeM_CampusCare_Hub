@@ -17,7 +17,7 @@ $username = $_SESSION['username'] ?? 'Guest';
             </svg>
         </div>
 
-        <h1>history</h1>
+        <h1>History</h1>
 
         <div class="icon">
             <a href="homepage.php" id="home-icon">
@@ -143,7 +143,7 @@ $username = $_SESSION['username'] ?? 'Guest';
                 <line x1="21" y1="12" x2="9" y2="12"></line>
             </svg>
             <span>Logout</span>
-        </a>
+        </a> 
     </div>
 
-</section>  
+</section>

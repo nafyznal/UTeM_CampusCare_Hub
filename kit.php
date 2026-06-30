@@ -1,23 +1,5 @@
-<?php
-// === HANDLE FORM SUBMISSION ===
-$message = "";
-$success = false;
+<?php session_start(); ?>
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $Kit_Id  = $_POST['Kit_Id'] ?? 'Unknown';
-    $status  = "Pending";
-    $date    = date("Y-m-d H:i:s");
-
-    $data = $date . " | " . $Kit_Id . " | " . $status . "\n";
-
-    if (file_put_contents("requests.txt", $data, FILE_APPEND | LOCK_EX) !== false) {
-        $message = "Request untuk $Kit_Id berjaya disimpan!";
-        $success = true;
-    } else {
-        $message = "Error: Gagal menulis data ke dalam fail.";
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +8,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Kit</title>
     <link rel="stylesheet" type="text/css" href="format.css">
     <style>
+        #rightSide{ 
+            margin-top: 70px;      
+            margin-bottom: 50px;   
+            padding: 20px 10px;
+            width: 65%;
+            margin-left: auto;
+            margin-right: auto;    
+            min-height: calc(100vh - 70px - 50px);
+        }
+        .dfood {
+            background-color: #541A1A;  
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 5px;
+        }
+        
+        .dfood:hover {
+            background-color: #6a2323;   
+            transform: scale(1.05);      
+        }
         .kit {
+            margin: 20px auto 30px auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -36,14 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-position: center;
             color: white;
             border-radius: 7pt;
-            margin: 10pt;
             padding: 7pt;
             width: 65%;
         }
-
-        .mini { background-image: url("image/miniKit.jpeg"); }
-        .big  { background-image: url("image/bigKit.jpeg"); }
-
         .desc {
             display: none;
             color: white;
@@ -52,7 +53,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 6px;
             font-size: 14px;
         }
-
+        .kit .desc{
+            display: none;
+        }
+        .kit:hover .desc{
+            display: block;
+        }
+        .request {
+            display: inline-block;       
+            white-space: nowrap;                 
+            padding: 10px 20px;         
+            border-radius: 15px;
+            font-size: 14px;
+            cursor: pointer;
+            min-width: fit-content;     
+            max-width: 100%;             
+            box-sizing: border-box;  
+        }
+        .request:hover{
+            background-color: #6a2323;
+            transform: scale(1.05);
+        }
         /* Show descriptions on mobile (no hover available) */
         @media (max-width: 768px) {
             .desc { display: block !important; }
@@ -100,40 +121,102 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" class="dfood" onclick="location.href='kit.php'">KIT</button>
         <button type="button" class="dfood" onclick="location.href='meal.php'">MEAL</button>
     </div>
+<?php 
+$message = "";
+$success = false;
 
-    <!-- Mini Kit -->
-    <div class="kit mini">
-        <span class="kfood">Mini Kit</span>
-        <div class="desc" id="miniDesc">
+$conn = new mysqli("localhost:3307", "root", "", "campuscare_hub");
+if($conn->connect_error){
+    die("Connection failed: " .$conn->connect_error);
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $Kit_Id = $_POST['Kit_Id'] ?? '';
+    $StudentId = $_SESSION['StudentId'] ?? '';
+    $status = "Pending";
+    $date = date("Y-m-d");
+
+    $grpStmt = $conn->prepare("SELECT id_group FROM student WHERE StudentId=?");
+    $grpStmt->bind_param("i", $StudentId);
+    $grpStmt->execute();
+    $grpStmt->bind_result($id_group);
+    $grpStmt->fetch();
+    $grpStmt->close();
+
+    $intervalDays = 0;
+    if (strpos($id_group, 'B') === 0) $intervalDays = 14;
+    elseif (strpos($id_group, 'M') === 0) $intervalDays = 30;
+    elseif (strpos($id_group, 'T') === 0) $intervalDays = 60;
+
+    $lastStmt = $conn->prepare("SELECT RequestDate 
+                                FROM request 
+                                WHERE StudentId=? AND Kit_Id=? 
+                                ORDER BY RequestDate DESC LIMIT 1");
+    $lastStmt->bind_param("is", $StudentId, $Kit_Id);
+    $lastStmt->execute();
+    $lastStmt->bind_result($lastDate);
+    $hasLast = $lastStmt->fetch();
+    $lastStmt->close();
+
+    if ($hasLast) {
+        $nextAllowed = date("Y-m-d", strtotime($lastDate . " +$intervalDays days"));
+        if ($date < $nextAllowed) {
+            $message = "You can only request $Kit_Id again after $nextAllowed.";
+            $success = false;
+        } else {
+            $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
+            if ($stmt->execute()) {
+                $message = "Request for $Kit_Id submitted successfully!";
+                $success = true;
+            } else {
+                $message = "Error: " . $stmt->error;
+                $success = false;
+            }
+        }
+    } else {
+        $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
+        if ($stmt->execute()) {
+            $message = "Request for $Kit_Id submitted successfully!";
+            $success = true;
+        } else {
+            $message = "Error: " . $stmt->error;
+            $success = false;
+        }
+    }
+}
+?>
+
+<!-- Kit Request -->
+<?php
+$conn = new mysqli("localhost:3307", "root", "", "campuscare_hub");
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+
+$result = $conn->query("SELECT Kit_Id, KitName, Description, Picture FROM kit WHERE Kit_Id LIKE 'KIT%'");
+
+while ($row = $result->fetch_assoc()) {
+?>
+    <div class="kit" style="background-image:url('<?php echo $row['Picture']; ?>');">
+        <span class="kfood"><?php echo $row['KitName']; ?></span>
+        <div class="desc">
             <p>Description:</p>
-            <p>Biscuit, Nescafe, Maggie</p>
+            <p><?php echo $row['Description']; ?></p>
         </div>
         <form method="POST" action="">
-            <input type="hidden" name="Kit_Id" value="KIT-001">
-            <button type="submit" class="request">Request Mini Kit</button>
+            <input type="hidden" name="Kit_Id" value="<?php echo $row['Kit_Id']; ?>">
+            <br><button type="submit" class="request">Request <?php echo $row['KitName']; ?></button>
         </form>
     </div>
-
-    <!-- Big Kit -->
-    <div class="kit big">
-        <span class="kfood">Big Kit</span>
-        <div class="desc" id="bigDesc">
-            <p>Description:</p>
-            <p>Oreo, Lexus, Chocolate "Aik Cheong"</p>
-        </div>
-        <form method="POST" action="">
-            <input type="hidden" name="Kit_Id" value="KIT-002">
-            <button type="submit" class="request">Request Big Kit</button>
-        </form>
-    </div>
-
+<?php
+}
+?>
 </div>
 
 <!-- Popup -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <img src="image/arrowUpLeft.svg" id="backIcon" alt="Close">
-        <img src="<?php echo $success ? 'image/success.png' : 'image/error.png'; ?>" class="medium" alt="Status">
+        <img src="images/arrowUpLeft.svg" id="backIcon" alt="Close">
+        <img src="<?php echo $success ? 'images/success.png' : 'images/error.png'; ?>" class="medium" alt="Status">
         <h3 id="popupMessage"><?php echo htmlspecialchars($message); ?></h3>
     </div>
 </div>
@@ -149,18 +232,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     document.getElementById('backIcon').addEventListener('click', () => {
         document.getElementById('popup').style.display = 'none';
     });
-
-    // === KIT HOVER DESCRIPTIONS ===
-    function addHoverToggle(boxSelector, descId) {
-        const box  = document.querySelector(boxSelector);
-        const desc = document.getElementById(descId);
-        if (!box || !desc) return;
-        box.addEventListener('mouseenter', () => desc.style.display = 'block');
-        box.addEventListener('mouseleave', () => desc.style.display = 'none');
-    }
-
-    addHoverToggle('.kit.mini', 'miniDesc');
-    addHoverToggle('.kit.big',  'bigDesc');
 
     // === SIDEBAR & DROPDOWN ===
     document.addEventListener("DOMContentLoaded", function () {

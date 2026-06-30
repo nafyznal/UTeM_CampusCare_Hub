@@ -1,25 +1,3 @@
-<?php
-    session_start();
-
-    $registered = false;
-    $error = '';
-
-    if (isset($_POST['register'])) {
-    $name     = trim($_POST['name']);
-    $email    = trim($_POST['email']);
-    $password = $_POST['password'];
-    $role     = $_POST['role'];
-
-    if (empty($name) || empty($email) || empty($password) || empty($role)) {
-        $error = "Please fill in all fields.";
-    } 
-    else 
-        {
-        $registered = true;
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +8,8 @@
 </head>
 
 <body>
-
+<?php
+include("signinHeader.php");?>
     <header class="header">
         <div id="header-container" >
             <div class="menu-icon" id="menuBtn" onclick="toggleSidebar()">
@@ -101,17 +80,17 @@
                     <div class="card">
                         <span class="card-number">01</span>
                         <h3 class="card-title">Free Daily Meals</h3>
-                        <div class="card-image"><img src="donation3.png" alt="Meals"></div>
+                        <div class="card-image"><img src="images/donation3.png" alt="Meals"></div>
                     </div>
                     <div class="card">
                         <span class="card-number">02</span>
                         <h3 class="card-title">Essential Supplies</h3>
-                        <div class="card-image"><img src="donation1.jpeg" alt="Supplies"></div>
+                        <div class="card-image"><img src="images/donation1.jpeg" alt="Supplies"></div>
                     </div>
                     <div class="card">
                         <span class="card-number">03</span>
                         <h3 class="card-title">Academic Support</h3>
-                        <div class="card-image"><img src="donation2.webp" alt="Academic"></div>
+                        <div class="card-image"><img src="images/donation2.webp" alt="Academic"></div>
                     </div>
                 </div>
 
@@ -123,43 +102,35 @@
         </section>
     </main>
 
-    <script>
-        let sidebar = document.getElementById('mySidebar');
-        let mainContent = document.getElementById('mainContent');
-        let menuBtn = document.getElementById('menuBtn');
+<script>
+    const sidebar = document.getElementById('mySidebar');
+    const menuBtn = document.getElementById('menuBtn');
 
-        function toggleSidebar() {
-            sidebar.classList.toggle('hidden');
-           
+    function toggleSidebar()
+    {
+        sidebar.classList.toggle('hidden');
+    }
+    
+    function toggleSubMenu(event) 
+    {
+        event.stopPropagation(); 
+        let subMenu = document.getElementById('aidSubMenu');  
+        subMenu.classList.toggle('dropdown-closed');
+    }
+
+    function toggleFoodMenu(event) 
+    {
+        event.stopPropagation(); 
+        let foodSubMenu = document.getElementById('foodSubMenu');
+        foodSubMenu.classList.toggle('dropdown-closed');
+    }
+
+    document.addEventListener('click', function(event) {
+        if (!sidebar.classList.contains('hidden') && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+            sidebar.classList.add('hidden');
         }
-
-        function toggleSubMenu(event) {
-            event.stopPropagation();
-            let subMenu = document.getElementById('aidSubMenu');  
-            subMenu.classList.toggle('dropdown-closed');
-     
-        }
-
-        function toggleFoodMenu(event) {
-            event.stopPropagation();
-           
-            let foodSubMenu = document.getElementById('foodSubMenu');
-            let foodCaret = document.getElementById('food-caret');
-           
-            foodSubMenu.classList.toggle('dropdown-closed');
-        }
-
-        document.addEventListener('click', function(event) {
-            if (!sidebar.classList.contains('hidden') && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-               
-                sidebar.classList.add('hidden');
-              
-            }
-        });
-
-        function prosesLogout() {
-            window.location.href = "index.php";
-        }
-    </script>
+    });
+</script>
+  
 </body>
 </html>

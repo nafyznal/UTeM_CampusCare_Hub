@@ -1,6 +1,6 @@
 <?php
     session_start();
-    // Guard clause: kick unauthenticated users back to login
+
     if (!isset($_SESSION['username'])) {
         header("location: index.php");
         exit;
@@ -31,9 +31,7 @@
                 <span class="brand-sub">Campus<br>Care</span>
             </div>
 
-            <a href="donation.php" class="btn-donation">
-                START DONATION
-            </a>
+            <a href="donation.php" class="btn-donation">START DONATION</a>
 
         </div>
     </section>
@@ -109,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (foodMenu) foodMenu.classList.toggle('dropdown-closed');
     };
 
-    // Close sidebar dynamically if user clicks outside of it
+ 
     document.addEventListener('click', function (event) {
         if (sidebar && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
             sidebar.classList.add('hidden');
@@ -119,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function prosesLogout() {
-    window.location.href = "logout.php";
+    window.location.href = "index.php";
 }
 
 document.querySelectorAll(".icon").forEach(icon=>{
@@ -135,7 +133,7 @@ document.querySelectorAll(".icon").forEach(icon=>{
 
 </script>
 
-<?php include'footer.php'?>
+
 
 </body>
 </html>
