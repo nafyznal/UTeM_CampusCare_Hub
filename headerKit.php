@@ -97,7 +97,7 @@ $username = $_SESSION['username'] ?? 'Guest';
                         <li><a href="meal.php">Meal</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Essential</a></li>
+                <li><a href="essential.php">Essential</a></li>
             </ul>
         </li>
 

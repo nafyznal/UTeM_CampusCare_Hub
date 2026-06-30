@@ -3,23 +3,28 @@ $username = $_SESSION['username'] ?? 'Guest';
 ?>
 <link rel="stylesheet" type="text/css" href="formatHomepage.css">
 
-<header>
-    <div id="header-container">
-
-        <div class="icon" id="menu-btn">
-            <svg id="menu-icon" viewBox="0 0 24 24" fill="none"
-                 stroke="#541A1A" stroke-width="2.5"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-        </div>
-
-        <h1>UTeM CampuscareHub</h1>
-
-    </div>
-</header>
+<header class="center" style="width:100%">
+            <div id="header-container">
+                <div class="icon" id="menu-btn">
+                    <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </div>
+                    
+                <h1 style="color: #541A1A;">UTeM CampuscareHub</h1>
+                
+                <div class="icon">
+                    <a href="SignIn.php" id="home-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </header>
 
 
 <nav class="sidebar hidden" id="nav-section">

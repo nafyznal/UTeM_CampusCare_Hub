@@ -34,19 +34,17 @@ include("connectDonation.php");
 
                     <div>
                         <label>Amount (RM)</label>
-                        <input type="number" name="amount" min="1" required>
+                        <input type="number" name="amount" min="1" step="0.01" required>
                     </div>
 
                     <div>
                         <label>How Often</label>
-
                         <select name="frequency" required>
                             <option value="">Select</option>
                             <option value="One Time">One Time</option>
                             <option value="Weekly">Weekly</option>
                             <option value="Monthly">Monthly</option>
                         </select>
-
                     </div>
 
                 </div>
@@ -54,13 +52,11 @@ include("connectDonation.php");
                 <h2>Donation Category</h2>
 
                 <div class="checkbox-row">
-                    <input type="checkbox" name="category[]" value="Foods">
-                    <label>Foods</label>
+                    <input type="checkbox" name="category[]" value="Food"> Food
                 </div>
 
                 <div class="checkbox-row">
-                    <input type="checkbox" name="category[]" value="Necessities">
-                    <label>Necessities</label>
+                    <input type="checkbox" name="category[]" value="Necessity"> Necessity
                 </div>
 
                 <h2>Your Information</h2>
@@ -87,17 +83,14 @@ include("connectDonation.php");
                     </div>
 
                     <div class="radio-group">
-
                         <label>
                             <input type="radio" name="visibility" value="Anonymous" required>
                             Anonymous
                         </label>
-
                         <label>
                             <input type="radio" name="visibility" value="Recognisable">
                             Recognisable
                         </label>
-
                     </div>
 
                 </div>
@@ -105,17 +98,14 @@ include("connectDonation.php");
                 <h2>Payment Method</h2>
 
                 <div class="payment-method">
-
                     <label>
                         <input type="radio" name="payment" value="QR" required>
                         QR
                     </label>
-
                     <label>
                         <input type="radio" name="payment" value="Credit / Debit">
                         Credit / Debit
                     </label>
-
                 </div>
 
                 <button type="submit" class="payment-btn">
@@ -136,7 +126,7 @@ include("connectDonation.php");
                 $sqlFetch = "SELECT DonorName, Amount FROM donation ORDER BY DonationID DESC";
                 $result = mysqli_query($conn, $sqlFetch);
 
-                if (mysqli_num_rows($result) > 0) {
+                if ($result && mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {
                         $donorName = htmlspecialchars($row['DonorName']);
                         $donorAmount = number_format($row['Amount'], 2);

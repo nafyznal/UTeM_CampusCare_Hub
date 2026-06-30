@@ -6,7 +6,7 @@
 }
 
 body{
-    
+    background: url('images/donation.webp');
     display:flex;
     justify-content:center;
     align-items:center;

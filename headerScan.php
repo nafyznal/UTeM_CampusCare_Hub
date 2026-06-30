@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $username = $_SESSION['username'] ?? 'Guest';
 ?>
-<link rel="stylesheet" type="text/css" href="formatProfile.css">
+<link rel="stylesheet" type="text/css" href="formatHeader.css">
 <header class="center" style="width:100%">
     <div id="header-container">
 
@@ -97,7 +97,7 @@ $username = $_SESSION['username'] ?? 'Guest';
                         <li><a href="meal.php">Meal</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Essential</a></li>
+                <li><a href="essential.php">Essential</a></li>
             </ul>
         </li>
 

@@ -288,9 +288,9 @@ $result = $conn2->query("SELECT Kit_Id, KitName, Description, Picture FROM kit W
 
 // Map Kit_Id to local image files
 $mealImages = [
-    'MEAL-001' => 'image/miniMeal.jpeg',
-    'MEAL-002' => 'image/sanitaryPad.jpeg',
-    'MEAL-003' => 'image/toiletries.jpeg',
+    'MEAL-001' => 'images/miniMeal.jpeg',
+    'MEAL-002' => 'images/sanitaryPad.jpeg',
+    'MEAL-003' => 'images/toiletries.jpeg',
 ];
 
 while ($row = $result->fetch_assoc()) {

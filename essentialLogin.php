@@ -8,7 +8,8 @@
     <title>Kit</title>
     <link rel="stylesheet" type="text/css" href="format.css">
     <style>
-        #rightSide{ 
+        /* === LAYOUT AND CONTAINERS === */
+        #rightSide { 
             margin-top: 70px;      
             margin-bottom: 50px;   
             padding: 20px 10px;
@@ -16,38 +17,47 @@
             margin-left: auto;
             margin-right: auto;    
             min-height: calc(100vh - 70px - 50px); 
+            box-sizing: border-box;
         }
+
         .essential {
             margin: 20px auto 30px auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            background-color: grey;
+            background-color: #808080; /* Styled gray color fallback */
             background-size: cover;
             background-position: center;
-            color: white;
+            background-repeat: no-repeat;
+            color: #ffffff;
             border-radius: 7pt;
-            padding: 7pt;
+            padding: 15px;
             width: 65%;
+            box-sizing: border-box;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        /* === DESCRIPTIONS AND INTERACTION === */
         .desc {
             display: none;
-            color: white;
-            padding: 10px;
+            color: #ffffff;
+            padding: 10px 0;
             margin-top: 5px;
             border-radius: 6px;
             font-size: 14px;
+            width: 100%;
         }
-        .essential .desc{
-            display: none;
-        }
-        .essential:hover .desc{
+
+        /* Standard desktop hover controls */
+        .essential:hover .desc {
             display: block;
         }
+
+        /* === BUTTONS AND ACTIONS === */
         .request {
             display: inline-block;       
-            white-space: nowrap;                 
+            white-space: nowrap;                   
             padding: 10px 20px;         
             border-radius: 15px;
             font-size: 14px;
@@ -55,50 +65,77 @@
             min-width: fit-content;     
             max-width: 100%;             
             box-sizing: border-box;  
-        }
-        .request:hover{
-            background-color: #6a2323;
-            transform: scale(1.05);
-        }
-        /* Show descriptions on mobile (no hover available) */
-        @media (max-width: 768px) {
-            .desc { display: block !important; }
+            border: none;
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
 
-        /* === POPUP === */
+        .request:hover {
+            background-color: #6a2323;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* === POPUP OVERLAY === */
         .popup {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
             justify-content: center;
             align-items: center;
             z-index: 9999;
         }
 
         .popup-content {
-            background: white;
-            color: black;
-            padding: 20px;
+            background: #ffffff;
+            color: #000000;
+            padding: 30px;
             border-radius: 10px;
             text-align: center;
             position: relative;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            min-width: 280px;
         }
 
         #backIcon {
             position: absolute;
-            top: 10px; left: 10px;
+            top: 12px; 
+            left: 12px;
             cursor: pointer;
             width: 24px;
+            transition: opacity 0.2s ease;
         }
 
-        .medium { width: 50px; height: 50px; }
+        #backIcon:hover {
+            opacity: 0.7;
+        }
+
+        .medium { 
+            width: 50px; 
+            height: 50px; 
+            margin-bottom: 10px;
+        }
+
+        /* === RESPONSIVE MEDIA QUERIES === */
+        @media (max-width: 768px) {
+            #rightSide, .essential { 
+                width: 90%; 
+            }
+            .desc { 
+                display: block !important; 
+            }
+        }
     </style>
 </head>
 <body>
 
-<?php include ('headerKit.php'); ?>
+<?php include 'headerSign.php'; ?>
 
 <div id="rightSide">
 
@@ -112,80 +149,27 @@ if($conn->connect_error){
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $Kit_Id = $_POST['Kit_Id'] ?? '';
-    $StudentId = $_SESSION['StudentId'] ?? '';
-    $status = "Pending";
-    $date = date("Y-m-d");
 
-    $grpStmt = $conn->prepare("SELECT id_group FROM student WHERE StudentId=?");
-    $grpStmt->bind_param("i", $StudentId);
-    $grpStmt->execute();
-    $grpStmt->bind_result($id_group);
-    $grpStmt->fetch();
-    $grpStmt->close();
-
-    $intervalDays = 0;
-    if (strpos($id_group, 'B') === 0) $intervalDays = 14;
-    elseif (strpos($id_group, 'M') === 0) $intervalDays = 30;
-    elseif (strpos($id_group, 'T') === 0) $intervalDays = 60;
-
-    $lastStmt = $conn->prepare("SELECT RequestDate 
-                                FROM request 
-                                WHERE StudentId=? AND Kit_Id=? 
-                                ORDER BY RequestDate DESC LIMIT 1");
-    $lastStmt->bind_param("is", $StudentId, $Kit_Id);
-    $lastStmt->execute();
-    $lastStmt->bind_result($lastDate);
-    $hasLast = $lastStmt->fetch();
-    $lastStmt->close();
-
-    if ($hasLast) {
-        $nextAllowed = date("Y-m-d", strtotime($lastDate . " +$intervalDays days"));
-        if ($date < $nextAllowed) {
-            $message = "You can only request $Kit_Id again after $nextAllowed.";
-            $success = false;
-        } else {
-            $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
-            if ($stmt->execute()) {
-                $message = "Request for $Kit_Id submitted successfully!";
-                $success = true;
-            } else {
-                $message = "Error: " . $stmt->error;
-                $success = false;
-            }
-        }
-    } else {
-        $stmt = $conn->prepare("INSERT INTO request (Kit_Id, StudentId, Status, RequestDate) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("siss", $Kit_Id, $StudentId, $status, $date);
-        if ($stmt->execute()) {
-            $message = "Request for $Kit_Id submitted successfully!";
-            $success = true;
-        } else {
-            $message = "Error: " . $stmt->error;
-            $success = false;
-        }
-    }
+    $message = "You should register first before make a request";
+    $success = false;
 }
 ?>
 
 <!-- Essential Request -->
 <?php
-$conn = new mysqli("localhost:3301", "root", "", "campuscare_hub");
-if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
-
 $result = $conn->query("SELECT Kit_Id, KitName, Description, Picture FROM kit WHERE Kit_Id LIKE 'ESS%'");
 
 while ($row = $result->fetch_assoc()) {
 ?>
-    <div class="essential" style="background-image:url('<?php echo $row['Picture']; ?>');">
-        <span class="kfood"><?php echo $row['KitName']; ?></span>
+    <div class="essential" style="background-image:url('<?php echo htmlspecialchars($row['Picture']); ?>');">
+        <span class="kfood"><?php echo htmlspecialchars($row['KitName']); ?></span>
         <div class="desc">
-            <p>Description:</p>
-            <p><?php echo $row['Description']; ?></p>
+            <p><strong>Description:</strong></p>
+            <p><?php echo htmlspecialchars($row['Description']); ?></p>
         </div>
         <form method="POST" action="">
-            <input type="hidden" name="Kit_Id" value="<?php echo $row['Kit_Id']; ?>">
-            <br><button type="submit" class="request">Request <?php echo $row['KitName']; ?></button>
+            <input type="hidden" name="Kit_Id" value="<?php echo htmlspecialchars($row['Kit_Id']); ?>">
+            <br><button type="submit" class="request">Request <?php echo htmlspecialchars($row['KitName']); ?></button>
         </form>
     </div>
 <?php
@@ -246,12 +230,15 @@ while ($row = $result->fetch_assoc()) {
     }
 
     // === ICON HOVER EFFECT ===
-    document.querySelectorAll(".icon").forEach(icon => {
+    document.querySelectorAll(".icon,svg.img").forEach(icon => {
         icon.addEventListener("mouseover",  () => icon.classList.add("hover"));
         icon.addEventListener("mouseleave", () => icon.classList.remove("hover"));
     });
 </script>
 
-<?php include 'footer.php'; ?>
+<?php 
+$conn->close();
+include 'footer.php'; 
+?>
 </body>
 </html>

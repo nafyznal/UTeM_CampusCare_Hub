@@ -55,6 +55,10 @@ header {
     color: #541A1A;
 }
 
+.card-image img{
+    border: 12px;
+}
+
 #menu-icon,
 #home-icon {
     filter: drop-shadow(5px 5px 6px rgba(24, 24, 24, 0.3));

@@ -18,7 +18,7 @@
             min-height: calc(100vh - 70px - 50px);
         }
         .dfood {
-            background-color: #541A1A;   /* warna asal */
+            background-color: #541A1A;
             color: #fff;
             padding: 10px 20px;
             font-size: 14px;
@@ -26,57 +26,106 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
             margin: 5px;
         }
-        /* Hover effect */
         .dfood:hover {
-            background-color: #6a2323;   /* warna maroon lebih cerah bila hover */
-            transform: scale(1.05);      /* sedikit zoom bila hover */
+            background-color: #6a2323;
+            transform: scale(1.05);
         }
+
         .kit {
             margin: 20px auto 30px auto;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: flex-end;
             align-items: flex-start;
-            background-color: grey;
+            background-color: #541A1A;
             background-size: cover;
             background-position: center;
             color: white;
-            border-radius: 7pt;
-            padding: 7pt;
+            border-radius: 12px;
+            padding: 0;
             width: 65%;
+            min-height: 160px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(84,26,26,0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+        .kit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(84,26,26,0.35);
+        }
+
+        .kit-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.10) 0%,
+                rgba(84,26,26,0.75) 60%,
+                rgba(84,26,26,0.95) 100%
+            );
+            border-radius: 12px;
+        }
+
+        .kit-no-img {
+            background-image: repeating-linear-gradient(
+                135deg,
+                rgba(255,255,255,0.03) 0px,
+                rgba(255,255,255,0.03) 1px,
+                transparent 1px,
+                transparent 12px
+            ) !important;
+        }
+
+        .kit-body {
+            position: relative;
+            z-index: 1;
+            padding: 18px 20px 16px 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .kfood {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
         .desc {
             display: none;
-            color: white;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 6px;
-            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+            font-size: 13px;
+            margin-bottom: 10px;
+            line-height: 1.5;
         }
-        .kit .desc{
-            display: none;
-        }
-        .kit:hover .desc{
+        .kit:hover .desc {
             display: block;
         }
-        .request {
-            display: inline-block;       
-            white-space: nowrap;                 
-            padding: 10px 20px;         
-            border-radius: 15px;
-            font-size: 14px;
-            cursor: pointer;
-            min-width: fit-content;     
-            max-width: 100%;             
-            box-sizing: border-box;  
-        }
-        .request:hover{
-            background-color: #6a2323;
-            transform: scale(1.05);
-        }
-        /* Show descriptions on mobile (no hover available) */
+
         @media (max-width: 768px) {
             .desc { display: block !important; }
+        }
+
+        .request {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.45);
+            backdrop-filter: blur(4px);
+            transition: background 0.2s ease, transform 0.15s ease;
+            margin-top: 8px;
+        }
+        .request:hover {
+            background: rgba(255,255,255,0.30);
+            transform: scale(1.04);
         }
 
         /* === POPUP === */
@@ -112,15 +161,16 @@
 </head>
 <body>
 
-<?php include 'headerSignIn.php'; ?>
+<?php include 'headerSign.php'; ?>
 
 <div id="rightSide">
 
-    <!-- Tab Navigation -->
+    <center>
     <div class="food" id="flex-container">
-        <button type="button" class="dfood" onclick="location.href='kitLogin.php'">KIT</button>
-        <button type="button" class="dfood" onclick="location.href='mealLogin.php'">MEAL</button>
+        <button type="button" class="dfood" onclick="location.href='kitLogin.php'" style="border-radius: 20px;">KIT</button>
+        <button type="button" class="dfood" onclick="location.href='mealLogin.php'" style="border-radius: 20px;">MEAL</button>
     </div>
+    </center>
 <?php 
 $message = "";
 $success = false;
@@ -135,32 +185,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = "You should register first before make a request";
     $success = false;
 }
+
+// Fetch kit items
+$result = $conn->query("SELECT Kit_Id, KitName, Description, Picture FROM kit WHERE Kit_Id LIKE 'KIT%'");
 ?>
 
 <!-- Kit Request -->
 <?php
-$conn = new mysqli("localhost:3301", "root", "", "campuscare_hub");
-if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
-
-$result = $conn->query("SELECT Kit_Id, KitName, Description, Picture FROM kit WHERE Kit_Id LIKE 'KIT%'");
-
 while ($row = $result->fetch_assoc()) {
+    $pic       = $row['Picture'] ?? '';
+    $hasPic    = !empty($pic);
+    $bgStyle   = $hasPic ? "background-image: url('" . htmlspecialchars($pic) . "');" : "";
+    $noImgClass = $hasPic ? "" : "kit-no-img";
 ?>
-    <div class="kit" style="background-image:url('<?php echo $row['Picture']; ?>');">
-        <span class="kfood"><?php echo $row['KitName']; ?></span>
-        <div class="desc">
-            <p>Description:</p>
-            <p><?php echo $row['Description']; ?></p>
+    <div class="kit <?php echo $noImgClass; ?>" style="<?php echo $bgStyle; ?>">
+        <div class="kit-overlay"></div>
+        <div class="kit-body">
+            <span class="kfood"><?php echo htmlspecialchars($row['KitName']); ?></span>
+            <div class="desc">
+                <?php echo htmlspecialchars($row['Description']); ?>
+            </div>
+            <form method="POST" action="">
+                <input type="hidden" name="Kit_Id" value="<?php echo htmlspecialchars($row['Kit_Id']); ?>">
+                <button type="submit" class="request">
+                    Request <?php echo htmlspecialchars($row['KitName']); ?>
+                </button>
+            </form>
         </div>
-        <form method="POST" action="">
-            <input type="hidden" name="Kit_Id" value="<?php echo $row['Kit_Id']; ?>">
-            <br><button type="submit" class="request">Request <?php echo $row['KitName']; ?></button>
-        </form>
     </div>
 <?php
 }
 ?>
-</div>
+
+</div><!-- /#rightSide -->
 
 <!-- Popup -->
 <div id="popup" class="popup">
@@ -186,7 +243,7 @@ while ($row = $result->fetch_assoc()) {
     // === SIDEBAR & DROPDOWN ===
     document.addEventListener("DOMContentLoaded", function () {
         const menuBtn = document.getElementById('menu-btn');
-        const sidebar = document.getElementById('mySidebar');
+        const sidebar = document.getElementById('nav-section');
 
         menuBtn?.addEventListener('click', function (e) {
             e.stopPropagation();

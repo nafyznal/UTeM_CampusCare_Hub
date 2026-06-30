@@ -3,10 +3,25 @@ session_start();
 include("connectDonation.php");
 
 // POST data collection
-$name = mysqli_real_escape_string($conn, $_POST['name']);
-$amount = mysqli_real_escape_string($conn, $_POST['amount']);
-$visibility = $_POST['visibility'];
-$payment = mysqli_real_escape_string($conn, $_POST['payment']); // maps to DonationType
+$name       = mysqli_real_escape_string($conn, $_POST['name'] ?? '');
+$amount     = mysqli_real_escape_string($conn, $_POST['amount'] ?? '');
+$visibility = $_POST['visibility'] ?? '';
+$payment    = mysqli_real_escape_string($conn, $_POST['payment'] ?? ''); // maps to DonationType
+
+// Category data (array from category[] checkboxes)
+$categoriesArray = $_POST['category'] ?? [];
+if (!is_array($categoriesArray)) {
+    $categoriesArray = [$categoriesArray];
+}
+$categoriesArray = array_filter($categoriesArray, function ($c) {
+    return trim((string)$c) !== '';
+});
+$categoryString = !empty($categoriesArray) ? implode(", ", $categoriesArray) : "General";
+$categoryString = mysqli_real_escape_string($conn, $categoryString);
+
+if (!is_numeric($amount) || (float)$amount <= 0) {
+    die("Invalid donation amount.");
+}
 
 // Handle anonymity setting for the live donators wall display
 if ($visibility == "Anonymous") {
@@ -24,9 +39,9 @@ $adminID = isset($_SESSION['AdminID']) ? $_SESSION['AdminID'] : "Admin01";
 $dbDate = date("Y-m-d"); // Format required for MySQL standard DATE data types
 $uiDateTime = date("d/m/Y h:i:s A"); // Kept strictly for user-facing receipt display
 
-// 2. Insert execution into table: donation
-$sqlDonation = "INSERT INTO donation (AdminID, DonorName, DonationType, Amount, Date) 
-                VALUES ('$adminID', '$displayName', '$payment', '$amount', '$dbDate')";
+// 2. Insert execution into table: donation (now includes DonationCategory)
+$sqlDonation = "INSERT INTO donation (AdminID, DonorName, DonationType, DonationCategory, Amount, Date) 
+                VALUES ('$adminID', '$displayName', '$payment', '$categoryString', '$amount', '$dbDate')";
 
 if (mysqli_query($conn, $sqlDonation)) {
     // Capture the auto-incremented DonationID created by the operation
@@ -59,10 +74,11 @@ $reference = "REF" . rand(10000, 99999);
 
         <div class="tick">✓</div>
 
-        <p><strong>Reference:</strong> <?php echo $reference; ?></p>
-        <p><strong>Payment Date / Time :</strong> <?php echo $uiDateTime; ?></p>
+        <p><strong>Reference:</strong> <?php echo htmlspecialchars($reference); ?></p>
+        <p><strong>Payment Date / Time :</strong> <?php echo htmlspecialchars($uiDateTime); ?></p>
         <p><strong>Payment With :</strong> <?php echo htmlspecialchars($payment); ?></p>
-        <p><strong>Total Amount:</strong> RM <?php echo number_format($amount, 2); ?></p>
+        <p><strong>Category :</strong> <?php echo htmlspecialchars($categoryString); ?></p>
+        <p><strong>Total Amount:</strong> RM <?php echo number_format((float)$amount, 2); ?></p>
         <p><strong>Status:</strong> Successful</p>
 
         <div class="gateway-action-group">

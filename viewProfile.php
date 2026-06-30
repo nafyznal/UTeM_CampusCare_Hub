@@ -90,10 +90,6 @@ $username = $_SESSION['username'] ?? 'Guest';
                     <th>Email : </th>
                     <td><?php echo isset($row['Email']) ? htmlspecialchars($row['Email']) : "";?></td>
                 </tr>
-                <!-- <tr>
-                    <th>Category : </th>
-                    <td><?php //echo isset($row['Email']) ? htmlspecialchars($row['Email']) : "";?></td>
-                </tr> -->
                 <tr>
                     <th>Gender : </th>
                     <td><?php echo isset($row['Gender']) ? htmlspecialchars($row['Gender']) : "";?></td>

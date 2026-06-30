@@ -156,6 +156,7 @@ $conn->close();
                 icon.classList.remove("hover");
             });
         });
+        
     </script>
     <?php include 'footer.php'; ?>
 </body>

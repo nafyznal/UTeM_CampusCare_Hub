@@ -10,18 +10,6 @@
 <body>
 <?php
 include("headerSignIn.php");?>
-    <header class="header">
-        <div id="header-container" >
-            <div class="menu-icon" id="menuBtn" onclick="toggleSidebar()">
-                 <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#541A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </div>
-            <h1>UTeM Campus Care</h1>
-        </div>
-    </header>
 <!-- SideBar -->
     <section class="sidebar hidden" id="mySidebar">
         <div class="sidebar-profile">
@@ -101,35 +89,45 @@ include("headerSignIn.php");?>
     </main>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuBtn = document.getElementById('menu-btn');
     const sidebar = document.getElementById('nav-section');
-    const menuBtn = document.getElementById('menuBtn');
 
-    function toggleSidebar()
-    {
-        sidebar.classList.toggle('hidden');
-    }
-    
-    function toggleSubMenu(event) 
-    {
-        event.stopPropagation(); 
-        let subMenu = document.getElementById('aidSubMenu');  
-        subMenu.classList.toggle('dropdown-closed');
+    if (menuBtn && sidebar) {
+        menuBtn.addEventListener('click', function (event) {
+            event.stopPropagation();
+            sidebar.classList.toggle('hidden');
+        });
     }
 
-    function toggleFoodMenu(event) 
-    {
-        event.stopPropagation(); 
-        let foodSubMenu = document.getElementById('foodSubMenu');
-        foodSubMenu.classList.toggle('dropdown-closed');
-    }
+    // Dropdown toggles mapped to the explicit IDs inside your header file
+    window.toggleSubMenu = function (event) {
+        event.stopPropagation();
+        const subMenu = document.getElementById('aidSubMenu');
+        if (subMenu) subMenu.classList.toggle('dropdown-closed');
+    };
 
-    document.addEventListener('click', function(event) {
-        if (!sidebar.classList.contains('hidden') && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+    window.toggleFoodMenu = function (event) {
+        event.stopPropagation();
+        const foodMenu = document.getElementById('foodSubMenu');
+        if (foodMenu) foodMenu.classList.toggle('dropdown-closed');
+    };
+
+    // Close sidebar dynamically if user clicks outside of it
+    document.addEventListener('click', function (event) {
+        if (sidebar && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
             sidebar.classList.add('hidden');
         }
     });
 
-    document.querySelectorAll(".icon,svg,img").forEach(icon=>{
+});
+
+function prosesLogout() {
+    window.location.href = "index.php";
+}
+
+document.querySelectorAll(".icon,svg,img").forEach(icon=>{
     icon.addEventListener("mouseover",()=>{
         icon.classList.add("hover")
     });
@@ -139,6 +137,7 @@ include("headerSignIn.php");?>
     });
 
 });
+
 </script>
   
 </body>

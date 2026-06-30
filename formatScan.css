@@ -18,10 +18,10 @@ body{
     justify-content:center;
 }
 
-header{
-    background:white;
-    padding:30px;
-    width:100%;
+header {
+    background-color: white;
+    padding: 30px;
+    position:absolute;
 }
 
 #header-container{
@@ -57,61 +57,6 @@ svg{
     display:none !important;
 }
 
-.sidebar{
-    background:#541A1A;
-    color:white;
-    border-radius:20px;
-    width:210px;
-    position:fixed;
-    top:110px;
-    left:20px;
-    z-index:999;
-    filter:drop-shadow(5px 5px 6px rgba(24,24,24,0.3));
-}
-
-.sidebar-profile{
-    display:flex;
-    align-items:center;
-    margin:20px;
-    gap:10px;
-    font-weight:bold;
-}
-
-.sidebar-profile svg{
-    width:30px;
-    height:30px;
-}
-
-hr{
-    border:0;
-    height:1px;
-    background:rgba(255,255,255,0.2);
-    margin:15px 0;
-}
-
-.sidebar-menu{
-    padding:0;
-    margin:20px 0;
-}
-
-.sidebar-menu li{
-    list-style:none;
-    margin:0 20px 25px;
-}
-
-.sidebar-menu a,
-#logout{
-    color:white;
-    text-decoration:none;
-    font-size:15px;
-    font-weight:500;
-}
-
-.sidebar-footer{
-    border-top:1px solid rgba(255,255,255,0.2);
-    padding:20px;
-    text-align:center;
-}
 
 .scan-main{
     width:100%;
@@ -195,11 +140,11 @@ footer p{
 
 @media(max-width:480px){
     header{
-        padding:22px;
+        padding:18px 16px;
     }
 
     #header-container h1{
-        font-size:20px;
+        font-size:18px;
     }
 
     .scan-main{

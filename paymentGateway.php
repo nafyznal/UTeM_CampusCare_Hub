@@ -3,15 +3,28 @@ session_start();
 include("connectDonation.php");
 
 // POST data from donation.php
-$amount = $_POST['amount'];
-$payment = $_POST['payment'];
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$visibility = $_POST['visibility'];
+$amount     = $_POST['amount'] ?? '0';
+$payment    = $_POST['payment'] ?? '';
+$name       = $_POST['name'] ?? '';
+$email      = $_POST['email'] ?? '';
+$phone      = $_POST['phone'] ?? '';
+$visibility = $_POST['visibility'] ?? '';
 
-// Collect categories if selected (as a comma-separated string)
-$category = isset($_POST['category']) ? implode(", ", $_POST['category']) : "General";
+// Ambil array category[] dari donation.php
+$categoriesArray = $_POST['category'] ?? [];
+
+// Pastikan ia memang array (kalau form rosak / hantar string tunggal)
+if (!is_array($categoriesArray)) {
+    $categoriesArray = [$categoriesArray];
+}
+
+// Buang nilai kosong supaya tak insert ruang kosong dalam array
+$categoriesArray = array_filter($categoriesArray, function ($c) {
+    return trim((string)$c) !== '';
+});
+
+// Tukar kepada bentuk teks untuk paparan UI skrin gateway sahaja
+$categoryDisplayString = !empty($categoriesArray) ? implode(", ", $categoriesArray) : "General";
 
 $qrData = "UTeM CampusCare Hub Donation | RM " . $amount . " | Method: " . $payment;
 $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" . urlencode($qrData);
@@ -32,7 +45,7 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" . urle
 
         <p><strong>Amount :</strong> RM <?php echo htmlspecialchars($amount); ?></p>
         <p><strong>Payment Method :</strong> <?php echo htmlspecialchars($payment); ?></p>
-        <p><strong>Category :</strong> <?php echo htmlspecialchars($category); ?></p>
+        <p><strong>Category :</strong> <?php echo htmlspecialchars($categoryDisplayString); ?></p>
 
         <?php if ($payment == "QR") { ?>
             <div class="qr-section">
@@ -58,7 +71,17 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" . urle
             <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
             <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
             <input type="hidden" name="visibility" value="<?php echo htmlspecialchars($visibility); ?>">
-            <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+
+            <!-- Hantar semula setiap satu kategori sebagai elemen Array category[] -->
+            <?php
+            if (!empty($categoriesArray)) {
+                foreach ($categoriesArray as $cat) {
+                    echo '<input type="hidden" name="category[]" value="' . htmlspecialchars($cat) . '">';
+                }
+            } else {
+                echo '<input type="hidden" name="category[]" value="General">';
+            }
+            ?>
 
             <div class="gateway-action-group">
                 <button type="submit">Complete Payment</button>

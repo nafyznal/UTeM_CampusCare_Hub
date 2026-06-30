@@ -31,6 +31,13 @@ while ($row = $result->fetch_assoc()) {
 
 $stmt->close();
 $conn->close();
+
+// Collection point details (static for now — move to a DB table later if
+// different kits/meals end up being collected from different locations).
+$collectPoint = [
+    "place" => "Pusat Pelajar UTeM",
+    "map"   => "https://maps.google.com/?q=Pusat+Pelajar+UTeM",
+];
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +46,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scan and Collect</title>
-    <link rel="stylesheet" href="formatScan.css">
+    <link rel="stylesheet" href="format.css">
 </head>
 
 <body>
@@ -73,6 +80,17 @@ $conn->close();
                     <div class="collect-info">
                         <p><strong>Request ID:</strong> <?php echo $request["RequestID"]; ?></p>
                         <p><strong>Date:</strong> <?php echo date("d/m/Y", strtotime($request["RequestDate"])); ?></p>
+                        <p>
+                            <strong>Collection Point:</strong>
+                            <?php echo htmlspecialchars($collectPoint["place"]); ?>
+                        </p>
+                        <p>
+                            <a href="<?php echo htmlspecialchars($collectPoint["map"]); ?>"
+                               target="_blank" rel="noopener noreferrer"
+                               class="map-link">
+                                View on Map
+                            </a>
+                        </p>
                     </div>
                 </div>
             <?php endforeach; ?>

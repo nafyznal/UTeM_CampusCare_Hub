@@ -1,25 +1,22 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 $username = $_SESSION['username'] ?? 'Guest';
 ?>
-<link rel="stylesheet" type="text/css" href="formatProfile.css">
-<header class="center" style="width:100%">
+<link rel="stylesheet" type="text/css" href="formatHeader.css">
+
+<header>
     <div id="header-container">
 
         <div class="icon" id="menu-btn">
-            <svg id="menu-icon" width="30" height="30" viewBox="0 0 24 24"
-                 fill="none" stroke="#541A1A" stroke-width="2.5"
+            <svg id="menu-icon" viewBox="0 0 24 24" fill="none"
+                 stroke="#541A1A" stroke-width="2.5"
                  stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
         </div>
 
-        <h1 style="color:#541A1A;">History</h1>
+        <h1>History</h1>
 
         <div class="icon">
             <a href="homepage.php" id="home-icon">
@@ -46,7 +43,7 @@ $username = $_SESSION['username'] ?? 'Guest';
             <?php if (!empty($_SESSION['Picture'])): ?>
                 <img src="<?= htmlspecialchars($_SESSION['Picture']) ?>" alt="Profile">
             <?php else: ?>
-                <svg viewBox="0 0 24 24" 
+                <svg width="30" height="30" viewBox="0 0 24 24" 
                     fill="none" stroke="#c98a8a" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="8" r="5"/>
@@ -97,7 +94,7 @@ $username = $_SESSION['username'] ?? 'Guest';
                         <li><a href="meal.php">Meal</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Essential</a></li>
+                <li><a href="essential.php">Essential</a></li>
             </ul>
         </li>
 
