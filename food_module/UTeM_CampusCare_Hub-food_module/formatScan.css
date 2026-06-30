@@ -1,0 +1,146 @@
+body{
+    background-color: #F1E2D1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* heaader */
+
+header {
+    margin: 0;
+    padding: 10px 10px;
+    background-color: transparent;
+    width: 100%;
+}
+
+#menu-icon {
+    cursor: pointer;
+    filter: drop-shadow(2px 2px 2px rgb(100, 100, 100));
+}
+
+.header-container{
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-container h1{
+    margin: 0%;
+    text-align: center;
+}
+
+#home-icon{
+    cursor: pointer;
+    filter: drop-shadow(3px 3px 2px rgb(100, 100, 100));
+}
+
+/* utk sidebar */
+
+.user-info{
+    display: flex;
+    align-items:center;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+section{
+    background-color: #541A1A;
+    color: white;
+    border-radius: 20px;
+    width: 200px;
+    height: auto;
+    position: fixed;
+    top: 10%;
+    margin-left: 20px;
+}
+
+.user-info p{
+    
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+ul{
+    padding: 0;
+    margin-top: 50px;
+}
+
+li{
+    list-style:none; 
+    margin-left:20px; 
+    margin-bottom:30px;
+    pointer-events: auto;
+}
+
+li a{
+    color: white;
+    text-decoration: none;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;    
+    user-select: none;
+}
+
+h2{
+    text-align: center;
+    margin-top: 20px;
+}
+
+img{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#logout{
+    display:flex; 
+    justify-content:center; 
+    align-items:center; 
+    margin-top:40px; 
+    gap:8px; 
+    cursor:pointer;
+    margin-bottom: 40px;
+}
+
+.hidden{
+    display: none;
+}
+
+.hover{
+    transition: all 0.3s ease;
+    transform: scale(1.1);
+}
+
+svg{
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.sub{
+    margin-left: 70px;
+}
+
+.subSub{
+    margin-left: 120px
+}
+
+
+/* FOOTER */
+footer{
+    display: flex;
+    background-color: #541A1A;
+    height: 30%;
+    top: 100%;
+    align-items: end;
+}
+
+footer p{
+    margin-left: 10px;
+    color: white;
+}
