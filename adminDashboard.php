@@ -11,8 +11,8 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     exit;
 }
 
-// 3. Database Connection (Using modern Object-Oriented approach)
-$servername = "127.0.0.1:3301"; // Updated to match your port configuration
+
+$servername = "127.0.0.1:3301";
 $username   = "root";
 $password   = "";
 $dbname     = "campuscare_hub";
