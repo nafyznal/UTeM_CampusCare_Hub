@@ -1,0 +1,146 @@
+/* === HOMEPAGE === */
+body {
+    background-color: #F1E2D1;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* === MAIN CONTENT === */
+.main-container {
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* === HERO BANNER === */
+.hero-banner {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/donation.webp');
+    width: 100%;
+    height: 320px;
+    border-radius: 40px;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+.banner-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo-text {
+    color: white;
+    text-align: left;
+}
+
+.brand-title {
+    font-size: 64px;
+    font-weight: bold;
+    margin-right: 15px;
+    letter-spacing: -1px;
+}
+
+.brand-sub {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.1;
+    display: inline-block;
+}
+
+.btn-donation {
+    background-color: #541A1A;
+    color: white;
+    text-decoration: none;
+    padding: 15px 32px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-donation:hover {
+    transform: scale(1.05);
+}
+
+/* === SUPPORT SECTION === */
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: #4a1515;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 40px;
+}
+
+.impact-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    text-align: center;
+}
+
+.card-number {
+    display: block;
+    font-size: 14px;
+    color: #7a6e67;
+    margin-bottom: 2px;
+}
+
+.card-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+}
+
+/* === MISSION BOX === */
+.mission-box {
+    background-color: #541A1A;
+    color: #f7ede2;
+    padding: 35px 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    height: fit-content;
+}
+
+.mission-box h2 {
+    color: white;
+    margin-top: 0;
+    text-align: left;
+    font-size: 22px;
+}
+
+.mission-box p {
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.hover {
+    transform: scale(1.08);
+}
